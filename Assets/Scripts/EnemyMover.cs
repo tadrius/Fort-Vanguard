@@ -6,8 +6,7 @@ public class EnemyMover : MonoBehaviour
 {
 
     [SerializeField] List<Waypoint> path = new List<Waypoint>();
-    [Tooltip("The time in seconds to move to the next tile along the path.")]
-    [SerializeField] float waitTime = 1f;
+    [SerializeField] [Range(0f, 10f)] float speed = 1f;
 
     // Start is called before the first frame update
     void Start()
@@ -18,8 +17,17 @@ public class EnemyMover : MonoBehaviour
     // Coroutine to move along the path
     IEnumerator FollowPath() {
         foreach (Waypoint wp in path) {
-            transform.position = wp.transform.position;
-            yield return new WaitForSeconds(waitTime);
+            Vector3 startPos = transform.position;
+            Vector3 endPos = wp.transform.position;
+            float travelPercent = 0f;
+
+            transform.LookAt(endPos);
+
+            while(travelPercent < 1f) {
+                transform.position = Vector3.Lerp(startPos, endPos, travelPercent);
+                travelPercent += speed * Time.deltaTime;
+                yield return new WaitForEndOfFrame();
+            }
         }
     }
 }
