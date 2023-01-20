@@ -8,11 +8,13 @@ public class TargetLocator : MonoBehaviour
     [SerializeField] Transform weapon;
     Transform target;
 
-
     // Start is called before the first frame update
     void Start()
     {
-        target = FindObjectOfType<EnemyMover>().transform;
+        EnemyMover enemy = FindObjectOfType<EnemyMover>();
+        if (null != enemy) {
+            target = enemy.transform;
+        }
     }
 
     // Update is called once per frame
