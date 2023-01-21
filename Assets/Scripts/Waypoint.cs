@@ -5,8 +5,9 @@ using UnityEngine;
 public class Waypoint : MonoBehaviour
 {
 
-    [SerializeField] bool isValidSite = true;
     [SerializeField] GameObject building;
+    [SerializeField] bool isValidSite = true;
+    public bool IsValidSite { get { return isValidSite; }} // property to expose isValidSite
 
     static RuntimeSpawnsParent runtimeSpawnsParent;
 
