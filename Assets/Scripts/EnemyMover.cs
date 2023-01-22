@@ -8,10 +8,29 @@ public class EnemyMover : MonoBehaviour
     [SerializeField] List<Waypoint> path = new List<Waypoint>();
     [SerializeField] [Range(0f, 10f)] float speed = 1f;
 
+    private static string pathTag = "Path";
+
     // Start is called before the first frame update
-    void Start()
-    {
+    void Start() {
+        FindPath();
+        MoveToPathStart();
         StartCoroutine(FollowPath());
+    }
+
+    void MoveToPathStart() {
+        transform.position = path[0].transform.position;
+    }
+
+    void FindPath() {
+        path.Clear();
+
+        // get path parents (tiles are in order within)
+        GameObject pathParentObject = GameObject.FindGameObjectWithTag(pathTag);
+        foreach (Waypoint wp in pathParentObject.GetComponentsInChildren<Waypoint>()) {
+            if (null != wp) {
+                path.Add(wp);
+            }
+        }
     }
 
     // Coroutine to move along the path
@@ -29,5 +48,6 @@ public class EnemyMover : MonoBehaviour
                 yield return new WaitForEndOfFrame();
             }
         }
+        Destroy(gameObject);
     }
 }
