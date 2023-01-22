@@ -6,11 +6,13 @@ public class TargetLocator : MonoBehaviour
 {
 
     [SerializeField] Transform weapon;
+    ParticleSystem[] weaponParticleSystems;
     Transform target;
 
     // Start is called before the first frame update
     void Start()
     {
+        weaponParticleSystems = weapon.GetComponentsInChildren<ParticleSystem>();
         LocateEnemy();
     }
 
@@ -19,6 +21,7 @@ public class TargetLocator : MonoBehaviour
     {
         AimWeapon();
         if (null == target) {
+            setWeaponParticleEmissions(false);
             LocateEnemy();
         }
     }
@@ -27,7 +30,15 @@ public class TargetLocator : MonoBehaviour
         EnemyMover enemy = FindObjectOfType<EnemyMover>();
         if (null != enemy) {
             target = enemy.transform;
-        }        
+            setWeaponParticleEmissions(true);
+        }
+    }
+
+    void setWeaponParticleEmissions(bool enabled) {
+        foreach (ParticleSystem weaponParticles in weaponParticleSystems) {
+            var em = weaponParticles.emission;
+            em.enabled = enabled;
+        }       
     }
 
     void AimWeapon() {
