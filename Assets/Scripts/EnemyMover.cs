@@ -19,6 +19,7 @@ public class EnemyMover : MonoBehaviour
 
     void MoveToPathStart() {
         transform.position = path[0].transform.position;
+        path.Remove(path[0]);
     }
 
     void FindPath() {
