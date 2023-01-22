@@ -19,22 +19,22 @@ public class TargetLocator : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        AimWeapon();
-        if (null == target) {
-            setWeaponParticleEmissions(false);
+        if (null != target && target.gameObject.activeSelf) {
+            AimWeapon();
+        } else {
+            setParticleEmissionsEnabled(false);
             LocateEnemy();
         }
     }
 
     void LocateEnemy() {
         EnemyMover enemy = FindObjectOfType<EnemyMover>();
-        if (null != enemy) {
+        if (null != enemy && enemy.gameObject.activeSelf) {
             target = enemy.transform;
-            setWeaponParticleEmissions(true);
         }
     }
 
-    void setWeaponParticleEmissions(bool enabled) {
+    void setParticleEmissionsEnabled(bool enabled) {
         foreach (ParticleSystem weaponParticles in weaponParticleSystems) {
             var em = weaponParticles.emission;
             em.enabled = enabled;
@@ -43,5 +43,6 @@ public class TargetLocator : MonoBehaviour
 
     void AimWeapon() {
         weapon.LookAt(target);
+        setParticleEmissionsEnabled(true);
     }
 }

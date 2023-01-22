@@ -11,7 +11,7 @@ public class EnemyMover : MonoBehaviour
     private static string pathTag = "Path";
 
     // Start is called before the first frame update
-    void Start() {
+    void OnEnable() {
         FindPath();
         MoveToPathStart();
         StartCoroutine(FollowPath());
@@ -49,6 +49,6 @@ public class EnemyMover : MonoBehaviour
                 yield return new WaitForEndOfFrame();
             }
         }
-        Destroy(gameObject);
+        gameObject.SetActive(false);
     }
 }

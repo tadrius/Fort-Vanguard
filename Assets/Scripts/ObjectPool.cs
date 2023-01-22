@@ -5,19 +5,41 @@ using UnityEngine;
 public class ObjectPool : MonoBehaviour
 {
 
+    [SerializeField] int poolSize = 10;
     [SerializeField] [Range(0f, 10f)] float enemySpawnDelay = 1f;
-    [SerializeField] List<GameObject> enemyTypes;
+    [SerializeField] GameObject enemyType;
+
+    GameObject[] objects;
+
+    void Awake() {
+        PopulatePool();
+    }
 
     void Start()
     {
-        StartCoroutine(SpawnEnemies());
+        StartCoroutine(SpawnObjects());
     }
 
-    IEnumerator SpawnEnemies() {
+    void PopulatePool() {
+        objects = new GameObject[poolSize];
+        for (int i = 0; i < objects.Length; i++) {
+            objects[i] = GameObject.Instantiate(enemyType, transform);
+            objects[i].SetActive(false);
+        }
+    }
+
+    void EnableObjectInPool() {
+        foreach (GameObject obj in objects) {
+            if (!obj.activeSelf) {
+                obj.SetActive(true);
+                return;
+            }
+        }
+    }
+
+    IEnumerator SpawnObjects() {
         while (true) {
-            // spawn an enemy of a random type
-            GameObject enemyType = enemyTypes[Random.Range(0, enemyTypes.Count - 1)];
-            GameObject enemy = GameObject.Instantiate(enemyType, transform);
+            EnableObjectInPool();
             yield return new WaitForSeconds(enemySpawnDelay);
         }
     }
