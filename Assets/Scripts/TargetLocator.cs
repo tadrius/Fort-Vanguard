@@ -6,43 +6,77 @@ public class TargetLocator : MonoBehaviour
 {
 
     [SerializeField] Transform weapon;
-    ParticleSystem[] weaponParticleSystems;
+    [Tooltip("The maximum range at which an enemy will be targeted.")]
+    [SerializeField] float range = 25f;
+    ParticleSystem[] projectileParticleSystems;
     Transform target;
+
+    // TODO - use enemies field
+    // to track potential targets
+    // Enemy[] enemies;
 
     // Start is called before the first frame update
     void Start()
     {
-        weaponParticleSystems = weapon.GetComponentsInChildren<ParticleSystem>();
-        LocateEnemy();
+        projectileParticleSystems = weapon.GetComponentsInChildren<ParticleSystem>();
+        // TODO - use enemies field instead of repeated calls in FindClosestTarget
+        // enemies = FindObjectsOfType<Enemy>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (null != target && target.gameObject.activeSelf) {
-            AimWeapon();
+        if (TargetIsValid()) {
+            ShootTarget(); 
         } else {
-            setParticleEmissionsEnabled(false);
-            LocateEnemy();
+            DropTarget();
+            FindClosestTarget();
         }
     }
 
-    void LocateEnemy() {
-        EnemyMover enemy = FindObjectOfType<EnemyMover>();
-        if (null != enemy && enemy.gameObject.activeSelf) {
-            target = enemy.transform;
+    void FindClosestTarget() {
+        Transform closestTarget = null;
+        float maxDistance = range;
+        // TODO - use enemies field instead of repeated calls in FindClosestTarget
+        Enemy[] enemies = FindObjectsOfType<Enemy>();
+        foreach (Enemy en in enemies) {
+            float enemyDistance = Vector3.Distance(transform.position, en.transform.position);
+            if (en.gameObject.activeSelf && enemyDistance < maxDistance) {
+                closestTarget = en.transform;
+                maxDistance = enemyDistance;
+            }
         }
+        target = closestTarget;
     }
 
-    void setParticleEmissionsEnabled(bool enabled) {
-        foreach (ParticleSystem weaponParticles in weaponParticleSystems) {
-            var em = weaponParticles.emission;
-            em.enabled = enabled;
-        }       
+    bool TargetIsValid() {
+        if (null != target && target.gameObject.activeSelf) {
+            float targetDistance = Vector3.Distance(transform.position, target.position);
+            if (targetDistance <= range) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    void ShootTarget() {
+        AimWeapon();
+        setProjectileEmissionsEnabled(true);
     }
 
     void AimWeapon() {
         weapon.LookAt(target);
-        setParticleEmissionsEnabled(true);
+    }
+
+    void DropTarget() {
+        target = null;      
+        setProjectileEmissionsEnabled(false);
+    }
+
+    void setProjectileEmissionsEnabled(bool enabled) {
+        foreach (ParticleSystem projectileParticles in projectileParticleSystems) {
+            var em = projectileParticles.emission;
+            em.enabled = enabled;
+        }
     }
 }

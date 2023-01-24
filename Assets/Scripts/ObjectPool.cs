@@ -6,8 +6,8 @@ public class ObjectPool : MonoBehaviour
 {
 
     [SerializeField] int poolSize = 10;
-    [SerializeField] [Range(0f, 10f)] float enemySpawnDelay = 1f;
-    [SerializeField] GameObject enemyType;
+    [SerializeField] [Range(0f, 10f)] float spawnDelay = 1f;
+    [SerializeField] GameObject objectType;
 
     GameObject[] objects;
 
@@ -23,8 +23,9 @@ public class ObjectPool : MonoBehaviour
     void PopulatePool() {
         objects = new GameObject[poolSize];
         for (int i = 0; i < objects.Length; i++) {
-            objects[i] = GameObject.Instantiate(enemyType, transform);
+            objects[i] = GameObject.Instantiate(objectType, transform);
             objects[i].SetActive(false);
+            objects[i].name = $"{objectType.name} {i}";
         }
     }
 
@@ -40,7 +41,7 @@ public class ObjectPool : MonoBehaviour
     IEnumerator SpawnObjects() {
         while (true) {
             EnableObjectInPool();
-            yield return new WaitForSeconds(enemySpawnDelay);
+            yield return new WaitForSeconds(spawnDelay);
         }
     }
 }
