@@ -9,13 +9,13 @@ public class Enemy : MonoBehaviour
     [SerializeField] int penalty = 15;
 
     Bank bank;
-    Player player;
+    PlayerHealth playerHealth;
 
     // Start is called before the first frame update
     void Start()
     {
         bank = FindObjectOfType<Bank>();
-        player = FindObjectOfType<Player>();
+        playerHealth = FindObjectOfType<PlayerHealth>();
     }
 
     public void DepositReward() {
@@ -28,8 +28,8 @@ public class Enemy : MonoBehaviour
         // if (null != bank) {
         //     bank.Withdraw(penalty);
         // }
-        if (null != player) {
-            player.Damage(penalty);
+        if (null != playerHealth) {
+            playerHealth.Damage(penalty);
         }
     }
 }
