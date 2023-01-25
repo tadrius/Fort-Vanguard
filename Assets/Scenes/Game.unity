@@ -325,26 +325,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 380428200}
-  - component: {fileID: 380428199}
   m_Layer: 0
   m_Name: RuntimeSpawns
-  m_TagString: Untagged
+  m_TagString: RuntimeSpawns
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &380428199
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 380428198}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bd76447175549ad449ad14abbfbff097, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &380428200
 Transform:
   m_ObjectHideFlags: 0
@@ -391,7 +378,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolSize: 10
   spawnDelay: 1
-  objectType: {fileID: 970295940677433216, guid: 81445fbac6e55c14c8d12edd3c406b61, type: 3}
+  objectPrefab: {fileID: 970295940677433216, guid: 81445fbac6e55c14c8d12edd3c406b61, type: 3}
 --- !u!4 &413015544
 Transform:
   m_ObjectHideFlags: 0
@@ -729,6 +716,10 @@ PrefabInstance:
     - target: {fileID: 6456274445976277100, guid: d6ca57e9bf4d71c42a24f3e2435dc509, type: 3}
       propertyPath: m_fontColor.r
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6674234424019745838, guid: d6ca57e9bf4d71c42a24f3e2435dc509, type: 3}
+      propertyPath: isValidSite
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8883888709088420801, guid: d6ca57e9bf4d71c42a24f3e2435dc509, type: 3}
       propertyPath: m_Name
@@ -1172,8 +1163,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a1baaae69d59a24a964c012175f882e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingBalance: 100
-  currentBalance: 0
 --- !u!4 &910545491
 Transform:
   m_ObjectHideFlags: 0

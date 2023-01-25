@@ -5,21 +5,15 @@ using UnityEngine;
 public class Waypoint : MonoBehaviour
 {
 
-    [SerializeField] GameObject building;
+    [SerializeField] Building buildingPrefab;
     [SerializeField] bool isValidSite = true;
-    public bool IsValidSite { get { return isValidSite; }} // property to expose isValidSite
-
-    static RuntimeSpawnsParent runtimeSpawnsParent;
-
-    void Awake() {
-        runtimeSpawnsParent = GameObject.FindObjectOfType<RuntimeSpawnsParent>();
-    }
+    public bool IsValidSite { get { return isValidSite; } } // property to expose isValidSite
 
     void OnMouseDown() {
         if (isValidSite) {
-            GameObject newBuilding = Instantiate(building, transform.position, Quaternion.identity);
-            newBuilding.transform.parent = runtimeSpawnsParent.transform;
-            isValidSite = false;
+            if (buildingPrefab.CreateBuilding(buildingPrefab, transform.position)) {
+                isValidSite = false;
+            }
         }
     }
 }

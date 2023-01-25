@@ -5,15 +5,17 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
 
-    [SerializeField] int reward = 25;
-    [SerializeField] int penalty = 25;
+    [SerializeField] int reward = 15;
+    [SerializeField] int penalty = 15;
 
     Bank bank;
+    Player player;
 
     // Start is called before the first frame update
     void Start()
     {
         bank = FindObjectOfType<Bank>();
+        player = FindObjectOfType<Player>();
     }
 
     public void DepositReward() {
@@ -22,9 +24,12 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    public void WithdrawPenalty() {
-         if (null != bank) {
-            bank.Withdraw(penalty);
-        }       
+    public void IncurPenalty() {
+        // if (null != bank) {
+        //     bank.Withdraw(penalty);
+        // }
+        if (null != player) {
+            player.Damage(penalty);
+        }
     }
 }

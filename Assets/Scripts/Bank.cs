@@ -15,23 +15,26 @@ public class Bank : MonoBehaviour
         currentBalance = startingBalance;
     }
 
-    public void Deposit(int amount) {
+    public bool Deposit(int amount) {
         if (amount < 0) {
             Debug.Log("Cannot deposit a negative amount. Returning...");
-            return;
+            return false;
         }
         currentBalance += amount;
+        return true;
     }
 
-    public void Withdraw(int amount) {
+    public bool Withdraw(int amount) {
         if (amount < 0) {
             Debug.Log("Cannot withdraw a negative amount. Returning...");
-            return;
-        }
-        if (currentBalance >= amount) {
-            currentBalance -= amount;
-        } else {
+            return false;
+        } else if (currentBalance < amount) {
             Debug.Log("Cannot withdraw. Current balance is less than withdraw amount.");
+            return false;
+        } else {
+            currentBalance -= amount;
+            Debug.Log($"Withdrew {amount}.");
+            return true;
         }
     }
 

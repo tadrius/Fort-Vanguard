@@ -185,6 +185,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d77d02e3a75f3b4ba24f5e518c9dd4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  validSiteColor: {r: 1, g: 1, b: 1, a: 1}
+  invalidSiteColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
 --- !u!1 &2489182837448897032
 GameObject:
   m_ObjectHideFlags: 0
@@ -232,8 +234,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 223edd16ee21aef428edab085fb896a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  buildingPrefab: {fileID: 538049276389529403, guid: 7fd311129ca81594e9f16eb1e38e93e3, type: 3}
   isValidSite: 1
-  building: {fileID: 6326313055194710703, guid: 7fd311129ca81594e9f16eb1e38e93e3, type: 3}
 --- !u!65 &5790025241019911893
 BoxCollider:
   m_ObjectHideFlags: 0

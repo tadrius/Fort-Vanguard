@@ -18,7 +18,7 @@ public class EnemyMover : MonoBehaviour
 
     // Start is called before the first frame update
     void OnEnable() {
-        FindPath();
+        FindPath(); // TODO - move FindPath to Start?
         MoveToPathStart();
         StartCoroutine(FollowPath());
     }
@@ -62,6 +62,6 @@ public class EnemyMover : MonoBehaviour
 
     void Attack() {
         gameObject.SetActive(false);
-        enemy.WithdrawPenalty();
+        enemy.IncurPenalty();
     }
 }
