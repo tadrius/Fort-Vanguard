@@ -8,7 +8,13 @@ public class EnemyMover : MonoBehaviour
     [SerializeField] List<Waypoint> path = new List<Waypoint>();
     [SerializeField] [Range(0f, 10f)] float speed = 1f;
 
+    Enemy enemy;
+
     private static string pathTag = "Path";
+
+    void Start() {
+        enemy = GetComponent<Enemy>();
+    }
 
     // Start is called before the first frame update
     void OnEnable() {
@@ -49,6 +55,13 @@ public class EnemyMover : MonoBehaviour
                 yield return new WaitForEndOfFrame();
             }
         }
+
+        // reached end of path
+        Attack();
+    }
+
+    void Attack() {
         gameObject.SetActive(false);
+        enemy.WithdrawPenalty();
     }
 }
