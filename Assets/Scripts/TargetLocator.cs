@@ -7,10 +7,11 @@ public class TargetLocator : MonoBehaviour
 
     [SerializeField] Transform weapon;
     [Tooltip("The maximum range at which an enemy will be targeted.")]
-    [SerializeField] float range = 25f;
+    [SerializeField] float range = 50f;
 
     ParticleSystem[] projectileParticleSystems;
     Transform target;
+    Building building;
 
     // TODO - use enemies field
     // to track potential targets
@@ -20,6 +21,10 @@ public class TargetLocator : MonoBehaviour
     void Start()
     {
         projectileParticleSystems = weapon.GetComponentsInChildren<ParticleSystem>();
+        building = GetComponent<Building>();
+        if (building.IsElevated) {
+            range *= 2;
+        }
         // TODO - use enemies field instead of repeated calls in FindClosestTarget
         // enemies = FindObjectsOfType<Enemy>();
     }

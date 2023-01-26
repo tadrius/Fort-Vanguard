@@ -10,10 +10,15 @@ public class Building : MonoBehaviour
 
     Bank bank;
     GameObject runtimeSpawns;
+    bool isElevated = false;
 
     public int Cost { get { return cost; }}
+    public bool IsElevated { get { return isElevated; }}
+
+
 
     readonly static string runtimeSpawnsTag = "RuntimeSpawns";
+
 
     public bool CreateBuilding(Building prefab, Vector3 position, bool isPlatformSite) {
         runtimeSpawns = GameObject.FindGameObjectWithTag(runtimeSpawnsTag);
@@ -21,6 +26,7 @@ public class Building : MonoBehaviour
         
         if (CheckPlatformCompatibility(isPlatformSite) && WithdrawCost()) {
             GameObject newBuilding = Instantiate(prefab.gameObject, position, Quaternion.identity);
+            newBuilding.GetComponent<Building>().isElevated = isPlatformSite;
             newBuilding.transform.parent = runtimeSpawns.transform;
             return true;
         }
