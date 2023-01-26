@@ -63,6 +63,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHitPoints: 10
+  hitPointRamp: 1
 --- !u!114 &6315030260504949892
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -76,7 +77,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   reward: 25
-  penalty: 25
+  penalty: 10
 --- !u!65 &4099580739292209448
 BoxCollider:
   m_ObjectHideFlags: 0
