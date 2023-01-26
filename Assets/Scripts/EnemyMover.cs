@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Enemy))]
 public class EnemyMover : MonoBehaviour
 {
 
@@ -31,9 +32,9 @@ public class EnemyMover : MonoBehaviour
     void FindPath() {
         path.Clear();
 
-        // get path parents (tiles are in order within)
-        GameObject pathParentObject = GameObject.FindGameObjectWithTag(pathTag);
-        foreach (Waypoint wp in pathParentObject.GetComponentsInChildren<Waypoint>()) {
+        // get path object (path waypoints are children in order)
+        GameObject pathObject = GameObject.FindGameObjectWithTag(pathTag);
+        foreach (Waypoint wp in pathObject.GetComponentsInChildren<Waypoint>()) {
             if (null != wp) {
                 path.Add(wp);
             }
@@ -57,10 +58,10 @@ public class EnemyMover : MonoBehaviour
         }
 
         // reached end of path
-        Attack();
+        FinishPath();
     }
 
-    void Attack() {
+    void FinishPath() {
         gameObject.SetActive(false);
         enemy.IncurPenalty();
     }
