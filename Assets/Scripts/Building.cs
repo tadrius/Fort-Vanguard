@@ -10,6 +10,9 @@ public class Building : MonoBehaviour
 
     Bank bank;
     GameObject runtimeSpawns;
+
+    public int Cost { get { return cost; }}
+
     readonly static string runtimeSpawnsTag = "RuntimeSpawns";
 
     public bool CreateBuilding(Building prefab, Vector3 position, bool isPlatformSite) {

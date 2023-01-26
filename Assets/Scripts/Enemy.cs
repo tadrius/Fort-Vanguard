@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-
     [SerializeField] int reward = 15;
     [SerializeField] int penalty = 15;
 

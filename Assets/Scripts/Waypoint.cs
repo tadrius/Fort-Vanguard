@@ -15,10 +15,8 @@ public class Waypoint : MonoBehaviour
     
     Builder builder;
 
-    readonly static string playerTag = "Player";
-
     void Start() {
-        builder = GetPlayerBuilder();
+        builder = Builder.GetPlayerBuilder();
         DisableBuildSiteDisplays();
     }
 
@@ -43,15 +41,6 @@ public class Waypoint : MonoBehaviour
                 DisableBuildSiteDisplays();
             }
         }
-    }
-    
-    Builder GetPlayerBuilder() {
-        GameObject player = GameObject.FindGameObjectWithTag(playerTag);
-        if (null != player) {
-            return player.GetComponent<Builder>();
-        }
-        Debug.Log("Cannot find player or player's builder component.");
-        return null;
     }
 
     void DisableBuildSiteDisplays() {
