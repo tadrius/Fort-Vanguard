@@ -8,6 +8,7 @@ public class TargetLocator : MonoBehaviour
     [SerializeField] Transform weapon;
     [Tooltip("The maximum range at which an enemy will be targeted.")]
     [SerializeField] float range = 25f;
+
     ParticleSystem[] projectileParticleSystems;
     Transform target;
 

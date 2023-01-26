@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5976496082050186129}
   - component: {fileID: 7193794125315858181}
   m_Layer: 0
-  m_Name: BallistaTopMesh
+  m_Name: WeaponMesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -29,10 +29,9 @@ Transform:
   m_LocalPosition: {x: 0, y: 2.5, z: 0}
   m_LocalScale: {x: 6.25, y: 6.25, z: 6.25}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 5756945312339919212}
-  m_Father: {fileID: 1969231298231798777}
-  m_RootOrder: 1
+  m_Children: []
+  m_Father: {fileID: 1156941561960639961}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &5976496082050186129
 MeshFilter:
@@ -96,7 +95,7 @@ GameObject:
   - component: {fileID: 8429790299789665650}
   - component: {fileID: 5033084554095362534}
   m_Layer: 0
-  m_Name: BalistaBaseMesh
+  m_Name: BaseMesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -167,6 +166,39 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &2531508076086270829
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1156941561960639961}
+  m_Layer: 0
+  m_Name: Weapon
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1156941561960639961
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2531508076086270829}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 8802260018901500635}
+  - {fileID: 5756945312339919212}
+  m_Father: {fileID: 1969231298231798777}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6326313055194710703
 GameObject:
   m_ObjectHideFlags: 0
@@ -179,7 +211,7 @@ GameObject:
   - component: {fileID: -7626514891481829472}
   - component: {fileID: 538049276389529403}
   m_Layer: 0
-  m_Name: TowerBallista
+  m_Name: Ballista
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -198,7 +230,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6641559035182914616}
-  - {fileID: 8802260018901500635}
+  - {fileID: 1156941561960639961}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -214,8 +246,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e62bfae282f99542826a2656a67ba25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weapon: {fileID: 8802260018901500635}
-  range: 25
+  weapon: {fileID: 1156941561960639961}
+  range: 100
 --- !u!114 &538049276389529403
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -228,6 +260,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bcf51633213305c4d8fc768294fc2f39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cost: 50
+  isPlatformBuildable: 1
 --- !u!1 &6525885720796112995
 GameObject:
   m_ObjectHideFlags: 0
@@ -240,7 +274,7 @@ GameObject:
   - component: {fileID: 5999403566254790778}
   - component: {fileID: 4027073715668924868}
   m_Layer: 0
-  m_Name: Particle System
+  m_Name: AttackParticles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -253,13 +287,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6525885720796112995}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.15, z: 0.15}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 3.4375, z: 0.93750006}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 8802260018901500635}
-  m_RootOrder: 0
+  m_Father: {fileID: 1156941561960639961}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!198 &5999403566254790778
 ParticleSystem:
@@ -269,7 +303,7 @@ ParticleSystem:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6525885720796112995}
   serializedVersion: 8
-  lengthInSec: 0.35
+  lengthInSec: 0.5
   simulationSpeed: 1
   stopAction: 0
   cullingMode: 0
@@ -334,7 +368,7 @@ ParticleSystem:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-  moveWithTransform: 0
+  moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
   randomSeed: 0
@@ -397,7 +431,7 @@ ParticleSystem:
     startSpeed:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 50
+      scalar: 100
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -513,7 +547,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 6.25
+      scalar: 5.5
       minScalar: 1
       maxCurve:
         serializedVersion: 2
