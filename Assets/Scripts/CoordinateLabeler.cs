@@ -7,7 +7,6 @@ using TMPro;
 [RequireComponent(typeof(TextMeshPro))]
 public class CoordinateLabeler : MonoBehaviour
 {
-
     [SerializeField] Color validSiteColor = Color.white;
     [SerializeField] Color invalidSiteColor = Color.gray;
     TextMeshPro label;

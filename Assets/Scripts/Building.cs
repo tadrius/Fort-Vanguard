@@ -13,10 +13,9 @@ public class Building : MonoBehaviour
     public int Cost { get { return cost; }}
     public bool IsElevated { get { return isElevated; }}
 
-    readonly static string runtimeSpawnsTag = "RuntimeSpawns";
-
     public GameObject CreateBuilding(Building prefab, Vector3 position, Waypoint wp) {
-        GameObject runtimeSpawns = GameObject.FindGameObjectWithTag(runtimeSpawnsTag);
+        GameObject runtimeSpawns = GameObject.FindGameObjectWithTag(
+            RuntimeSpawns.runtimeSpawnsTag);
         Bank bank = FindObjectOfType<Bank>();
         
         if (CheckSiteCompatibility(wp) && WithdrawCost(bank)) {
@@ -34,7 +33,7 @@ public class Building : MonoBehaviour
         // then this building is being used as a platform and cannot be destroyed
         foreach (Waypoint wp in waypoints) {
             if (!wp.IsValidSite) {
-                Debug.Log("Cannot destroy a building being used as a platform");
+                Debug.Log("Cannot destroy a building being used as a platform.");
                 return false;
             }        
         }
@@ -49,9 +48,9 @@ public class Building : MonoBehaviour
             if (!wp.IsPlatformSite || (wp.IsPlatformSite && isPlatformBuildable)) {
                 return true;
             }
-            Debug.Log("Building cannot be constructed on platform");
+            Debug.Log("Building cannot be constructed on platform.");
         }
-        Debug.Log("Invalid construction site");
+        Debug.Log("Invalid construction site.");
         return false;
     }
 

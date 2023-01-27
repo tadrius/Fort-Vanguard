@@ -7,8 +7,6 @@ public class Builder : MonoBehaviour
 
     [SerializeField] Building buildingPrefab;
 
-    readonly static string playerTag = "Player";
-
     public Building BuildingPrefab { get { return buildingPrefab; } }
 
     public void SetBuildingPrefab(Building building) {
@@ -16,7 +14,7 @@ public class Builder : MonoBehaviour
     }
 
     public static Builder GetPlayerBuilder() {
-        GameObject player = GameObject.FindGameObjectWithTag(playerTag);
+        GameObject player = GameObject.FindGameObjectWithTag(Player.playerTag);
         if (null != player) {
             return player.GetComponent<Builder>();
         }

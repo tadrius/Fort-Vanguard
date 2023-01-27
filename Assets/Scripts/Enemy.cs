@@ -4,31 +4,35 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    [SerializeField] int reward = 15;
-    [SerializeField] int penalty = 15;
+    [SerializeField] int pointReward = 1;
+    [SerializeField] int coinReward = 5;
+    [SerializeField] int healthPenalty = 20;
 
+    ScoreKeeper scoreKeeper;
     Bank bank;
     PlayerHealth playerHealth;
 
     // Start is called before the first frame update
     void Start()
     {
-        bank = FindObjectOfType<Bank>();
-        playerHealth = FindObjectOfType<PlayerHealth>();
+        GameObject player = GameObject.FindGameObjectWithTag(Player.playerTag);
+        scoreKeeper = player.GetComponent<ScoreKeeper>(); 
+        bank = player.GetComponent<Bank>();
+        playerHealth = player.GetComponent<PlayerHealth>();
     }
 
     public void DepositReward() {
         if (null != bank) {
-            bank.Deposit(reward);
+            bank.Deposit(coinReward);
+        }
+        if (null != scoreKeeper) {
+            scoreKeeper.AddToScore(pointReward);
         }
     }
 
     public void IncurPenalty() {
-        // if (null != bank) {
-        //     bank.Withdraw(penalty);
-        // }
         if (null != playerHealth) {
-            playerHealth.Damage(penalty);
+            playerHealth.Damage(healthPenalty);
         }
     }
 }

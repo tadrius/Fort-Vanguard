@@ -6,15 +6,20 @@ using TMPro;
 
 public class BuildingSelector : MonoBehaviour
 {
+    [SerializeField] bool isInitialSelection = false;
     [SerializeField] Building building;
     [SerializeField] TMP_Text nameText;
     [SerializeField] TMP_Text costText;
+    [SerializeField] Image selectionIcon;
 
     Builder builder;
 
     void Awake() {
         builder = Builder.GetPlayerBuilder();
         WriteBuildingInfo();
+        if (isInitialSelection) {
+            Select();
+        }
     }
 
     void WriteBuildingInfo() {
@@ -22,8 +27,21 @@ public class BuildingSelector : MonoBehaviour
         costText.text = $"{building.Cost}";
     }
 
-    public void OnButtonPress() {
+    public void Select() {
+        selectionIcon.enabled = true;
         builder.SetBuildingPrefab(building);
+
+        // Deselect all other building selectors
+        BuildingSelector[] selectors = FindObjectsOfType<BuildingSelector>();
+        foreach (BuildingSelector selector in selectors) {
+            if (this != selector) {
+                selector.Deselect();
+            }           
+        }    
+    }
+
+    public void Deselect() {
+        selectionIcon.enabled = false;
     }
 
 }
