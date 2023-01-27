@@ -11,9 +11,11 @@ public class Waypoint : MonoBehaviour
     [SerializeField] bool isValidSite = true;
     [SerializeField] bool isPlatformSite = false;
 
-    public bool IsValidSite { get { return isValidSite; } } // property to expose isValidSite
-    
+    public bool IsValidSite { get { return isValidSite; } }
+    public bool IsPlatformSite { get { return isPlatformSite; } } 
+
     Builder builder;
+    GameObject buildingObject;
 
     void Start() {
         builder = Builder.GetPlayerBuilder();
@@ -21,7 +23,7 @@ public class Waypoint : MonoBehaviour
     }
 
     void OnMouseOver() {
-        if (isValidSite && builder.Building.CheckPlatformCompatibility(isPlatformSite)) {
+        if (builder.BuildingPrefab.CheckSiteCompatibility(this)) {
             validSiteDisplay.SetActive(true);
         } else {
             invalidSiteDisplay.SetActive(true);
@@ -33,10 +35,19 @@ public class Waypoint : MonoBehaviour
     }
 
     void OnMouseDown() {
-        Building buildling = builder.Building;
+        Building building;
 
-        if (isValidSite) {
-            if (buildling.CreateBuilding(buildling, transform.position, isPlatformSite)) {
+        if (null != buildingObject) {
+            // if a building exists on this tile, attempt to destroy it
+            building = buildingObject.GetComponent<Building>();
+            if (building.DestroyBuilding()) {
+                isValidSite = true;
+            }
+        } else { 
+            // otherwise, create a new building
+            building = builder.BuildingPrefab;
+            buildingObject = building.CreateBuilding(building, transform.position, this);
+            if (null != buildingObject) {
                 isValidSite = false;
                 DisableBuildSiteDisplays();
             }

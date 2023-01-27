@@ -9,7 +9,7 @@ public class Builder : MonoBehaviour
 
     readonly static string playerTag = "Player";
 
-    public Building Building { get { return buildingPrefab; } }
+    public Building BuildingPrefab { get { return buildingPrefab; } }
 
     public void SetBuildingPrefab(Building building) {
         buildingPrefab = building;

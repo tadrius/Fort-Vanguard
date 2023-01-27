@@ -8,41 +8,62 @@ public class Building : MonoBehaviour
     [SerializeField] int cost = 50;
     [SerializeField] bool isPlatformBuildable = false;
 
-    Bank bank;
-    GameObject runtimeSpawns;
     bool isElevated = false;
 
     public int Cost { get { return cost; }}
     public bool IsElevated { get { return isElevated; }}
 
-
-
     readonly static string runtimeSpawnsTag = "RuntimeSpawns";
 
-
-    public bool CreateBuilding(Building prefab, Vector3 position, bool isPlatformSite) {
-        runtimeSpawns = GameObject.FindGameObjectWithTag(runtimeSpawnsTag);
-        bank = FindObjectOfType<Bank>();
+    public GameObject CreateBuilding(Building prefab, Vector3 position, Waypoint wp) {
+        GameObject runtimeSpawns = GameObject.FindGameObjectWithTag(runtimeSpawnsTag);
+        Bank bank = FindObjectOfType<Bank>();
         
-        if (CheckPlatformCompatibility(isPlatformSite) && WithdrawCost()) {
+        if (CheckSiteCompatibility(wp) && WithdrawCost(bank)) {
             GameObject newBuilding = Instantiate(prefab.gameObject, position, Quaternion.identity);
-            newBuilding.GetComponent<Building>().isElevated = isPlatformSite;
+            newBuilding.GetComponent<Building>().isElevated = wp.IsPlatformSite;
             newBuilding.transform.parent = runtimeSpawns.transform;
-            return true;
+            return newBuilding;
         }
+        return null;
+    }
+
+    public bool DestroyBuilding() {
+        Waypoint[] waypoints = GetComponentsInChildren<Waypoint>();
+        // if this building has any child waypoints and any of these waypoints are in use
+        // then this building is being used as a platform and cannot be destroyed
+        foreach (Waypoint wp in waypoints) {
+            if (!wp.IsValidSite) {
+                Debug.Log("Cannot destroy a building being used as a platform");
+                return false;
+            }        
+        }
+        // otherwise destroy the building
+        DepositRefund(FindObjectOfType<Bank>());
+        Destroy(gameObject);
+        return true;
+    }
+
+    public bool CheckSiteCompatibility(Waypoint wp) {
+        if (wp.IsValidSite) {
+            if (!wp.IsPlatformSite || (wp.IsPlatformSite && isPlatformBuildable)) {
+                return true;
+            }
+            Debug.Log("Building cannot be constructed on platform");
+        }
+        Debug.Log("Invalid construction site");
         return false;
     }
 
-    public bool CheckPlatformCompatibility(bool isPlatformSite) {
-        if ((isPlatformSite && isPlatformBuildable) || !isPlatformSite) {
-            return true;
-        }
-        Debug.Log("Building cannot be constructed on platform");
-        return false;
-    }
-
-    bool WithdrawCost() {
+    bool WithdrawCost(Bank bank) {
         if (null != bank && bank.Withdraw(cost)) {
+            return true;
+        }
+        return false;
+    }
+
+    bool DepositRefund(Bank bank) {
+        if (null != bank && bank.Deposit(cost/2)) {
             return true;
         }
         return false;

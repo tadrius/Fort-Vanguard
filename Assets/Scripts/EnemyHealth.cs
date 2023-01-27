@@ -10,6 +10,7 @@ public class EnemyHealth : MonoBehaviour
     [Tooltip("By how much the enemy's health will increase each time it is killed, " 
         + "resulting in stronger enemies over time.")]
     [SerializeField] int hitPointRamp = 1;
+    [SerializeField] ParticleSystem damageParticles;
 
     int currentHitPoints = 0;
     Enemy enemy;
@@ -25,9 +26,14 @@ public class EnemyHealth : MonoBehaviour
 
     void OnParticleCollision(GameObject other) {
         currentHitPoints--;
+        PlayDamageParticles();
         if (0 >= currentHitPoints) {
             Kill();
         }
+    }
+
+    void PlayDamageParticles() {
+        damageParticles.Play();
     }
 
     void Kill() {
