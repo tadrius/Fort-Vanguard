@@ -6,8 +6,7 @@ public class Bank : MonoBehaviour
 {
 
     [SerializeField] int startingBalance = 100;
-    // TODO - remove SerializeField
-    [SerializeField] int currentBalance;
+    int currentBalance;
 
     public int CurrentBalance { get { return currentBalance; } }
 
