@@ -49,9 +49,9 @@ public class Waypoint : MonoBehaviour
             buildingObject = building.CreateBuilding(building, transform.position, this);
             if (null != buildingObject) {
                 isValidSite = false;
-                DisableBuildSiteDisplays();
             }
         }
+        DisableBuildSiteDisplays();
     }
 
     void DisableBuildSiteDisplays() {

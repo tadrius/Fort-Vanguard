@@ -50,7 +50,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   path: []
-  speed: 1
+  speed: 1.5
 --- !u!114 &6789481542358313854
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -78,8 +78,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d088faf2fde590c4da79af73a1d458d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  reward: 5
-  penalty: 20
+  pointReward: 1
+  coinReward: 5
+  healthPenalty: 20
 --- !u!65 &4099580739292209448
 BoxCollider:
   m_ObjectHideFlags: 0
