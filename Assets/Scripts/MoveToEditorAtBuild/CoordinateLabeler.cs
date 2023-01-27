@@ -17,15 +17,16 @@ public class CoordinateLabeler : MonoBehaviour
         label = GetComponent<TextMeshPro>();
         label.enabled = false;
         waypoint = GetComponentInParent<Waypoint>();
-        DisplayCoordinates();
+        UpdateCoordinatesLabel();
     }
 
     void Update()
     {
         // will run even when not playing
         if (!Application.isPlaying) {
-            DisplayCoordinates();
+            UpdateCoordinatesLabel();
             UpdateObjectName();
+            label.enabled = true;
         }
         SetLabelColor();
         ToggleLabels();
@@ -45,7 +46,7 @@ public class CoordinateLabeler : MonoBehaviour
         }
     }
 
-    void DisplayCoordinates() {
+    void UpdateCoordinatesLabel() {
         coordinates.x = Mathf.RoundToInt(transform.parent.position.x/
             UnityEditor.EditorSnapSettings.move.x);
         coordinates.y = Mathf.RoundToInt(transform.parent.position.z/

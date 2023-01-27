@@ -5,17 +5,20 @@ using UnityEngine;
 public class GridManager : MonoBehaviour
 {
 
-    [SerializeField] Node node;
+    [SerializeField] Vector2Int gridSize;
+    Dictionary<Vector2Int, Node> grid = new Dictionary<Vector2Int, Node>();
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        Debug.Log($"Node: {node.coordinates}, {node.isTraversable}");
+    void Awake() {
+        PopulateGrid();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+    void PopulateGrid() {
+        for (int x = 0; x < gridSize.x; x++) {
+            for (int y = 0; y < gridSize.y; y++) {
+                Vector2Int coordinates = new Vector2Int(x, y);
+                grid.Add(coordinates, new Node(coordinates, true)); // isTraversable true by default
+                Debug.Log($"{grid[coordinates].coordinates}, {grid[coordinates].isTraversable}");
+            }
+        }
     }
 }
