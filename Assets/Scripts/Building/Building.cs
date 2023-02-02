@@ -13,14 +13,14 @@ public class Building : MonoBehaviour
     public int Cost { get { return cost; }}
     public bool IsElevated { get { return isElevated; }}
 
-    public GameObject CreateBuilding(Building prefab, Vector3 position, Waypoint wp) {
+    public GameObject CreateBuilding(Building prefab, Vector3 position, Tile tile) {
         GameObject runtimeSpawns = GameObject.FindGameObjectWithTag(
             RuntimeSpawns.runtimeSpawnsTag);
         Bank bank = FindObjectOfType<Bank>();
         
-        if (CheckSiteCompatibility(wp) && WithdrawCost(bank)) {
+        if (CheckSiteCompatibility(tile) && WithdrawCost(bank)) {
             GameObject newBuilding = Instantiate(prefab.gameObject, position, Quaternion.identity);
-            newBuilding.GetComponent<Building>().isElevated = wp.IsPlatformSite;
+            newBuilding.GetComponent<Building>().isElevated = tile.IsPlatformSite;
             newBuilding.transform.parent = runtimeSpawns.transform;
             return newBuilding;
         }
@@ -28,11 +28,11 @@ public class Building : MonoBehaviour
     }
 
     public bool DestroyBuilding() {
-        Waypoint[] waypoints = GetComponentsInChildren<Waypoint>();
-        // if this building has any child waypoints and any of these waypoints are in use
+        Tile[] tiles = GetComponentsInChildren<Tile>();
+        // if this building has any child tiles and any of these tiles are in use
         // then this building is being used as a platform and cannot be destroyed
-        foreach (Waypoint wp in waypoints) {
-            if (!wp.IsValidSite) {
+        foreach (Tile tile in tiles) {
+            if (!tile.IsValidSite) {
                 Debug.Log("Cannot destroy a building being used as a platform.");
                 return false;
             }        
@@ -43,9 +43,9 @@ public class Building : MonoBehaviour
         return true;
     }
 
-    public bool CheckSiteCompatibility(Waypoint wp) {
-        if (wp.IsValidSite) {
-            if (!wp.IsPlatformSite || (wp.IsPlatformSite && isPlatformBuildable)) {
+    public bool CheckSiteCompatibility(Tile tile) {
+        if (tile.IsValidSite) {
+            if (!tile.IsPlatformSite || (tile.IsPlatformSite && isPlatformBuildable)) {
                 return true;
             }
         }
