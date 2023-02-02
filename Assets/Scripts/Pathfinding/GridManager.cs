@@ -5,9 +5,13 @@ using UnityEngine;
 public class GridManager : MonoBehaviour
 {
 
+    [Tooltip("Size of each side of a cell. Should match the Unity Editor Snap Settings.")]
+    [SerializeField] float unityCellSize = 10f;
+    [Tooltip("Number of tiles along the horizontal and vertical of the grid.")]
     [SerializeField] Vector2Int gridSize;
     Dictionary<Vector2Int, Node> grid = new Dictionary<Vector2Int, Node>();
 
+    public float UnityCellSize { get { return unityCellSize; }}
     public Dictionary<Vector2Int, Node> Grid { get { return grid; }}
 
     void Awake() {
@@ -19,7 +23,6 @@ public class GridManager : MonoBehaviour
             for (int y = 0; y < gridSize.y; y++) {
                 Vector2Int coordinates = new Vector2Int(x, y);
                 grid.Add(coordinates, new Node(coordinates, true)); // isTraversable true by default
-                // Debug.Log($"Added node at {grid[coordinates].coordinates}, isTraversable: {grid[coordinates].isTraversable}");
             }
         }
     }
@@ -28,7 +31,28 @@ public class GridManager : MonoBehaviour
         if (grid.ContainsKey(coordinates)) {
             return grid[coordinates];
         }
-        // Debug.Log($"Grid does not contain key: {coordinates}. Returning null...");
         return null;
+    }
+
+    public void BlockNode(Vector2Int coordinates) {
+        Node node = GetNode(coordinates);
+        if (null != node) {
+            node.isTraversable = false;
+        }
+    }
+
+    public Vector2Int GetCoordinatesFromPosition(Vector3 position) {
+        Vector2Int coordinates = new Vector2Int();
+        coordinates.x = Mathf.RoundToInt(position.x/unityCellSize);
+        coordinates.y = Mathf.RoundToInt(position.z/unityCellSize); 
+        return coordinates;
+    }
+
+    public Vector3 GetPositionFromCoordinates(Vector2Int coordinates) {
+        Vector3 position = new Vector3();
+        position.x = (float) coordinates.x * unityCellSize;
+        position.y = 0f;
+        position.z = (float) coordinates.y * unityCellSize;
+        return position;
     }
 }

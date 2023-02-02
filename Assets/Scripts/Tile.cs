@@ -14,11 +14,24 @@ public class Tile : MonoBehaviour
     public bool IsValidSite { get { return isValidSite; } }
     public bool IsPlatformSite { get { return isPlatformSite; } } 
 
+    GridManager gridManager;
     Builder builder;
     GameObject buildingObject;
 
-    void Start() {
+    Vector2Int coordinates = new Vector2Int();
+
+    void Awake() {
+        gridManager = FindObjectOfType<GridManager>();
         builder = Builder.GetPlayerBuilder();
+    }
+
+    void Start() {
+        if (null != gridManager) {
+            coordinates = gridManager.GetCoordinatesFromPosition(transform.position);
+        }
+        if (!isValidSite) {
+            gridManager.BlockNode(coordinates);
+        }
         DisableBuildSiteDisplays();
     }
 

@@ -7,16 +7,21 @@ using TMPro;
 [RequireComponent(typeof(TextMeshPro))]
 public class CoordinateLabeler : MonoBehaviour
 {
-    [SerializeField] Color validSiteColor = Color.white;
-    [SerializeField] Color invalidSiteColor = Color.gray;
+    
+    [SerializeField] Color UntraversableColor = Color.grey;
+    [SerializeField] Color exploredColor = Color.yellow;
+    [SerializeField] Color pathColor = Color.magenta;
+    [SerializeField] Color defaultColor = Color.white;
+
+
     TextMeshPro label;
     Vector2Int coordinates = new Vector2Int();
-    Waypoint waypoint;
+    GridManager gridManager;
 
     void Awake() {
+        gridManager = FindObjectOfType<GridManager>();
         label = GetComponent<TextMeshPro>();
         label.enabled = false;
-        waypoint = GetComponentInParent<Waypoint>();
         UpdateCoordinatesLabel();
     }
 
@@ -39,18 +44,28 @@ public class CoordinateLabeler : MonoBehaviour
     }
 
     void SetLabelColor() {
-        if (null != waypoint && !waypoint.IsValidSite) {
-            label.color = invalidSiteColor;
-        } else {
-            label.color = validSiteColor;
+        if (null == gridManager) {
+            return;
+        }
+        Node node = gridManager.GetNode(coordinates);
+        if (null != node) {
+            if (!node.isTraversable) {
+                label.color = UntraversableColor;
+            } else if (node.isPath) {
+                label.color = pathColor;
+            } else if (node.isExplored) {
+                label.color = exploredColor;
+            } else {
+                label.color = defaultColor;
+            }
         }
     }
 
     void UpdateCoordinatesLabel() {
         coordinates.x = Mathf.RoundToInt(transform.parent.position.x/
-            UnityEditor.EditorSnapSettings.move.x);
+            gridManager.UnityCellSize);
         coordinates.y = Mathf.RoundToInt(transform.parent.position.z/
-            UnityEditor.EditorSnapSettings.move.z); // using 3d space z as grid y
+            gridManager.UnityCellSize); // using 3d space z as grid y
 
         // construct coordinate label using string interpolation
         label.text = $"{coordinates.x},{coordinates.y}";
