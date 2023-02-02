@@ -55,23 +55,38 @@ public class Tile : MonoBehaviour
             // if a building exists on this tile, attempt to destroy it
             building = buildingObject.GetComponent<Building>();
             if (building.DestroyBuilding()) {
-                isValidSite = true;
-                gridManager.UnblockNode(coordinates);
+                UnblockTile();
             }
         } else { 
             // otherwise, create a new building
             building = builder.BuildingPrefab;
-            if (null != gridManager.GetNode(coordinates)
-                && gridManager.GetNode(coordinates).isTraversable 
-                && !pathfinder.WillBlockPath(coordinates)) {
+            if (!WillBlockPathfinding()) {
                 buildingObject = building.CreateBuilding(building, transform.position, this);
                 if (null != buildingObject) {
-                    isValidSite = false;
-                    gridManager.BlockNode(coordinates);
+                    BlockTile();
                 }
             }
         }
         DisableBuildSiteDisplays();
+    }
+
+    // checks if blocking this tile's associated node will interfere with pathfinding
+    bool WillBlockPathfinding() {
+        if (null != gridManager.GetNode(coordinates) 
+            && gridManager.GetNode(coordinates).isTraversable ) {
+            return pathfinder.WillBlockPath(coordinates);
+        };
+        return false; // if tile is not involved with pathfinding then building will not block
+    }
+
+    void BlockTile() {
+        isValidSite = false;
+        gridManager.BlockNode(coordinates);
+    }
+
+    void UnblockTile() {
+        isValidSite = true;
+        gridManager.UnblockNode(coordinates);        
     }
 
     void DisableBuildSiteDisplays() {
