@@ -15,7 +15,7 @@ public class BuildingSelector : MonoBehaviour
     Builder builder;
 
     void Awake() {
-        builder = Builder.GetPlayerBuilder();
+        builder = GameObject.FindGameObjectWithTag(Player.playerTag).GetComponent<Builder>();
         WriteBuildingInfo();
         if (isInitialSelection) {
             Select();

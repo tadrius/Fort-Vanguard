@@ -13,18 +13,26 @@ public class Building : MonoBehaviour
     public int Cost { get { return cost; }}
     public bool IsElevated { get { return isElevated; }}
 
-    public GameObject CreateBuilding(Building prefab, Vector3 position, Tile tile) {
+    public GameObject CreateBuilding(Tile tile) {
         GameObject runtimeSpawns = GameObject.FindGameObjectWithTag(
             RuntimeSpawns.runtimeSpawnsTag);
         Bank bank = FindObjectOfType<Bank>();
         
         if (CheckSiteCompatibility(tile) && WithdrawCost(bank)) {
-            GameObject newBuilding = Instantiate(prefab.gameObject, position, Quaternion.identity);
-            newBuilding.GetComponent<Building>().isElevated = tile.IsPlatformSite;
+            GameObject newBuilding = Instantiate(
+                gameObject, tile.transform.position, Quaternion.identity);
+            newBuilding.GetComponent<Building>().SetIsElevated(tile.IsPlatformSite);
             newBuilding.transform.parent = runtimeSpawns.transform;
             return newBuilding;
         }
         return null;
+    }
+
+    public bool RefundBuilding() {
+        if (DestroyBuilding()) {
+            return DepositRefund(FindObjectOfType<Bank>());
+        }
+        return false;
     }
 
     public bool DestroyBuilding() {
@@ -38,7 +46,6 @@ public class Building : MonoBehaviour
             }        
         }
         // otherwise destroy the building
-        DepositRefund(FindObjectOfType<Bank>());
         Destroy(gameObject);
         return true;
     }
@@ -64,5 +71,9 @@ public class Building : MonoBehaviour
             return true;
         }
         return false;
+    }
+
+    public void SetIsElevated(bool isElevated) {
+        this.isElevated = isElevated;
     }
 }

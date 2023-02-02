@@ -24,7 +24,7 @@ public class Tile : MonoBehaviour
     void Awake() {
         gridManager = FindObjectOfType<GridManager>();
         pathfinder = FindObjectOfType<Pathfinder>();
-        builder = Builder.GetPlayerBuilder();
+        builder = GameObject.FindGameObjectWithTag(Player.playerTag).GetComponent<Builder>();
     }
 
     void Start() {
@@ -38,7 +38,7 @@ public class Tile : MonoBehaviour
     }
 
     void OnMouseOver() {
-        if (builder.BuildingPrefab.CheckSiteCompatibility(this)) {
+        if (builder.Building.CheckSiteCompatibility(this)) {
             validSiteDisplay.SetActive(true);
         } else {
             invalidSiteDisplay.SetActive(true);
@@ -54,14 +54,13 @@ public class Tile : MonoBehaviour
         if (null != buildingObject) {
             // if a building exists on this tile, attempt to destroy it
             building = buildingObject.GetComponent<Building>();
-            if (building.DestroyBuilding()) {
+            if (building.RefundBuilding()) {
                 UnblockTile();
             }
         } else { 
             // otherwise, create a new building
-            building = builder.BuildingPrefab;
             if (!WillBlockPathfinding()) {
-                buildingObject = building.CreateBuilding(building, transform.position, this);
+                buildingObject = builder.Building.CreateBuilding(this);
                 if (null != buildingObject) {
                     BlockTile();
                 }

@@ -20,6 +20,7 @@ public class Bank : MonoBehaviour
             return false;
         }
         currentBalance += amount;
+        Debug.Log($"Deposited {amount}.");
         return true;
     }
 
