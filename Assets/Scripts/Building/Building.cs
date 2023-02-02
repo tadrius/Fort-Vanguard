@@ -48,9 +48,7 @@ public class Building : MonoBehaviour
             if (!wp.IsPlatformSite || (wp.IsPlatformSite && isPlatformBuildable)) {
                 return true;
             }
-            Debug.Log("Building cannot be constructed on platform.");
         }
-        Debug.Log("Invalid construction site.");
         return false;
     }
 

@@ -8,6 +8,8 @@ public class GridManager : MonoBehaviour
     [SerializeField] Vector2Int gridSize;
     Dictionary<Vector2Int, Node> grid = new Dictionary<Vector2Int, Node>();
 
+    public Dictionary<Vector2Int, Node> Grid { get { return grid; }}
+
     void Awake() {
         PopulateGrid();
     }
@@ -17,8 +19,16 @@ public class GridManager : MonoBehaviour
             for (int y = 0; y < gridSize.y; y++) {
                 Vector2Int coordinates = new Vector2Int(x, y);
                 grid.Add(coordinates, new Node(coordinates, true)); // isTraversable true by default
-                Debug.Log($"{grid[coordinates].coordinates}, {grid[coordinates].isTraversable}");
+                // Debug.Log($"Added node at {grid[coordinates].coordinates}, isTraversable: {grid[coordinates].isTraversable}");
             }
         }
+    }
+
+    public Node GetNode(Vector2Int coordinates) {
+        if (grid.ContainsKey(coordinates)) {
+            return grid[coordinates];
+        }
+        // Debug.Log($"Grid does not contain key: {coordinates}. Returning null...");
+        return null;
     }
 }
