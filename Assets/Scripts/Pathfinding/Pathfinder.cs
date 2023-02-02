@@ -18,10 +18,13 @@ public class Pathfinder : MonoBehaviour
     Vector2Int[] directions = // order of directions changes order of search algorithm
         { Vector2Int.right, Vector2Int.left, Vector2Int.up, Vector2Int.down };
     GridManager gridManager;
-    Dictionary<Vector2Int, Node> grid = new Dictionary<Vector2Int, Node>();
+    Dictionary<Vector2Int, Node> grid;
 
     void Awake() {
         gridManager = FindObjectOfType<GridManager>();
+        if (null != gridManager) {
+            grid = gridManager.Grid;
+        }
     }
 
     // Start is called before the first frame update
@@ -31,8 +34,13 @@ public class Pathfinder : MonoBehaviour
         endNode = gridManager.GetNode(endCoordinates);
         startNode.isTraversable = true;
         endNode.isTraversable = true;
+        FindPath();
+    }
+
+    List<Node> FindPath() {
+        gridManager.ResetNodes();
         BreadthFirstSearch();
-        BuildPath();
+        return BuildPath();
     }
 
     void ExploreNeighbors() {
@@ -57,6 +65,11 @@ public class Pathfinder : MonoBehaviour
     }
 
     void BreadthFirstSearch() {
+        // reset
+        toSearch.Clear();
+        traversed.Clear();
+
+        // setup
         toSearch.Enqueue(startNode);
         traversed.Add(startCoordinates, startNode);
 
@@ -80,6 +93,24 @@ public class Pathfinder : MonoBehaviour
         }
         path.Reverse();
         return path;
+    }
+
+    // checks if blocking the node at the given coordinates will block the last possible path
+    public bool WillBlockPath(Vector2Int coordinates) {
+        if (grid.ContainsKey(coordinates)) {
+            // temporarily change node state to check if the change would block possible paths 
+            bool previousState = grid[coordinates].isTraversable;
+            grid[coordinates].isTraversable = false;
+            List<Node> newPath = FindPath();
+            grid[coordinates].isTraversable = previousState;
+
+            // if resulting path is too short, change would block route
+            if (newPath.Count <= 1) {
+                FindPath();
+                return true;
+            }
+        }
+        return false;
     }
 
 }

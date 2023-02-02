@@ -41,6 +41,19 @@ public class GridManager : MonoBehaviour
         }
     }
 
+    public void UnblockNode(Vector2Int coordinates) {
+        Node node = GetNode(coordinates);
+        if (null != node) {
+            node.isTraversable = true;
+        }
+    }
+
+    public void ResetNodes() {
+        foreach (KeyValuePair<Vector2Int, Node> entry in grid) {
+            entry.Value.Reset();
+        }
+    }
+
     public Vector2Int GetCoordinatesFromPosition(Vector3 position) {
         Vector2Int coordinates = new Vector2Int();
         coordinates.x = Mathf.RoundToInt(position.x/unityCellSize);

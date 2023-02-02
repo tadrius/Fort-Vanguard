@@ -15,4 +15,11 @@ public class Node
         this.coordinates = coordinates;
         this.isTraversable = isTraversable;
     }
+
+    // reset pathfinding flags
+    public void Reset() {
+        parent = null;
+        isExplored = false;
+        isPath = false;
+    }
 }

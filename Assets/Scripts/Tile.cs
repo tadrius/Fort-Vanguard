@@ -15,6 +15,7 @@ public class Tile : MonoBehaviour
     public bool IsPlatformSite { get { return isPlatformSite; } } 
 
     GridManager gridManager;
+    Pathfinder pathfinder;
     Builder builder;
     GameObject buildingObject;
 
@@ -22,6 +23,7 @@ public class Tile : MonoBehaviour
 
     void Awake() {
         gridManager = FindObjectOfType<GridManager>();
+        pathfinder = FindObjectOfType<Pathfinder>();
         builder = Builder.GetPlayerBuilder();
     }
 
@@ -49,19 +51,24 @@ public class Tile : MonoBehaviour
 
     void OnMouseDown() {
         Building building;
-
         if (null != buildingObject) {
             // if a building exists on this tile, attempt to destroy it
             building = buildingObject.GetComponent<Building>();
             if (building.DestroyBuilding()) {
                 isValidSite = true;
+                gridManager.UnblockNode(coordinates);
             }
         } else { 
             // otherwise, create a new building
             building = builder.BuildingPrefab;
-            buildingObject = building.CreateBuilding(building, transform.position, this);
-            if (null != buildingObject) {
-                isValidSite = false;
+            if (null != gridManager.GetNode(coordinates)
+                && gridManager.GetNode(coordinates).isTraversable 
+                && !pathfinder.WillBlockPath(coordinates)) {
+                buildingObject = building.CreateBuilding(building, transform.position, this);
+                if (null != buildingObject) {
+                    isValidSite = false;
+                    gridManager.BlockNode(coordinates);
+                }
             }
         }
         DisableBuildSiteDisplays();
