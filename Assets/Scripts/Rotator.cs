@@ -10,7 +10,7 @@ public class Rotator : MonoBehaviour
     Vector3 focalPoint;
 
     void Awake() {
-        focalPoint = new Vector3(140f, 0f, 60f);
+        focalPoint = new Vector3(transform.position.x, 0f, transform.position.x);
     }
 
     // Update is called once per frame
