@@ -6,7 +6,9 @@ public class Pathfinder : MonoBehaviour
 {
 
     [SerializeField] Vector2Int startCoordinates;
+    public Vector2Int StartCoordinates { get { return startCoordinates; }}
     [SerializeField] Vector2Int endCoordinates;
+    public Vector2Int EndCoordinates { get { return endCoordinates; }}
     Node startNode;
     Node endNode;
     Node currentNode;
@@ -24,22 +26,26 @@ public class Pathfinder : MonoBehaviour
         gridManager = FindObjectOfType<GridManager>();
         if (null != gridManager) {
             grid = gridManager.Grid;
+            startNode = grid[startCoordinates];
+            startNode.isTraversable = true;
+            endNode = grid[endCoordinates];
+            endNode.isTraversable = true;
         }
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        startNode = gridManager.GetNode(startCoordinates);
-        endNode = gridManager.GetNode(endCoordinates);
-        startNode.isTraversable = true;
-        endNode.isTraversable = true;
         FindPath();
     }
 
-    List<Node> FindPath() {
+    public List<Node> FindPath() {
+        return FindPath(startCoordinates, endCoordinates);
+    }
+
+    public List<Node> FindPath(Vector2Int startCoordinates, Vector2Int endCoordinates) {
         gridManager.ResetNodes();
-        BreadthFirstSearch();
+        BreadthFirstSearch(startCoordinates, endCoordinates);
         return BuildPath();
     }
 
@@ -64,12 +70,17 @@ public class Pathfinder : MonoBehaviour
         }
     }
 
-    void BreadthFirstSearch() {
+    void BreadthFirstSearch(Vector2Int startCoordinates, Vector2Int endCoordinates) {
         // reset
         toSearch.Clear();
         traversed.Clear();
 
         // setup
+        Node startNode = gridManager.GetNode(startCoordinates);
+        if (null == startNode) {
+            Debug.Log($"No node available at {startCoordinates}");
+            return;
+        }
         toSearch.Enqueue(startNode);
         traversed.Add(startCoordinates, startNode);
 
@@ -101,16 +112,22 @@ public class Pathfinder : MonoBehaviour
             // temporarily change node state to check if the change would block possible paths 
             bool previousState = grid[coordinates].isTraversable;
             grid[coordinates].isTraversable = false;
-            List<Node> newPath = FindPath();
+            List<Node> path = FindPath();
             grid[coordinates].isTraversable = previousState;
 
             // if resulting path is too short, change would block route
-            if (newPath.Count <= 1) {
+            if (path.Count <= 1) {
+                Debug.Log("Blocking this node will block all possible paths.");
                 FindPath();
                 return true;
             }
         }
         return false;
+    }
+
+    public void NotifyReceivers() {
+        BroadcastMessage(EnemyMover.findPathMethodName, 
+            false, SendMessageOptions.DontRequireReceiver);
     }
 
 }

@@ -81,11 +81,13 @@ public class Tile : MonoBehaviour
     void BlockTile() {
         isValidSite = false;
         gridManager.BlockNode(coordinates);
+        pathfinder.NotifyReceivers();
     }
 
     void UnblockTile() {
         isValidSite = true;
-        gridManager.UnblockNode(coordinates);        
+        gridManager.UnblockNode(coordinates);
+        pathfinder.NotifyReceivers();  
     }
 
     void DisableBuildSiteDisplays() {

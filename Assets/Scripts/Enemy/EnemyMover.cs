@@ -6,46 +6,53 @@ using UnityEngine;
 public class EnemyMover : MonoBehaviour
 {
 
-    [SerializeField] List<Tile> path = new List<Tile>();
     [SerializeField] [Range(0f, 10f)] float speed = 1f;
 
     Enemy enemy;
+    Pathfinder pathfinder;
+    GridManager gridManager;
+    List<Node> path = new List<Node>();
 
-    private static string pathTag = "Path";
-
-    void Start() {
+    void Awake() {
         enemy = GetComponent<Enemy>();
+        pathfinder = FindObjectOfType<Pathfinder>();
+        gridManager = FindObjectOfType<GridManager>();
     }
 
     // Start is called before the first frame update
     void OnEnable() {
-        FindPath(); // TODO - move FindPath to Start?
         MoveToPathStart();
-        StartCoroutine(FollowPath());
+        FindPath(true);
     }
 
     void MoveToPathStart() {
-        transform.position = path[0].transform.position;
-        path.Remove(path[0]);
+        transform.position = gridManager.GetPositionFromCoordinates(pathfinder.StartCoordinates);
     }
 
-    void FindPath() {
-        path.Clear();
-
-        // get path object (path tiles are children in order)
-        GameObject pathObject = GameObject.FindGameObjectWithTag(pathTag);
-        foreach (Tile tile in pathObject.GetComponentsInChildren<Tile>()) {
-            if (null != tile) {
-                path.Add(tile);
-            }
+    readonly public static string findPathMethodName = "FindPath";
+    void FindPath(bool resetPath) {
+        Vector2Int startCoordinates, endCoordinates;
+        if (resetPath) {
+            startCoordinates = pathfinder.StartCoordinates;
+            endCoordinates = pathfinder.EndCoordinates;
+        } else {
+            startCoordinates = gridManager.GetCoordinatesFromPosition(transform.position);
+            endCoordinates = pathfinder.EndCoordinates;
         }
+        StopAllCoroutines();
+
+        path.Clear();
+        path = pathfinder.FindPath(startCoordinates, endCoordinates);
+
+        StartCoroutine(FollowPath());
     }
 
     // Coroutine to move along the path
     IEnumerator FollowPath() {
-        foreach (Tile tile in path) {
+        for (int i = 1; i < path.Count; i++) { // skip the starting node (enemy will already be there)
             Vector3 startPos = transform.position;
-            Vector3 endPos = tile.transform.position;
+            Vector3 endPos = gridManager.GetPositionFromCoordinates(path[i].coordinates);
+            Debug.Log($"{gridManager.GetCoordinatesFromPosition(transform.position)}, {path[i].coordinates}");
             float travelPercent = 0f;
 
             transform.LookAt(endPos);
