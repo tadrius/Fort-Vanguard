@@ -5,13 +5,25 @@ using UnityEngine;
 public class Building : MonoBehaviour
 {
 
+    [Tooltip("The cost to construct this building.")]
     [SerializeField] int cost = 50;
+    [Tooltip("Whether or not this building can be constructed on a platform.")]
     [SerializeField] bool isPlatformBuildable = false;
+    [Tooltip("The parts that comprise the fully constructed building.")]
+    [SerializeField] GameObject[] parts;
+    [Tooltip("Particles that play when the building is being constructed.")]
+    [SerializeField] ParticleSystem[] constructionParticles;
+    [SerializeField] float constructionTime = 3f;
 
     bool isElevated = false;
 
+
     public int Cost { get { return cost; }}
     public bool IsElevated { get { return isElevated; }}
+
+    void Start() {
+        StartCoroutine(Construct());
+    }
 
     public GameObject CreateBuilding(Tile tile) {
         GameObject runtimeSpawns = GameObject.FindGameObjectWithTag(
@@ -26,6 +38,39 @@ public class Building : MonoBehaviour
             return newBuilding;
         }
         return null;
+    }
+
+    IEnumerator Construct() {
+        SetPartsActive(false);
+        float timeElapsed = 0f;
+
+        PlayBuildFX();
+        while (timeElapsed < constructionTime) {
+            timeElapsed += Time.deltaTime;
+            yield return new WaitForEndOfFrame();
+        }
+        SetPartsActive(true);
+        DisableBuildFX();
+    }
+    
+    void SetPartsActive(bool isActive) {
+        foreach (GameObject part in parts) {
+            part.SetActive(isActive);
+        }        
+    }
+
+    void PlayBuildFX() {
+        foreach (ParticleSystem particleSystem in constructionParticles) {
+            var emission = particleSystem.emission;
+            emission.enabled = true;
+        }
+    }
+
+    void DisableBuildFX() {
+        foreach (ParticleSystem particleSystem in constructionParticles) {
+            var emission = particleSystem.emission;
+            emission.enabled = false;
+        }     
     }
 
     public bool RefundBuilding() {

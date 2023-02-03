@@ -11,11 +11,14 @@ public class EnemyHealth : MonoBehaviour
         + "resulting in stronger enemies over time.")]
     [SerializeField] int hitPointRamp = 1;
     [SerializeField] ParticleSystem damageParticles;
+    [SerializeField] GameObject deathFX;
 
     int currentHitPoints = 0;
     Enemy enemy;
+    GameObject runtimeSpawns;
 
     void Start() {
+        runtimeSpawns = GameObject.FindGameObjectWithTag(RuntimeSpawns.runtimeSpawnsTag);
         enemy = GetComponent<Enemy>();
     }
 
@@ -26,19 +29,31 @@ public class EnemyHealth : MonoBehaviour
 
     void OnParticleCollision(GameObject other) {
         currentHitPoints--;
-        PlayDamageParticles();
+        PlayDamageFX();
         if (0 >= currentHitPoints) {
             Kill();
         }
     }
 
-    void PlayDamageParticles() {
-        damageParticles.Play();
+    void Kill() {
+        SpawnDeathFX();
+        enemy.DepositReward();
+        gameObject.SetActive(false);
+        maxHitPoints += hitPointRamp;     
     }
 
-    void Kill() {
-        gameObject.SetActive(false);
-        enemy.DepositReward();
-        maxHitPoints += hitPointRamp;     
+    void PlayDamageFX() {
+        PlayParticles(damageParticles);
+    }
+
+    void PlayParticles(ParticleSystem particles) {
+        if (null != particles) {
+            particles.Play();
+        }
+    }
+
+    void SpawnDeathFX() {
+        GameObject newDeathFX = Instantiate(deathFX, transform.position, Quaternion.identity);
+        newDeathFX.transform.parent = runtimeSpawns.transform;
     }
 }
