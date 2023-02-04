@@ -24,12 +24,20 @@ PrefabInstance:
       value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 386491482599796199, guid: aff4e09874e9de44c8156947fa07a756, type: 3}
+      propertyPath: isOccupied
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 386491482599796199, guid: aff4e09874e9de44c8156947fa07a756, type: 3}
+      propertyPath: isBuildSite
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 386491482599796199, guid: aff4e09874e9de44c8156947fa07a756, type: 3}
       propertyPath: isValidSite
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2489182837448897032, guid: aff4e09874e9de44c8156947fa07a756, type: 3}
       propertyPath: m_Name
-      value: TileWater
+      value: Water
       objectReference: {fileID: 0}
     - target: {fileID: 2489182837448897039, guid: aff4e09874e9de44c8156947fa07a756, type: 3}
       propertyPath: m_RootOrder

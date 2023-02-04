@@ -214,8 +214,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   validSiteDisplay: {fileID: 1605467272567035318}
   invalidSiteDisplay: {fileID: 358385895538674261}
-  isValidSite: 1
-  isPlatformSite: 1
+  isOccupied: 0
+  isBuildSite: 1
+  isPlatform: 1
 --- !u!65 &4173188474167325140
 BoxCollider:
   m_ObjectHideFlags: 0

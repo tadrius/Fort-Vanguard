@@ -8,11 +8,13 @@ public class Tile : MonoBehaviour
     [SerializeField] GameObject validSiteDisplay;
     [SerializeField] GameObject invalidSiteDisplay;
 
-    [SerializeField] bool isValidSite = true;
-    [SerializeField] bool isPlatformSite = false;
+    [SerializeField] bool isOccupied = false;
+    [SerializeField] bool isBuildSite = true;
+    [SerializeField] bool isPlatform = false;
 
-    public bool IsValidSite { get { return isValidSite; } }
-    public bool IsPlatformSite { get { return isPlatformSite; } } 
+    public bool IsOccupied { get { return isOccupied; } }
+    public bool IsBuildSite { get { return isBuildSite; } }
+    public bool IsPlatform { get { return isPlatform; } } 
 
     GridManager gridManager;
     Pathfinder pathfinder;
@@ -31,14 +33,14 @@ public class Tile : MonoBehaviour
         if (null != gridManager) {
             coordinates = gridManager.GetCoordinatesFromPosition(transform.position);
         }
-        if (!isValidSite) {
+        if (isOccupied) {
             gridManager.BlockNode(coordinates);
         }
         DisableBuildSiteDisplays();
     }
 
     void OnMouseOver() {
-        if (builder.Building.CheckSiteCompatibility(this)) {
+        if (builder.Building.CheckSiteCompatibility(this) & !WillBlockPathfinding()) {
             validSiteDisplay.SetActive(true);
         } else {
             invalidSiteDisplay.SetActive(true);
@@ -79,13 +81,13 @@ public class Tile : MonoBehaviour
     }
 
     void BlockTile() {
-        isValidSite = false;
+        isOccupied = true;
         gridManager.BlockNode(coordinates);
         pathfinder.NotifyReceivers();
     }
 
     void UnblockTile() {
-        isValidSite = true;
+        isOccupied = false;
         gridManager.UnblockNode(coordinates);
         pathfinder.NotifyReceivers();  
     }

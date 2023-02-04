@@ -52,7 +52,6 @@ public class EnemyMover : MonoBehaviour
         for (int i = 1; i < path.Count; i++) { // skip the starting node (enemy will already be there)
             Vector3 startPos = transform.position;
             Vector3 endPos = gridManager.GetPositionFromCoordinates(path[i].coordinates);
-            Debug.Log($"{gridManager.GetCoordinatesFromPosition(transform.position)}, {path[i].coordinates}");
             float travelPercent = 0f;
 
             transform.LookAt(endPos);

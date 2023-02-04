@@ -33,7 +33,7 @@ public class Building : MonoBehaviour
         if (CheckSiteCompatibility(tile) && WithdrawCost(bank)) {
             GameObject newBuilding = Instantiate(
                 gameObject, tile.transform.position, Quaternion.identity);
-            newBuilding.GetComponent<Building>().SetIsElevated(tile.IsPlatformSite);
+            newBuilding.GetComponent<Building>().SetIsElevated(tile.IsPlatform);
             newBuilding.transform.parent = runtimeSpawns.transform;
             return newBuilding;
         }
@@ -85,7 +85,7 @@ public class Building : MonoBehaviour
         // if this building has any child tiles and any of these tiles are in use
         // then this building is being used as a platform and cannot be destroyed
         foreach (Tile tile in tiles) {
-            if (!tile.IsValidSite) {
+            if (tile.IsOccupied) {
                 Debug.Log("Cannot destroy a building being used as a platform.");
                 return false;
             }        
@@ -96,8 +96,8 @@ public class Building : MonoBehaviour
     }
 
     public bool CheckSiteCompatibility(Tile tile) {
-        if (tile.IsValidSite) {
-            if (!tile.IsPlatformSite || (tile.IsPlatformSite && isPlatformBuildable)) {
+        if (tile.IsBuildSite && !tile.IsOccupied) {
+            if (!tile.IsPlatform || (tile.IsPlatform && isPlatformBuildable)) {
                 return true;
             }
         }
