@@ -213,8 +213,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e62bfae282f99542826a2656a67ba25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  range: 50
-  attackDelay: 1.5
+  range: 40
+  attackDelay: 1
   attackAudio: {fileID: 8456605364411865546}
 --- !u!1 &4453657551533106616
 GameObject:
@@ -5072,7 +5072,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: f11db4559b3ffff45b62e9327fc5535d, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.25
+  m_Volume: 0.26
   m_Pitch: 1
   Loop: 0
   Mute: 0

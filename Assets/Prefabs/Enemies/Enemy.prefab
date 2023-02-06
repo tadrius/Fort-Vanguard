@@ -62,8 +62,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3e5119e7b1abd64e9df51a048aee90a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHitPoints: 4
-  hitPointRamp: 1
+  maxHitPoints: 6
+  hitPointRamp: 2
   damageParticles: {fileID: 8920539035917221243}
   deathFX: {fileID: 3022548671944094706, guid: a7d0175044b017b4d8cb0081fbd2a823, type: 3}
 --- !u!114 &6315030260504949892
@@ -79,7 +79,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pointReward: 1
-  coinReward: 5
+  coinReward: 7
   healthPenalty: 10
 --- !u!65 &4099580739292209448
 BoxCollider:
