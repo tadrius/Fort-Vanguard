@@ -13,10 +13,10 @@ public class Building : MonoBehaviour
     [SerializeField] GameObject[] parts;
     [Tooltip("Particles that play when the building is being constructed.")]
     [SerializeField] ParticleSystem[] constructionParticles;
+    [SerializeField] AudioSource constructionAudio;
     [SerializeField] float constructionTime = 3f;
 
     bool isElevated = false;
-
 
     public int Cost { get { return cost; }}
     public bool IsElevated { get { return isElevated; }}
@@ -44,13 +44,13 @@ public class Building : MonoBehaviour
         SetPartsActive(false);
         float timeElapsed = 0f;
 
-        PlayBuildFX();
+        PlayConstructionFX();
         while (timeElapsed < constructionTime) {
             timeElapsed += Time.deltaTime;
             yield return new WaitForEndOfFrame();
         }
         SetPartsActive(true);
-        DisableBuildFX();
+        DisableConstructionFX();
     }
     
     void SetPartsActive(bool isActive) {
@@ -59,14 +59,15 @@ public class Building : MonoBehaviour
         }        
     }
 
-    void PlayBuildFX() {
+    void PlayConstructionFX() {
+        constructionAudio.Play();
         foreach (ParticleSystem particleSystem in constructionParticles) {
             var emission = particleSystem.emission;
             emission.enabled = true;
         }
     }
 
-    void DisableBuildFX() {
+    void DisableConstructionFX() {
         foreach (ParticleSystem particleSystem in constructionParticles) {
             var emission = particleSystem.emission;
             emission.enabled = false;

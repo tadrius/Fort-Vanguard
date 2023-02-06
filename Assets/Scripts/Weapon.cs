@@ -2,38 +2,38 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TargetLocator : MonoBehaviour
+public class Weapon : MonoBehaviour
 {
 
-    [SerializeField] Transform weapon;
     [Tooltip("The maximum range at which an enemy will be targeted.")]
     [SerializeField] float range = 50f;
+    [Tooltip("How much time must pass between each attack.")]
+    [SerializeField] float attackDelay = 2f;
+    [SerializeField] AudioSource attackAudio;
 
     ParticleSystem[] projectileParticleSystems;
     Transform target;
     Building building;
 
-    // TODO - use enemies field
-    // to track potential targets
-    // Enemy[] enemies;
+    float attackTimer = 0f;
 
     // Start is called before the first frame update
     void Start()
     {
-        projectileParticleSystems = weapon.GetComponentsInChildren<ParticleSystem>();
+        projectileParticleSystems = GetComponentsInChildren<ParticleSystem>();
         building = GetComponent<Building>();
         if (building.IsElevated) {
             range *= 2;
         }
-        // TODO - use enemies field instead of repeated calls in FindClosestTarget
-        // enemies = FindObjectsOfType<Enemy>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        UpdateAttackTimer();
         if (TargetIsValid()) {
-            ShootTarget(); 
+            AimWeapon(); 
+            AttackTarget();
         } else {
             DropTarget();
             FindClosestTarget();
@@ -43,7 +43,6 @@ public class TargetLocator : MonoBehaviour
     void FindClosestTarget() {
         Transform closestTarget = null;
         float maxDistance = range;
-        // TODO - use enemies field instead of repeated calls in FindClosestTarget
         Enemy[] enemies = FindObjectsOfType<Enemy>();
         foreach (Enemy en in enemies) {
             float enemyDistance = Vector3.Distance(transform.position, en.transform.position);
@@ -65,24 +64,33 @@ public class TargetLocator : MonoBehaviour
         return false;
     }
 
-    void ShootTarget() {
-        AimWeapon();
-        setProjectileEmissionsEnabled(true);
+    void UpdateAttackTimer() {
+        if (attackTimer > 0) {
+            attackTimer -= Time.deltaTime;
+        }
+    }
+
+    void AttackTarget() {
+        if (attackTimer <= 0) {
+            EmitProjectileParticles();
+            if (null != attackAudio) {
+                attackAudio.Play();
+            }
+            attackTimer = attackDelay;
+        }
     }
 
     void AimWeapon() {
-        weapon.LookAt(target);
+        transform.LookAt(target);
     }
 
     void DropTarget() {
         target = null;      
-        setProjectileEmissionsEnabled(false);
     }
 
-    void setProjectileEmissionsEnabled(bool enabled) {
+    void EmitProjectileParticles() {
         foreach (ParticleSystem projectileParticles in projectileParticleSystems) {
-            var em = projectileParticles.emission;
-            em.enabled = enabled;
+            projectileParticles.Emit(1);
         }
     }
 }

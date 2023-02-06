@@ -43,12 +43,8 @@ public class EnemyHealth : MonoBehaviour
     }
 
     void PlayDamageFX() {
-        PlayParticles(damageParticles);
-    }
-
-    void PlayParticles(ParticleSystem particles) {
-        if (null != particles) {
-            particles.Play();
+        if (null != damageParticles) {
+            damageParticles.Play();
         }
     }
 
