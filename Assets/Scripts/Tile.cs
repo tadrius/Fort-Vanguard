@@ -7,6 +7,7 @@ public class Tile : MonoBehaviour
 
     [SerializeField] GameObject validSiteDisplay;
     [SerializeField] GameObject invalidSiteDisplay;
+    [SerializeField] GameObject pathDisplay;
 
     [SerializeField] bool isOccupied = false;
     [SerializeField] bool isBuildSite = true;
@@ -39,6 +40,10 @@ public class Tile : MonoBehaviour
         DisableBuildSiteDisplays();
     }
 
+    void Update() {
+        DisplayPathFX();
+    }
+
     void OnMouseOver() {
         if (builder.Building.CheckSiteCompatibility(this) & !WillBlockPathfinding()) {
             validSiteDisplay.SetActive(true);
@@ -49,6 +54,18 @@ public class Tile : MonoBehaviour
 
     void OnMouseExit() {
         DisableBuildSiteDisplays();
+    }
+
+    void DisplayPathFX() {
+        pathDisplay.SetActive(true);
+        if (null != gridManager) {
+            Node node = gridManager.GetNode(coordinates);
+            if (null != node && node.isPath) {
+                pathDisplay.SetActive(true);
+                return;
+            }
+        }
+        pathDisplay.SetActive(false);
     }
 
     void OnMouseDown() {

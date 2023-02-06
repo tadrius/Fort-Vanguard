@@ -13,7 +13,6 @@ public class CoordinateLabeler : MonoBehaviour
     [SerializeField] Color pathColor = Color.magenta;
     [SerializeField] Color defaultColor = Color.white;
 
-
     TextMeshPro label;
     Vector2Int coordinates = new Vector2Int();
     GridManager gridManager;
