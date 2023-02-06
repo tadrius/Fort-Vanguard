@@ -68,7 +68,8 @@ public class EnemyMover : MonoBehaviour
     }
 
     void FinishPath() {
-        gameObject.SetActive(false);
+        enemy.SpawnPenaltyFX();
         enemy.IncurPenalty();
+        gameObject.SetActive(false);
     }
 }

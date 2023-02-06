@@ -15,6 +15,7 @@ public class Building : MonoBehaviour
     [SerializeField] ParticleSystem[] constructionParticles;
     [SerializeField] AudioSource constructionAudio;
     [SerializeField] float constructionTime = 3f;
+    [SerializeField] GameObject dismantleFX;
 
     bool isElevated = false;
 
@@ -26,8 +27,8 @@ public class Building : MonoBehaviour
     }
 
     public GameObject CreateBuilding(Tile tile) {
-        GameObject runtimeSpawns = GameObject.FindGameObjectWithTag(
-            RuntimeSpawns.runtimeSpawnsTag);
+        RuntimeSpawns runtimeSpawns = GameObject.FindGameObjectWithTag(RuntimeSpawns.runtimeSpawnsTag)
+            .GetComponent<RuntimeSpawns>();
         Bank bank = FindObjectOfType<Bank>();
         
         if (CheckSiteCompatibility(tile) && WithdrawCost(bank)) {
@@ -91,7 +92,10 @@ public class Building : MonoBehaviour
                 return false;
             }        
         }
+        Debug.Log("Did we get here 1?");
         // otherwise destroy the building
+        SpawnDismantleFX();
+        Debug.Log("Did we get here 2?");
         Destroy(gameObject);
         return true;
     }
@@ -121,5 +125,11 @@ public class Building : MonoBehaviour
 
     public void SetIsElevated(bool isElevated) {
         this.isElevated = isElevated;
+    }
+
+    public void SpawnDismantleFX() {
+        RuntimeSpawns runtimeSpawns = GameObject.FindGameObjectWithTag(RuntimeSpawns.runtimeSpawnsTag)
+            .GetComponent<RuntimeSpawns>();
+        runtimeSpawns.SpawnFX(dismantleFX, transform.position);
     }
 }
