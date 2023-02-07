@@ -21,7 +21,7 @@ public class Weapon : MonoBehaviour
     void Start()
     {
         projectileParticleSystems = GetComponentsInChildren<ParticleSystem>();
-        building = GetComponent<Building>();
+        building = GetComponentInParent<Building>();
         if (building.IsElevated) {
             range *= 2;
         }
