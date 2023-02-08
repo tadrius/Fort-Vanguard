@@ -11,7 +11,6 @@ public class BuildingSelector : MonoBehaviour
     [SerializeField] TMP_Text nameText;
     [SerializeField] TMP_Text costText;
     [SerializeField] Image selectionIcon;
-    [SerializeField] AudioSource clickAudio;
 
     BuildingSelector[] selectors;
 
@@ -41,10 +40,6 @@ public class BuildingSelector : MonoBehaviour
                 selector.Deselect();
             }           
         }    
-    }
-
-    public void PlayClickFX() {
-        clickAudio.Play();
     }
 
     public void Deselect() {
