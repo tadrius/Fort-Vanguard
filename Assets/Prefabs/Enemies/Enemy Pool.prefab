@@ -45,8 +45,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f68c696937a2014f9d52daa14cd7773, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  poolSize: 50
-  spawnDelay: 1.25
+  poolSize: 25
+  spawnDelay: 1.75
   objectPrefab: {fileID: 970295940677433216, guid: 81445fbac6e55c14c8d12edd3c406b61, type: 3}
 --- !u!114 &87344692992266185
 MonoBehaviour:
@@ -60,5 +60,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffabb6d01495ef948966ac9186c824ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startCoordinates: {x: 10, y: 10}
-  endCoordinates: {x: 20, y: 20}
+  startCoordinates: {x: 9, y: 11}
+  endCoordinates: {x: 19, y: 21}
