@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class Tile : MonoBehaviour
 {
@@ -45,6 +46,11 @@ public class Tile : MonoBehaviour
     }
 
     void OnMouseOver() {
+        if (EventSystem.current.IsPointerOverGameObject()) { // return if a UI element is being pointed at
+            OnMouseExit();
+            return;
+        }
+
         if (builder.Building.CheckSiteCompatibility(this) & !WillBlockPathfinding()) {
             validSiteDisplay.SetActive(true);
         } else {
@@ -56,19 +62,11 @@ public class Tile : MonoBehaviour
         DisableBuildSiteDisplays();
     }
 
-    void DisplayPathFX() {
-        pathDisplay.SetActive(true);
-        if (null != gridManager) {
-            Node node = gridManager.GetNode(coordinates);
-            if (null != node && node.isPath) {
-                pathDisplay.SetActive(true);
-                return;
-            }
-        }
-        pathDisplay.SetActive(false);
-    }
-
     void OnMouseDown() {
+        if (EventSystem.current.IsPointerOverGameObject()) { // return if a UI element is being pointed at
+            return;
+        }
+
         Building building;
         if (null != buildingObject) {
             // if a building exists on this tile, attempt to destroy it
@@ -86,6 +84,18 @@ public class Tile : MonoBehaviour
             }
         }
         DisableBuildSiteDisplays();
+    }
+
+    void DisplayPathFX() {
+        pathDisplay.SetActive(true);
+        if (null != gridManager) {
+            Node node = gridManager.GetNode(coordinates);
+            if (null != node && node.isPath) {
+                pathDisplay.SetActive(true);
+                return;
+            }
+        }
+        pathDisplay.SetActive(false);
     }
 
     // checks if blocking this tile's associated node will interfere with pathfinding

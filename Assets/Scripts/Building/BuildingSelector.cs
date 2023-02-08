@@ -13,9 +13,12 @@ public class BuildingSelector : MonoBehaviour
     [SerializeField] Image selectionIcon;
     [SerializeField] AudioSource clickAudio;
 
+    BuildingSelector[] selectors;
+
     Builder builder;
 
     void Awake() {
+        selectors = FindObjectsOfType<BuildingSelector>();
         builder = GameObject.FindGameObjectWithTag(Player.playerTag).GetComponent<Builder>();
         WriteBuildingInfo();
         if (isInitialSelection) {
@@ -33,7 +36,6 @@ public class BuildingSelector : MonoBehaviour
         builder.SetBuildingPrefab(building);
 
         // Deselect all other building selectors
-        BuildingSelector[] selectors = FindObjectsOfType<BuildingSelector>();
         foreach (BuildingSelector selector in selectors) {
             if (this != selector) {
                 selector.Deselect();
