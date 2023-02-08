@@ -57245,8 +57245,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1438873798}
   - component: {fileID: 1438873797}
+  - component: {fileID: 1438873799}
   m_Layer: 0
-  m_Name: Audio Source
+  m_Name: Music Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -57266,7 +57267,7 @@ AudioSource:
   m_PlayOnAwake: 1
   m_Volume: 0.25
   m_Pitch: 1
-  Loop: 1
+  Loop: 0
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -57356,13 +57357,30 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1438873796}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 128.79533, y: 93.16011, z: 99.330154}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1438873799
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1438873796}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f114e02b73f5b84d91b5909074c98f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tracks:
+  - {fileID: 8300000, guid: 1f2ad53bacc245642854dbdc8ea71a9b, type: 3}
+  - {fileID: 8300000, guid: 89f935015cc98724a862a586326fdf21, type: 3}
+  - {fileID: 8300000, guid: 559c232a43caebe41870ce54786f604e, type: 3}
+  - {fileID: 8300000, guid: fc5af015011ea3745b7f78ea1dd1049f, type: 3}
 --- !u!4 &1439526958 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2489182837448897039, guid: aff4e09874e9de44c8156947fa07a756, type: 3}
@@ -86177,10 +86195,6 @@ PrefabInstance:
     - target: {fileID: 6589092025481791035, guid: ee61e3a84ce80b749a923d1ca9aa09cf, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6589092025481791036, guid: ee61e3a84ce80b749a923d1ca9aa09cf, type: 3}
-      propertyPath: health
-      value: 100
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ee61e3a84ce80b749a923d1ca9aa09cf, type: 3}

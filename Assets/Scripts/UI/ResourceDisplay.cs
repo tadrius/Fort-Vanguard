@@ -41,7 +41,7 @@ public class ResourceDisplay : MonoBehaviour
 
     public void UpdateHighScore() {
         if (null != scoreboard) {
-            highScoreText.text = $"High Score: {scoreboard.GetHighScore().Key}";
+            highScoreText.text = $"High Score: {scoreboard.GetHighScore()}";
         }
     }
 

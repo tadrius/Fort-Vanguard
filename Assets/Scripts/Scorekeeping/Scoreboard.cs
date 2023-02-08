@@ -5,44 +5,43 @@ using UnityEngine;
 public class Scoreboard : MonoBehaviour
 {
 
-    // a sorted list of int score values by string username
-    SortedList<int, string> scores = new SortedList<int, string>(new HighToLowIntComparer());
+    // a list of int score values
+    List<int> scores = new List<int>();
+    HighScoreComparer comparer = new HighScoreComparer();
 
     void Awake() {
-        // keep scoreboard as a singleton (destroy this instance if there are 2 or more instances)
+        // keep as a singleton (destroy this instance if there are 2 or more instances)
         if (2 <= FindObjectsOfType<Scoreboard>().Length) {
             Destroy(this.gameObject);
         } else {
-            // if this is an existing scoreboard, keep it alive.
+            // if this is an existing singleton, keep it alive.
             DontDestroyOnLoad(this.gameObject);
         }
 
         // add an initial score of 0
-        AddScoreEntry(0);
+        AddScore(0);
     }
 
-    public KeyValuePair<int, string> GetHighScore() {
-        return new KeyValuePair<int, string>(scores.Keys[0], scores.Values[0]);
+    public int GetHighScore() {
+        return scores[0];
     }
 
     void LogScoreboard() {
+        Debug.Log("Scoreboard:");
         if (0 == scores.Count) {
-            Debug.Log("No scores found.");
+            Debug.Log("Empty.");
         }
-        foreach(KeyValuePair<int, string> entry in scores) {
-            Debug.Log($"{entry.Value} : {entry.Key}");
+        foreach(int score in scores) {
+            Debug.Log($"{score}");
         }
     }
 
-    public void AddScoreEntry(int score) {
-        AddScoreEntry(score, "");
+    public void AddScore(int score) {
+        scores.Add(score);
+        scores.Sort(comparer);
     }
 
-    public void AddScoreEntry(int score, string username) {
-        scores.Add(score, username);
-    }
-
-    private class HighToLowIntComparer : IComparer<int> {
+    private class HighScoreComparer : IComparer<int> {
         public int Compare(int x, int y) {
             return y.CompareTo(x);
         }

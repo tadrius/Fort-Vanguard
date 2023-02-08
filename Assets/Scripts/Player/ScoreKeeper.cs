@@ -16,6 +16,6 @@ public class ScoreKeeper : MonoBehaviour
 
     public void UpdateScoreboard() {
         Scoreboard scoreboard = GameObject.FindObjectOfType<Scoreboard>();
-        scoreboard.AddScoreEntry(score);
+        scoreboard.AddScore(score);
     }
 }
