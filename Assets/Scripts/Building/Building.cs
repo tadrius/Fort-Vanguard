@@ -92,10 +92,8 @@ public class Building : MonoBehaviour
                 return false;
             }        
         }
-        Debug.Log("Did we get here 1?");
         // otherwise destroy the building
         SpawnDismantleFX();
-        Debug.Log("Did we get here 2?");
         Destroy(gameObject);
         return true;
     }

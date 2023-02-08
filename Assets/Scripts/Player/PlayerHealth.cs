@@ -3,10 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+[RequireComponent(typeof(Player))]
 public class PlayerHealth : MonoBehaviour
 {
     [SerializeField] int health = 100;
     
+    Player player;
+
+    void Awake() {
+        player = GetComponent<Player>();
+    }
+
     public int Health { get { return health; }}
 
     public void Damage(int damageAmount) {
@@ -17,15 +24,6 @@ public class PlayerHealth : MonoBehaviour
     }
 
     void Die() {
-        ReloadScene();
-    }
-
-    void ReloadScene() {
-        Scene currentScene = SceneManager.GetActiveScene();
-        LoadScene(currentScene);
-    }
-
-    void LoadScene(Scene scene) {
-        SceneManager.LoadScene(scene.buildIndex);
+        player.ExecuteGameOverSequence();
     }
 }
