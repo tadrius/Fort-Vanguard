@@ -36,6 +36,15 @@ public class Player : MonoBehaviour
 
     void LoadScene(Scene scene) {
         SceneManager.LoadScene(scene.buildIndex);
+        UnpauseGame();
+    }
+
+    public void PauseGame() {
+        Time.timeScale = 0f;
+    }
+
+    public void UnpauseGame() {
+        Time.timeScale = 1f;
     }
 
 }

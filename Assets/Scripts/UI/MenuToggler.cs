@@ -27,20 +27,10 @@ public class MenuToggler : MonoBehaviour
         selectionIcon.enabled = menuIsActive;
 
         if (menuIsActive) {
-            PauseGame();
             text.text = ResumeText;
         } else {
-            UnpauseGame();
             text.text = MenuText;
         }
-    }
-
-    void PauseGame() {
-        Time.timeScale = 0f;
-    }
-
-    void UnpauseGame() {
-        Time.timeScale = 1f;
     }
 
 }
