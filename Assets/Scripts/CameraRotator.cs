@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Rotator : MonoBehaviour
+public class CameraRotator : MonoBehaviour
 {
 
-    [SerializeField] float rotationSpeed = 25f;
+    [SerializeField] float rotationSpeed = 60f;
 
     Vector3 focalPoint;
 
@@ -13,14 +13,24 @@ public class Rotator : MonoBehaviour
         focalPoint = new Vector3(transform.position.x, 0f, transform.position.x);
     }
 
+
     // Update is called once per frame
     void Update() {
         Vector3 rotationVector = new Vector3(rotationSpeed * Time.deltaTime, 0f, 0f);
+        float rotation = rotationSpeed * Time.deltaTime;
         if (Input.GetKey(KeyCode.Q)) {
-            RotateAroundFocalPoint(rotationSpeed * Time.deltaTime);
+            RotateClockwise(rotation);
         } else if (Input.GetKey(KeyCode.E)) {
-            RotateAroundFocalPoint(-rotationSpeed * Time.deltaTime);
+            RotateCounterClockwise(rotation);
         }
+    }
+
+    public void RotateClockwise(float rotation) {
+        RotateAroundFocalPoint(rotation);
+    }
+
+    public void RotateCounterClockwise(float rotation) {
+        RotateAroundFocalPoint(-rotation);
     }
 
     void RotateAroundFocalPoint(float rotation) {
