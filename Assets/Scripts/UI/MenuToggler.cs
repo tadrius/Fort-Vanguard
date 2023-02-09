@@ -20,6 +20,12 @@ public class MenuToggler : MonoBehaviour
         selectionIcon.enabled = menuIsActive;
     }
 
+    void Update() {
+        if (Input.GetKeyDown(KeyCode.Escape)) {
+            ToggleMenu();
+        }
+    }
+
     public void ToggleMenu() {
         menuIsActive = !menuIsActive;
 
