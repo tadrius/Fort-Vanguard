@@ -5,7 +5,7 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     [SerializeField] int pointReward = 1;
-    [SerializeField] int coinReward = 5;
+    [SerializeField] int goldReward = 7;
     [SerializeField] int healthPenalty = 20;
     [SerializeField] GameObject penaltyFX;
     [SerializeField] GameObject deathFX;
@@ -28,7 +28,7 @@ public class Enemy : MonoBehaviour
 
     public void DepositReward() {
         if (null != bank) {
-            bank.Deposit(coinReward);
+            bank.Deposit(goldReward);
         }
         if (null != scoreKeeper) {
             scoreKeeper.AddToScore(pointReward);

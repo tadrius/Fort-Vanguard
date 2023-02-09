@@ -5,10 +5,10 @@ using TMPro;
 
 public class ResourceDisplay : MonoBehaviour
 {
-    [SerializeField] TMP_Text highScoreText;
-    [SerializeField] TMP_Text scoreText;
-    [SerializeField] TMP_Text healthText;
-    [SerializeField] TMP_Text moneyText;
+    [SerializeField] TMP_Text highScoreAmountText;
+    [SerializeField] TMP_Text scoreAmountText;
+    [SerializeField] TMP_Text healthAmountText;
+    [SerializeField] TMP_Text goldAmountText;
 
     Scoreboard scoreboard;
     ScoreKeeper scoreKeeper;
@@ -30,30 +30,30 @@ public class ResourceDisplay : MonoBehaviour
         UpdateScore();
         UpdateHighScore();
         UpdateHealth();
-        UpdateMoney();        
+        UpdateGold();        
     }
 
     public void UpdateScore() {
         if (null != scoreKeeper) {
-            scoreText.text = $"Score: {scoreKeeper.Score}";
+            scoreAmountText.text = $"{scoreKeeper.Score}";
         }
     }
 
     public void UpdateHighScore() {
         if (null != scoreboard) {
-            highScoreText.text = $"High Score: {scoreboard.GetHighScore()}";
+            highScoreAmountText.text = $"{scoreboard.GetHighScore()}";
         }
     }
 
     public void UpdateHealth() {
         if (null != playerHealth) {
-            healthText.text = $"Health: {playerHealth.Health}";
+            healthAmountText.text = $"{playerHealth.Health}";
         }
     }
 
-    public void UpdateMoney() {
+    public void UpdateGold() {
         if (null != bank) {
-            moneyText.text = $"Money: {bank.CurrentBalance}";
+            goldAmountText.text = $"{bank.CurrentBalance}";
         }
     }
 }
