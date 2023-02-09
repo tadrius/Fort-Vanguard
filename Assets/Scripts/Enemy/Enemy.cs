@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(EnemyHealth))]
+[RequireComponent(typeof(EnemyMover))]
 public class Enemy : MonoBehaviour
 {
     [SerializeField] int pointReward = 1;

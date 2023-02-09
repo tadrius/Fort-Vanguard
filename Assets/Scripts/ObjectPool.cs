@@ -5,19 +5,19 @@ using UnityEngine;
 public class ObjectPool : MonoBehaviour
 {
 
-    [SerializeField] [Range(0, 100)] int poolSize = 10;
-    [SerializeField] [Range(0.05f, 20f)] float spawnDelay = 1f;
+    [SerializeField] [Range(0, 200)] int poolSize = 50;
+    [SerializeField] [Range(0.05f, 20f)] float spawnDelay = 1.75f;
     [SerializeField] GameObject objectPrefab;
 
     GameObject[] objects;
+    protected bool allSpawnedOnce = false;
 
     void Awake() {
         PopulatePool();
     }
 
-    void Start()
-    {
-        StartCoroutine(SpawnObjects());
+    void Start() {
+        StartCoroutine(SpawnObjectsOnce());
     }
 
     void PopulatePool() {
@@ -38,10 +38,29 @@ public class ObjectPool : MonoBehaviour
         }
     }
 
-    IEnumerator SpawnObjects() {
+    IEnumerator SpawnObjectsContinuously() {
         while (true) {
             EnableObjectInPool();
             yield return new WaitForSeconds(spawnDelay);
         }
     }
+
+    IEnumerator SpawnObjectsOnce() {
+        allSpawnedOnce = false;
+        foreach (GameObject obj in objects) {
+            obj.SetActive(true);
+            yield return new WaitForSeconds(spawnDelay);
+        }
+        allSpawnedOnce = true;
+    }
+
+    public bool ObjectsAreActive() {
+        foreach (GameObject enemyObject in objects) {
+            if (enemyObject.activeSelf) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 }

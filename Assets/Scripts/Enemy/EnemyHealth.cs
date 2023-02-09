@@ -9,7 +9,7 @@ public class EnemyHealth : MonoBehaviour
     [SerializeField] int maxHitPoints = 10;
     [Tooltip("By how much the enemy's health will increase each time it is killed, " 
         + "resulting in stronger enemies over time.")]
-    [SerializeField] int hitPointRamp = 1;
+    [SerializeField] int hitPointRamp = 1; // TODO - can remove after waves are implemented
     [SerializeField] ParticleSystem damageParticles;
 
     int currentHitPoints = 0;
