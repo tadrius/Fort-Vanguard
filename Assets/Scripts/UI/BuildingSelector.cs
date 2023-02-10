@@ -6,6 +6,8 @@ using TMPro;
 
 public class BuildingSelector : MonoBehaviour
 {
+
+    [Tooltip("Indicates if this selector is activated at the start. Only one selector should have this enabled.")]
     [SerializeField] bool isInitialSelection = false;
     [SerializeField] Building building;
     [SerializeField] TMP_Text nameText;

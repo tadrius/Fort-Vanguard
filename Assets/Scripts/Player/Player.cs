@@ -10,6 +10,8 @@ using UnityEngine.SceneManagement;
 public class Player : MonoBehaviour
 {
 
+    [SerializeField] MenuScreen mainMenu;
+
     readonly public static string playerTag = "Player";
 
     Bank bank;
@@ -22,6 +24,10 @@ public class Player : MonoBehaviour
         playerHealth = GetComponent<PlayerHealth>();
         scoreKeeper = GetComponent<ScoreKeeper>();
         builder = GetComponent<Builder>();
+    }
+
+    void Start() {
+        mainMenu.OpenScreen();
     }
 
     public void ExecuteGameOverSequence() {
