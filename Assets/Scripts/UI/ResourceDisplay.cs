@@ -24,11 +24,11 @@ public class ResourceDisplay : MonoBehaviour
         playerHealth = player.GetComponent<PlayerHealth>();
         
         scoreboard = GameObject.FindObjectOfType<Scoreboard>();
+        UpdateHighScore();
     }
 
     void Update() {
         UpdateScore();
-        UpdateHighScore();
         UpdateHealth();
         UpdateGold();        
     }

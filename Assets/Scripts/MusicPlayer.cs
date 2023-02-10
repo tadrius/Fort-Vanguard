@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(AudioSource))]
+[RequireComponent(typeof(PersistentSingleton))]
 public class MusicPlayer : MonoBehaviour
 {
 
@@ -12,14 +13,6 @@ public class MusicPlayer : MonoBehaviour
     int trackIndex = 0;
 
     void Awake() {
-        // keep as a singleton (destroy this instance if there are 2 or more instances)
-        if (2 <= FindObjectsOfType<Scoreboard>().Length) {
-            Destroy(this.gameObject);
-        } else {
-            // if this is an existing singleton, keep it alive.
-            DontDestroyOnLoad(this.gameObject);
-        }
-
         audioSource = GetComponent<AudioSource>();
         audioSource.loop = false;
     }

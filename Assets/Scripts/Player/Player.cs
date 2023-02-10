@@ -9,25 +9,25 @@ using UnityEngine.SceneManagement;
 [RequireComponent(typeof(Builder))]
 public class Player : MonoBehaviour
 {
-
-    [SerializeField] MenuScreen mainMenu;
-
     readonly public static string playerTag = "Player";
 
     Bank bank;
     PlayerHealth playerHealth;
     ScoreKeeper scoreKeeper;
     Builder builder;
+    StartupManager startupManager;
 
     void Awake() {
         bank = GetComponent<Bank>();
         playerHealth = GetComponent<PlayerHealth>();
         scoreKeeper = GetComponent<ScoreKeeper>();
         builder = GetComponent<Builder>();
+
+        startupManager = GameObject.FindObjectOfType<StartupManager>();
     }
 
     void Start() {
-        mainMenu.OpenScreen();
+        startupManager.Startup();
     }
 
     public void ExecuteGameOverSequence() {
