@@ -44,10 +44,10 @@ public class Enemy : MonoBehaviour
     }
 
     public void SpawnDeathFX() {
-        runtimeSpawns.SpawnFX(deathFX, transform.position);
+        runtimeSpawns.SpawnObject(deathFX, transform.position);
     }
 
     public void SpawnPenaltyFX() {
-        runtimeSpawns.SpawnFX(penaltyFX, transform.position);
+        runtimeSpawns.SpawnObject(penaltyFX, transform.position);
     }
 }

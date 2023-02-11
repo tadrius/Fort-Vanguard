@@ -32,10 +32,8 @@ public class Building : MonoBehaviour
         Bank bank = FindObjectOfType<Bank>();
         
         if (CheckSiteCompatibility(tile) && WithdrawCost(bank)) {
-            GameObject newBuilding = Instantiate(
-                gameObject, tile.transform.position, Quaternion.identity);
+            GameObject newBuilding = runtimeSpawns.SpawnObject(gameObject, tile.transform.position);
             newBuilding.GetComponent<Building>().SetIsElevated(tile.IsPlatform);
-            newBuilding.transform.parent = runtimeSpawns.transform;
             return newBuilding;
         }
         return null;
@@ -128,6 +126,6 @@ public class Building : MonoBehaviour
     public void SpawnDismantleFX() {
         RuntimeSpawns runtimeSpawns = GameObject.FindGameObjectWithTag(RuntimeSpawns.runtimeSpawnsTag)
             .GetComponent<RuntimeSpawns>();
-        runtimeSpawns.SpawnFX(dismantleFX, transform.position);
+        runtimeSpawns.SpawnObject(dismantleFX, transform.position);
     }
 }
