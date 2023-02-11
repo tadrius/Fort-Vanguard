@@ -48,11 +48,8 @@ public class MenuScreen : MonoBehaviour
     }
 
     public void Exit() {
-        #if UNITY_EDITOR
-            UnityEditor.EditorApplication.isPlaying = false;
-        #else
-            Application.Quit();
-        #endif
+        Player player = GameObject.FindGameObjectWithTag(Player.playerTag).GetComponent<Player>();
+        player.QuitGame();
     }
 
     public void PauseGame() {

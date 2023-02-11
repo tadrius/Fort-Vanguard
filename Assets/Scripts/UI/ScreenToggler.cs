@@ -12,19 +12,24 @@ public class ScreenToggler : MonoBehaviour
     [SerializeField] string screenIsInactiveText = "Menu";
     [SerializeField] Image selectionIcon;
     [SerializeField] bool hotkeyEnabled;
-    [SerializeField] bool screenIsActive = false;
+    [SerializeField] bool screenIsActive;
 
     TMP_Text text;
 
     void Awake() {
         text = GetComponentInChildren<TMP_Text>();
-        CloseScreen();
+        screenIsActive = false;
+    }
+
+    void OnEnable() {
+        UpdateTogglerVisual();
+        screen.gameObject.SetActive(false);
     }
 
     void Update() {
         if (Input.GetKeyDown(KeyCode.Escape)) {
             if (hotkeyEnabled) {
-            GetComponent<Button>().onClick.Invoke();
+                GetComponent<Button>().onClick.Invoke();
             }
         }
     }
