@@ -8,7 +8,7 @@ public class WaveManager : MonoBehaviour
     [Tooltip("The number of seconds between the end of the previous wave and the start of the next wave.")]
     [SerializeField] float waveDelay = 10f;
     [Tooltip("A short time buffer, in seconds, waves and their delays.")]
-    [SerializeField] [Range(0f, 0.95f)] float transitionBuffer = 0.95f;
+    [SerializeField] [Range(0f, 1f)] float transitionBuffer = 1f;
     [SerializeField] List<Wave> waves = new List<Wave>();
 
     float startTimer;
@@ -63,7 +63,7 @@ public class WaveManager : MonoBehaviour
         }
         Debug.Log("Wave starting.");
         waves[currentWaveIndex].gameObject.SetActive(true); // Spawn wave
-        waveIsRunning = true;  
+        waveIsRunning = true;
     }
 
     void EndCurrentWave() {
