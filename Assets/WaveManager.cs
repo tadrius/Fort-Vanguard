@@ -47,7 +47,7 @@ public class WaveManager : MonoBehaviour
             if (currentWaveIndex < waves.Count) { // More waves to go.
                 StartCurrentWave();
             } else { // No additional waves.
-                player.ExecuteGameOverSequence(); // Victory.
+                player.WinGame();
             }
         } else { // Current wave is set.
             if (false == waves[currentWaveIndex].gameObject.activeSelf) { // Current wave was deactivated.

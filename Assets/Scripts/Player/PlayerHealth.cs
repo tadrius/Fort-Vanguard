@@ -24,6 +24,6 @@ public class PlayerHealth : MonoBehaviour
     }
 
     void Die() {
-        player.ExecuteGameOverSequence();
+        player.LoseGame();
     }
 }

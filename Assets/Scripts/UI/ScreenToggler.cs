@@ -12,13 +12,11 @@ public class ScreenToggler : MonoBehaviour
     [SerializeField] string screenIsInactiveText = "Menu";
     [SerializeField] Image selectionIcon;
     [SerializeField] bool hotkeyEnabled;
-    [SerializeField] bool screenIsActive;
 
     TMP_Text text;
 
     void Awake() {
         text = GetComponentInChildren<TMP_Text>();
-        screenIsActive = false;
     }
 
     void OnEnable() {
@@ -35,30 +33,27 @@ public class ScreenToggler : MonoBehaviour
     }
 
     public void ToggleScreen() {
-        if (screenIsActive) {
+        if (screen.gameObject.activeSelf) {
             CloseScreen();
         } else {
             OpenScreen();
         }
+        UpdateTogglerVisual();
     }
 
-    public void OpenScreen() {
-        screenIsActive = true;
-        UpdateTogglerVisual();
+    void OpenScreen() {
         screen.OpenScreen(returnScreen);
     }
 
-    public void CloseScreen() {
-        screenIsActive = false;
-        UpdateTogglerVisual();
+    void CloseScreen() {
         screen.CloseScreen();
     }
 
     void UpdateTogglerVisual() {
         if (null != selectionIcon) {
-            selectionIcon.enabled = screenIsActive;
+            selectionIcon.enabled = screen.gameObject.activeSelf;
         }
-        if (screenIsActive) {
+        if (screen.gameObject.activeSelf) {
             text.text = screenIsActiveText;
         } else {
             text.text = screenIsInactiveText;

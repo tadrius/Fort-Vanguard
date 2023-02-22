@@ -44,10 +44,10 @@ public class MenuScreen : MonoBehaviour
 
     public void RestartGame() {
         Player player = GameObject.FindGameObjectWithTag(Player.playerTag).GetComponent<Player>();
-        player.ExecuteGameOverSequence();
+        player.RestartGame();
     }
 
-    public void Exit() {
+    public void ExitGame() {
         Player player = GameObject.FindGameObjectWithTag(Player.playerTag).GetComponent<Player>();
         player.QuitGame();
     }

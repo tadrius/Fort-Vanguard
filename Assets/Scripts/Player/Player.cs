@@ -32,7 +32,19 @@ public class Player : MonoBehaviour
         startupManager.Startup();
     }
 
-    public void ExecuteGameOverSequence() {
+    public void WinGame() {
+        ExecuteGameOverSequence();
+    }
+
+    public void LoseGame() {
+        ExecuteGameOverSequence();
+    }
+
+    public void RestartGame() {
+        ExecuteGameOverSequence();
+    }
+
+    void ExecuteGameOverSequence() {
         scoreKeeper.UpdateScoreboard();
         ReloadScene();
     }
