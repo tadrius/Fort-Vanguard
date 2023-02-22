@@ -9,11 +9,14 @@ public class ResourceDisplay : MonoBehaviour
     [SerializeField] TMP_Text scoreAmountText;
     [SerializeField] TMP_Text healthAmountText;
     [SerializeField] TMP_Text goldAmountText;
+    [SerializeField] TMP_Text waveText;
+    [SerializeField] TMP_Text countdownText;
 
     Scoreboard scoreboard;
     ScoreKeeper scoreKeeper;
     Bank bank;
     PlayerHealth playerHealth;
+    WaveManager waveManager;
 
     // Start is called before the first frame update
     void Start()
@@ -23,6 +26,7 @@ public class ResourceDisplay : MonoBehaviour
         bank = player.GetComponent<Bank>();
         playerHealth = player.GetComponent<PlayerHealth>();
         
+        waveManager = GameObject.FindObjectOfType<WaveManager>();
         scoreboard = GameObject.FindObjectOfType<Scoreboard>();
         UpdateHighScore();
     }
@@ -30,7 +34,9 @@ public class ResourceDisplay : MonoBehaviour
     void Update() {
         UpdateScore();
         UpdateHealth();
-        UpdateGold();        
+        UpdateGold();
+        UpdateWave(); 
+        UpdateCountdown();   
     }
 
     public void UpdateScore() {
@@ -54,6 +60,24 @@ public class ResourceDisplay : MonoBehaviour
     public void UpdateGold() {
         if (null != bank) {
             goldAmountText.text = $"{bank.CurrentBalance}";
+        }
+    }
+
+    public void UpdateWave() {
+        if (null != waveManager) {
+            waveText.text = $"Wave {waveManager.CurrentWaveIndex + 1}:";
+        }
+    }
+
+    public void UpdateCountdown() {
+        int countdown = 0;
+        if (null != waveManager) {
+            if (waveManager.WaveIsRunning) { // show enemies remaining in wave
+                countdown = waveManager.GetCurrentWave().CountRemainingEnemies();
+            } else { // show seconds until wave start
+                countdown = Mathf.CeilToInt(waveManager.StartTimer);
+            }
+            countdownText.text = $"{countdown}";
         }
     }
 }
