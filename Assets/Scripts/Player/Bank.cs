@@ -20,7 +20,6 @@ public class Bank : MonoBehaviour
             return false;
         }
         currentBalance += amount;
-        Debug.Log($"Deposited {amount}.");
         return true;
     }
 
@@ -33,7 +32,6 @@ public class Bank : MonoBehaviour
             return false;
         } else {
             currentBalance -= amount;
-            Debug.Log($"Withdrew {amount}.");
             return true;
         }
     }

@@ -13,7 +13,7 @@ public class StartupManager : MonoBehaviour
     public void Startup() {
         MenuScreen mainMenu = GameObject.FindGameObjectWithTag(mainMenuTag).GetComponent<MenuScreen>();
         if (isFirstLoad) { // only open the main menu the first time the scene loads
-            Debug.Log("First-time load - opening main menu...");
+            Debug.Log("First-time load, opening main menu...");
             isFirstLoad = false;
             mainMenu.OpenScreen();
         } else { // otherwise close it

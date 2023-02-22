@@ -67,10 +67,8 @@ public class Player : MonoBehaviour
     }
 
     IEnumerator QuitApplicationWithDelay(float loadDelay) {
-        UnpauseGame();
-
         // delay
-        for (float time = loadDelay; time >= 0; time -= Time.deltaTime)
+        for (float time = loadDelay; time >= 0; time -= Time.unscaledDeltaTime)
         {
             yield return null;
         }
@@ -94,10 +92,8 @@ public class Player : MonoBehaviour
     }
 
     IEnumerator LoadSceneWithDelay(int sceneBuildIndex, float loadDelay) {
-        UnpauseGame();
-
         // delay
-        for (float time = loadDelay; time >= 0; time -= Time.deltaTime)
+        for (float time = loadDelay; time >= 0; time -= Time.unscaledDeltaTime)
         {
             yield return null;
         }
