@@ -10,6 +10,7 @@ using UnityEngine.SceneManagement;
 public class Player : MonoBehaviour
 {
     [SerializeField] float loadDelay = 1f;
+    [SerializeField] GameOverScreen gameOverScreen;
 
     readonly public static string playerTag = "Player";
 
@@ -33,20 +34,22 @@ public class Player : MonoBehaviour
     }
 
     public void WinGame() {
-        ExecuteGameOverSequence();
+        scoreKeeper.UpdateScoreboard();
+        gameOverScreen.OpenWinScreen();
     }
 
     public void LoseGame() {
-        ExecuteGameOverSequence();
+        scoreKeeper.UpdateScoreboard();
+        gameOverScreen.OpenLoseScreen();
     }
 
     public void RestartGame() {
-        ExecuteGameOverSequence();
+        scoreKeeper.UpdateScoreboard();
+        ReloadScene();
     }
 
     void ExecuteGameOverSequence() {
         scoreKeeper.UpdateScoreboard();
-        ReloadScene();
     }
 
     public void PauseGame() {
