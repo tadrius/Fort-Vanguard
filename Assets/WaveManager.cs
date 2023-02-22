@@ -15,6 +15,7 @@ public class WaveManager : MonoBehaviour
     float endTimer;
     int currentWaveIndex = 0;
     bool waveIsRunning = false;
+    bool noMoreWaves = false;
 
     public int CurrentWaveIndex { get { return currentWaveIndex; } }
     public bool WaveIsRunning { get { return waveIsRunning; } }
@@ -38,19 +39,19 @@ public class WaveManager : MonoBehaviour
     }
 
     void Start() {
-        startTimer = waveDelay;
-        endTimer = 0f;
+        ResetTimers();
     }
 
     void Update() {
-        if (!waveIsRunning) { // No current wave.
-            if (currentWaveIndex < waves.Count) { // More waves to go.
-                StartCurrentWave();
-            } else { // No additional waves.
+        if (!waveIsRunning) {
+            if (noMoreWaves) {
                 player.WinGame();
+            } else {
+                StartCurrentWave();               
             }
-        } else { // Current wave is set.
-            if (false == waves[currentWaveIndex].gameObject.activeSelf) { // Current wave was deactivated.
+        } else {
+            if (waves[currentWaveIndex].AllSpawned // End current wave if the contained enemies have all spawned
+                && !waves[currentWaveIndex].gameObject.activeSelf) { // And the wave is disabled
                 EndCurrentWave();
             }
         }      
@@ -61,9 +62,8 @@ public class WaveManager : MonoBehaviour
             startTimer -= Time.deltaTime;
             return;
         }
-        Debug.Log("Wave starting.");
-        waves[currentWaveIndex].gameObject.SetActive(true); // Spawn wave
         waveIsRunning = true;
+        waves[currentWaveIndex].gameObject.SetActive(true);
     }
 
     void EndCurrentWave() {
@@ -71,17 +71,24 @@ public class WaveManager : MonoBehaviour
             endTimer -= Time.deltaTime;
             return;
         }
-        Debug.Log("Wave completed.");
         bank.Deposit(waves[currentWaveIndex].GoldReward); // deposit rewards
         scoreKeeper.AddToScore(waves[currentWaveIndex].PointReward);        
-        waveIsRunning = false; // flag as finished running
+        waveIsRunning = false;
         PrepareNextWave();
     }
 
     void PrepareNextWave() {
-        currentWaveIndex++; // increment wave index
-        startTimer = waveDelay; // reset wave delay
-        endTimer = 0f;
+        if (currentWaveIndex + 1 < waves.Count) {
+            currentWaveIndex++;
+            ResetTimers();
+        } else {
+            noMoreWaves = true;
+        }
+    }
+
+    void ResetTimers() {
+        startTimer = waveDelay; // reset start timer
+        endTimer = 0f; // reset end timer       
     }
 
     public Wave GetCurrentWave() {
