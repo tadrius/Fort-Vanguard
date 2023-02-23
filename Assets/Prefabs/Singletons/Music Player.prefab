@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 8926906103089573968}
   - component: {fileID: 8926906103089573971}
   - component: {fileID: 8926906103089573969}
+  - component: {fileID: 3087759712999915098}
+  - component: {fileID: 7792176513362366831}
   m_Layer: 0
   m_Name: Music Player
   m_TagString: Untagged
@@ -146,3 +148,29 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 89f935015cc98724a862a586326fdf21, type: 3}
   - {fileID: 8300000, guid: 559c232a43caebe41870ce54786f604e, type: 3}
   - {fileID: 8300000, guid: fc5af015011ea3745b7f78ea1dd1049f, type: 3}
+--- !u!114 &3087759712999915098
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8926906103089573970}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e831712b0773594b9f74c7ca9f5e544, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  baseName: Music Player
+--- !u!114 &7792176513362366831
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8926906103089573970}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 591e8402ecc721d409d1de599b41edc1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id: 0

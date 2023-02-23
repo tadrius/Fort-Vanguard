@@ -10,6 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 36251463583467215}
   - component: {fileID: 36251463583467214}
+  - component: {fileID: 2728676582673063562}
+  - component: {fileID: 4867717225136678708}
   m_Layer: 0
   m_Name: Scoreboard
   m_TagString: Untagged
@@ -44,3 +46,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 765ef818740d23144bb8454d39d1ea9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2728676582673063562
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 36251463583467213}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e831712b0773594b9f74c7ca9f5e544, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  baseName: Scoreboard
+--- !u!114 &4867717225136678708
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 36251463583467213}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 591e8402ecc721d409d1de599b41edc1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id: 1
