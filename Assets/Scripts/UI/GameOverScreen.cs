@@ -13,14 +13,14 @@ public class GameOverScreen : MenuScreen
     public void OpenWinScreen() {
         titleText.text = winTextString;
         if (!gameObject.activeSelf) {
-            OpenScreen();
+            Open();
         }
     }
 
     public void OpenLoseScreen() {
         titleText.text = loseTextString;
         if (!gameObject.activeSelf) {
-            OpenScreen();
+            Open();
         }
     }
 

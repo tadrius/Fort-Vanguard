@@ -42,11 +42,11 @@ public class ScreenToggler : MonoBehaviour
     }
 
     void OpenScreen() {
-        screen.OpenScreen(returnScreen);
+        screen.Open(returnScreen);
     }
 
     void CloseScreen() {
-        screen.CloseScreen();
+        screen.Close();
     }
 
     void UpdateTogglerVisual() {

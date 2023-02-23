@@ -9,15 +9,15 @@ public class MenuScreen : MonoBehaviour
 
     MenuScreen returnScreen;
 
-    public void OpenScreen(MenuScreen returnScreen) {
-        OpenScreen();
+    public void Open(MenuScreen returnScreen) {
+        Open();
         if (null != returnScreen) {
             this.returnScreen = returnScreen;
             returnScreen.gameObject.SetActive(false);
         }
     }
 
-    public void OpenScreen() {
+    public void Open() {
         PauseGame();
         gameObject.SetActive(true);
         if (null != initialSubscreen) { // if an initial subscreen is set, close all subscreens and open it
@@ -29,17 +29,17 @@ public class MenuScreen : MonoBehaviour
         gameObject.SetActive(true); // set this active last so it does not disable itself
     }
 
-    public void CloseScreen() {
+    public void Close() {
         this.gameObject.SetActive(false);
         if (null != returnScreen) {
-            returnScreen.OpenScreen();
+            returnScreen.Open();
         } else {
             UnpauseGame(); // only unpause game if there is not another screen to return to
         }
     }
 
     public void StartGame() {
-        CloseScreen();
+        Close();
     }
 
     public void RestartGame() {

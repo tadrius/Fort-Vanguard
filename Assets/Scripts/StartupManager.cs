@@ -5,19 +5,18 @@ using UnityEngine.SceneManagement;
 
 public class StartupManager : MonoBehaviour
 {
-
     readonly public static string mainMenuTag = "MainMenu";
 
     bool isFirstLoad = true;
 
     public void Startup() {
-        MenuScreen mainMenu = GameObject.FindGameObjectWithTag(mainMenuTag).GetComponent<MenuScreen>();
-        if (isFirstLoad) { // only open the main menu the first time the scene loads
-            Debug.Log("First-time load, opening main menu...");
+        MenuScreen startMenu = GameObject.FindGameObjectWithTag(mainMenuTag).GetComponent<MenuScreen>();
+        if (isFirstLoad) { // on the first load of the scene
+            Debug.Log("First-time load, opening start menu...");
             isFirstLoad = false;
-            mainMenu.OpenScreen();
-        } else { // otherwise close it
-            mainMenu.CloseScreen();
+            startMenu.Open(); // open the start menu
+        } else { // on subsequent loads
+            startMenu.Close();
         }
     }
 }
