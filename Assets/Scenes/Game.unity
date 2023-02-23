@@ -5826,7 +5826,7 @@ GameObject:
   - component: {fileID: 146038180}
   - component: {fileID: 146038179}
   - component: {fileID: 146038178}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Post-process Volume
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -89712,6 +89712,18 @@ PrefabInstance:
     - target: {fileID: 3675356452793326951, guid: ee61e3a84ce80b749a923d1ca9aa09cf, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 7525608924745381419, guid: ee61e3a84ce80b749a923d1ca9aa09cf, type: 3}
+      propertyPath: antialiasingMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7525608924745381419, guid: ee61e3a84ce80b749a923d1ca9aa09cf, type: 3}
+      propertyPath: volumeLayer.m_Bits
+      value: 64
+      objectReference: {fileID: 0}
+    - target: {fileID: 7525608924745381419, guid: ee61e3a84ce80b749a923d1ca9aa09cf, type: 3}
+      propertyPath: fastApproximateAntialiasing.fastMode
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7525608924827470084, guid: ee61e3a84ce80b749a923d1ca9aa09cf, type: 3}
       propertyPath: loadDelay
