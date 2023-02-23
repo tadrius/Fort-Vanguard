@@ -117,7 +117,7 @@ public class Pathfinder : MonoBehaviour
 
             // if resulting path is too short, change would block route
             if (path.Count <= 1) {
-                Debug.Log("Blocking this node will block all possible paths.");
+                // Debug.Log("Blocking this node will block all possible paths.");
                 FindPath();
                 return true;
             }
