@@ -6,7 +6,16 @@ public class CharacterGenerator : MonoBehaviour
 {
 
     [SerializeField] PartSelector head;
-    [SerializeField] List<GameObject> headChoices; 
+    [SerializeField] List<GameObject> headChoices;
+
+    [SerializeField] PartSelector mustache;
+    [SerializeField] List<GameObject> mustacheChoices; 
+
+    [SerializeField] PartSelector beard;
+    [SerializeField] List<GameObject> beardChoices; 
+
+    [SerializeField] PartSelector headwear;
+    [SerializeField] List<GameObject> headwearChoices;    
 
     [SerializeField] PartSelector chest;
     [SerializeField] List<GameObject> chestChoices; 
@@ -32,6 +41,9 @@ public class CharacterGenerator : MonoBehaviour
 
     void Awake() {
         head.SetPossibleParts(headChoices);
+        mustache.SetPossibleParts(mustacheChoices);
+        beard.SetPossibleParts(beardChoices);
+        headwear.SetPossibleParts(headwearChoices);
         chest.SetPossibleParts(chestChoices);
         leftUpperArm.SetPossibleParts(upperArmChoice);
         rightUpperArm.SetPossibleParts(upperArmChoice);
@@ -42,19 +54,25 @@ public class CharacterGenerator : MonoBehaviour
         leftLeg.SetPossibleParts(legChoices);
         rightLeg.SetPossibleParts(legChoices);
 
+        // create parts
         head.CreateRandomPart();
+        mustache.CreateRandomPart();
+        beard.CreateRandomPart();
+        headwear.CreateRandomPart();
+
         chest.CreateRandomPart();
 
-        GameObject upperArm = leftUpperArm.CreateRandomPart();
-        rightUpperArm.CreatePart(upperArm);
+        int index;
+        index = leftUpperArm.CreateRandomPart();
+        rightUpperArm.CreatePart(index); // create mirroring part
 
-        GameObject forearm = leftForeArm.CreateRandomPart();
-        rightForeArm.CreatePart(forearm);
+        index = leftForeArm.CreateRandomPart();
+        rightForeArm.CreatePart(index);
 
-        GameObject hand = leftHand.CreateRandomPart();
-        rightHand.CreatePart(hand);
+        index = leftHand.CreateRandomPart();
+        rightHand.CreatePart(index);
 
-        GameObject leg = leftLeg.CreateRandomPart();
-        rightLeg.CreatePart(leg);
+        index = leftLeg.CreateRandomPart();
+        rightLeg.CreatePart(index);
     }
 }
