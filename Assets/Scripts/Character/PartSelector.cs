@@ -5,7 +5,7 @@ using UnityEngine;
 public class PartSelector : MonoBehaviour
 {
 
-    [SerializeField] List<GameObject> possibleParts; 
+    List<GameObject> possibleParts; 
 
     // create a random part from the possible parts list and return the index of the created part
     public int CreateRandomPart() {
