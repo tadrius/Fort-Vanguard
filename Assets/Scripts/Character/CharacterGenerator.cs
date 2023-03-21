@@ -24,11 +24,9 @@ public class CharacterGenerator : MonoBehaviour
     [SerializeField] PartSelector rightUpperArm;
     [SerializeField] List<GameObject> upperArmChoice; 
 
-
     [SerializeField] PartSelector leftForeArm;
     [SerializeField] PartSelector rightForeArm;
     [SerializeField] List<GameObject> forearmChoices; 
-
 
     [SerializeField] PartSelector leftHand;
     [SerializeField] PartSelector rightHand;
@@ -38,6 +36,10 @@ public class CharacterGenerator : MonoBehaviour
     [SerializeField] PartSelector rightLeg;
     [SerializeField] List<GameObject> legChoices; 
 
+    [SerializeField] PartSelector leftItem;
+    [SerializeField] List<GameObject> leftItemChoices;   
+    [SerializeField] PartSelector rightItem;
+    [SerializeField] List<GameObject> rightItemChoices;  
 
     void Awake() {
         head.SetPossibleParts(headChoices);
@@ -53,6 +55,8 @@ public class CharacterGenerator : MonoBehaviour
         rightHand.SetPossibleParts(handChoices);
         leftLeg.SetPossibleParts(legChoices);
         rightLeg.SetPossibleParts(legChoices);
+        leftItem.SetPossibleParts(leftItemChoices);
+        rightItem.SetPossibleParts(rightItemChoices);
 
         // create parts
         head.CreateRandomPart();
@@ -61,6 +65,9 @@ public class CharacterGenerator : MonoBehaviour
         headwear.CreateRandomPart();
 
         chest.CreateRandomPart();
+
+        rightItem.CreateRandomPart();
+        leftItem.CreateRandomPart();
 
         int index;
         index = leftUpperArm.CreateRandomPart();
