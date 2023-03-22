@@ -5,41 +5,35 @@ using UnityEngine;
 public class CharacterGenerator : MonoBehaviour
 {
 
-    [SerializeField] PartSelector head;
+    [SerializeField] Material palette;
+
     [SerializeField] List<GameObject> headChoices;
-
-    [SerializeField] PartSelector mustache;
     [SerializeField] List<GameObject> mustacheChoices; 
-
-    [SerializeField] PartSelector beard;
     [SerializeField] List<GameObject> beardChoices; 
-
-    [SerializeField] PartSelector headwear;
     [SerializeField] List<GameObject> headwearChoices;    
-
-    [SerializeField] PartSelector chest;
     [SerializeField] List<GameObject> chestChoices; 
+    [SerializeField] List<GameObject> upperArmChoice; 
+    [SerializeField] List<GameObject> forearmChoices; 
+    [SerializeField] List<GameObject> handChoices; 
+    [SerializeField] List<GameObject> legChoices; 
+    [SerializeField] List<GameObject> leftItemChoices;   
+    [SerializeField] List<GameObject> rightItemChoices;
 
+    [SerializeField] PartSelector head;
+    [SerializeField] PartSelector mustache;
+    [SerializeField] PartSelector beard;
+    [SerializeField] PartSelector headwear;
+    [SerializeField] PartSelector chest;
     [SerializeField] PartSelector leftUpperArm;
     [SerializeField] PartSelector rightUpperArm;
-    [SerializeField] List<GameObject> upperArmChoice; 
-
     [SerializeField] PartSelector leftForeArm;
     [SerializeField] PartSelector rightForeArm;
-    [SerializeField] List<GameObject> forearmChoices; 
-
     [SerializeField] PartSelector leftHand;
     [SerializeField] PartSelector rightHand;
-    [SerializeField] List<GameObject> handChoices; 
-
     [SerializeField] PartSelector leftLeg;
     [SerializeField] PartSelector rightLeg;
-    [SerializeField] List<GameObject> legChoices; 
-
     [SerializeField] PartSelector leftItem;
-    [SerializeField] List<GameObject> leftItemChoices;   
     [SerializeField] PartSelector rightItem;
-    [SerializeField] List<GameObject> rightItemChoices;  
 
     void Awake() {
         head.SetPossibleParts(headChoices);
@@ -59,27 +53,27 @@ public class CharacterGenerator : MonoBehaviour
         rightItem.SetPossibleParts(rightItemChoices);
 
         // create parts
-        head.CreateRandomPart();
-        mustache.CreateRandomPart();
-        beard.CreateRandomPart();
-        headwear.CreateRandomPart();
+        head.CreateRandomPart(palette);
+        mustache.CreateRandomPart(palette);
+        beard.CreateRandomPart(palette);
+        headwear.CreateRandomPart(palette);
 
-        chest.CreateRandomPart();
+        chest.CreateRandomPart(palette);
 
-        rightItem.CreateRandomPart();
-        leftItem.CreateRandomPart();
+        rightItem.CreateRandomPart(palette);
+        leftItem.CreateRandomPart(palette);
 
         int index;
-        index = leftUpperArm.CreateRandomPart();
-        rightUpperArm.CreatePart(index); // create mirroring part
+        index = leftUpperArm.CreateRandomPart(palette);
+        rightUpperArm.CreatePart(index, palette); // create mirroring part
 
-        index = leftForeArm.CreateRandomPart();
-        rightForeArm.CreatePart(index);
+        index = leftForeArm.CreateRandomPart(palette);
+        rightForeArm.CreatePart(index, palette);
 
-        index = leftHand.CreateRandomPart();
-        rightHand.CreatePart(index);
+        index = leftHand.CreateRandomPart(palette);
+        rightHand.CreatePart(index, palette);
 
-        index = leftLeg.CreateRandomPart();
-        rightLeg.CreatePart(index);
+        index = leftLeg.CreateRandomPart(palette);
+        rightLeg.CreatePart(index, palette);
     }
 }
