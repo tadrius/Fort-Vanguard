@@ -2551,10 +2551,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Sheikh Heavy Banner
       objectReference: {fileID: 0}
-    - target: {fileID: 2536785229143747975, guid: 57befb20d2ad65b4f9bc985eff3f9029, type: 3}
-      propertyPath: leftItemChoices.Array.data[0]
-      value: 
-      objectReference: {fileID: 919132149155446097, guid: e97b0ec8cac219145a49806bfd6b7716, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 57befb20d2ad65b4f9bc985eff3f9029, type: 3}
 --- !u!4 &680607742 stripped
@@ -2760,6 +2756,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 7551894757009047583, guid: 1404820955ab7984fa03bcfc780d15f3, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7551894757841881472, guid: 1404820955ab7984fa03bcfc780d15f3, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7551894758634428154, guid: 1404820955ab7984fa03bcfc780d15f3, type: 3}
       propertyPath: m_Name
       value: Test Character
@@ -2867,7 +2871,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7312451377040670289, guid: 289fa2e20b631484aa1dff4f069762b1, type: 3}
       propertyPath: m_Name
-      value: Jarl MediumCrossbow
+      value: Jarl Medium Crossbow
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 289fa2e20b631484aa1dff4f069762b1, type: 3}
@@ -4861,10 +4865,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Jarl Heavy Banner
       objectReference: {fileID: 0}
-    - target: {fileID: 3818580687186157305, guid: 9b89f33f444a65a44a1c281a4e028dfe, type: 3}
-      propertyPath: leftItemChoices.Array.data[0]
-      value: 
-      objectReference: {fileID: 919132149155446097, guid: e56d8f713ecbe7747b08d7dfaf7dfd74, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9b89f33f444a65a44a1c281a4e028dfe, type: 3}
 --- !u!1 &1466681786
