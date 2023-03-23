@@ -197,6 +197,9 @@ Transform:
   m_Children:
   - {fileID: 7372894714745053035}
   - {fileID: 7091574932511858858}
+  - {fileID: 8663989527357558756}
+  - {fileID: 5024776240539059589}
+  - {fileID: 6581941738462606299}
   m_Father: {fileID: 7551894758634428155}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1628,6 +1631,130 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 96c8adb4cdd5d214f848933ff22b830b, type: 3}
   m_PrefabInstance: {fileID: 4968644486560731400}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &5384770730965047049
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1035843701762402513}
+    m_Modifications:
+    - target: {fileID: 1291773675417560274, guid: 08a97101519d34246855b6954eb17639, type: 3}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1291773675417560274, guid: 08a97101519d34246855b6954eb17639, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1291773675417560274, guid: 08a97101519d34246855b6954eb17639, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1291773675417560274, guid: 08a97101519d34246855b6954eb17639, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1291773675417560274, guid: 08a97101519d34246855b6954eb17639, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1291773675417560274, guid: 08a97101519d34246855b6954eb17639, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1291773675417560274, guid: 08a97101519d34246855b6954eb17639, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1291773675417560274, guid: 08a97101519d34246855b6954eb17639, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1291773675417560274, guid: 08a97101519d34246855b6954eb17639, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1291773675417560274, guid: 08a97101519d34246855b6954eb17639, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1291773675417560274, guid: 08a97101519d34246855b6954eb17639, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8827185247390094858, guid: 08a97101519d34246855b6954eb17639, type: 3}
+      propertyPath: m_Name
+      value: Walk Sides Still Animation
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 08a97101519d34246855b6954eb17639, type: 3}
+--- !u!4 &6581941738462606299 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1291773675417560274, guid: 08a97101519d34246855b6954eb17639, type: 3}
+  m_PrefabInstance: {fileID: 5384770730965047049}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &6077284500852810071
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1035843701762402513}
+    m_Modifications:
+    - target: {fileID: 1291773675417560274, guid: 074b3508aa04a1f49a89db81bc2c94a8, type: 3}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1291773675417560274, guid: 074b3508aa04a1f49a89db81bc2c94a8, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1291773675417560274, guid: 074b3508aa04a1f49a89db81bc2c94a8, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1291773675417560274, guid: 074b3508aa04a1f49a89db81bc2c94a8, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1291773675417560274, guid: 074b3508aa04a1f49a89db81bc2c94a8, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1291773675417560274, guid: 074b3508aa04a1f49a89db81bc2c94a8, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1291773675417560274, guid: 074b3508aa04a1f49a89db81bc2c94a8, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1291773675417560274, guid: 074b3508aa04a1f49a89db81bc2c94a8, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1291773675417560274, guid: 074b3508aa04a1f49a89db81bc2c94a8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1291773675417560274, guid: 074b3508aa04a1f49a89db81bc2c94a8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1291773675417560274, guid: 074b3508aa04a1f49a89db81bc2c94a8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8827185247390094858, guid: 074b3508aa04a1f49a89db81bc2c94a8, type: 3}
+      propertyPath: m_Name
+      value: Walk Left Still Animation
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 074b3508aa04a1f49a89db81bc2c94a8, type: 3}
+--- !u!4 &5024776240539059589 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1291773675417560274, guid: 074b3508aa04a1f49a89db81bc2c94a8, type: 3}
+  m_PrefabInstance: {fileID: 6077284500852810071}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6228520551029213850
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1689,6 +1816,68 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 3e74a05f6b9874f4093203e0775d074e, type: 3}
   m_PrefabInstance: {fileID: 6228520551029213850}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &7625123867701078838
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1035843701762402513}
+    m_Modifications:
+    - target: {fileID: 1291773675417560274, guid: 2c3b08a9870670f4bbb227118e36f81c, type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1291773675417560274, guid: 2c3b08a9870670f4bbb227118e36f81c, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1291773675417560274, guid: 2c3b08a9870670f4bbb227118e36f81c, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1291773675417560274, guid: 2c3b08a9870670f4bbb227118e36f81c, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1291773675417560274, guid: 2c3b08a9870670f4bbb227118e36f81c, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1291773675417560274, guid: 2c3b08a9870670f4bbb227118e36f81c, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1291773675417560274, guid: 2c3b08a9870670f4bbb227118e36f81c, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1291773675417560274, guid: 2c3b08a9870670f4bbb227118e36f81c, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1291773675417560274, guid: 2c3b08a9870670f4bbb227118e36f81c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1291773675417560274, guid: 2c3b08a9870670f4bbb227118e36f81c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1291773675417560274, guid: 2c3b08a9870670f4bbb227118e36f81c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8827185247390094858, guid: 2c3b08a9870670f4bbb227118e36f81c, type: 3}
+      propertyPath: m_Name
+      value: Walk Right Still Animation
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 2c3b08a9870670f4bbb227118e36f81c, type: 3}
+--- !u!4 &8663989527357558756 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1291773675417560274, guid: 2c3b08a9870670f4bbb227118e36f81c, type: 3}
+  m_PrefabInstance: {fileID: 7625123867701078838}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7828828830665898158
 PrefabInstance:
