@@ -6,43 +6,58 @@ public class CharacterAnimator : MonoBehaviour
 {
 
     [SerializeField] CharacterAnimation currentAnimation;
-    [SerializeField] Transform neck;
-    [SerializeField] Transform upper;
-    [SerializeField] Transform lower;
 
-    [SerializeField] Transform rightShoulder;
-    [SerializeField] Transform leftShoulder;
+    AnimationSet animationSet;
+    AnimationRig animationRig;
 
-    [SerializeField] Transform rightElbow;
-    [SerializeField] Transform leftElbow;
-
-    [SerializeField] Transform rightWrist;
-    [SerializeField] Transform leftWrist;
-
-    [SerializeField] Transform rightHip;
-    [SerializeField] Transform leftHip;
+    void Awake() {
+        animationSet = GetComponentInChildren<AnimationSet>();
+        animationRig = GetComponentInChildren<AnimationRig>();
+    }
 
     void Update() {
+        PlayAnimation(currentAnimation);
+        ApplyPose(currentAnimation.CurrentPose);
+    }
+
+    void PlayRandomAnimation(List<CharacterAnimation> animations) {
+        if (animations.Count > 0) {
+            int index = Mathf.RoundToInt(Random.Range(0f, (float) animations.Count - 1));
+            PlayAnimation(animations[index]);
+        }
+    }
+
+    void PlayAnimation(CharacterAnimation animation) {
+        if (currentAnimation != animation) {
+            currentAnimation.gameObject.SetActive(false);
+        }
+        currentAnimation = animation;
         currentAnimation.gameObject.SetActive(true);
         ApplyPose(currentAnimation.CurrentPose);
     }
 
     void ApplyPose(AnimationPose.Pose pose) {
-        if (null != pose) {
-            neck.localEulerAngles = pose.neckRotation;
-            upper.localEulerAngles = pose.upperRotation;
-            lower.localEulerAngles = pose.lowerRotation;
-            rightShoulder.localEulerAngles = pose.rightShoulderRotation;
-            leftShoulder.localEulerAngles = pose.leftShoulderRotation;
-            rightElbow.localEulerAngles = pose.rightElbowRotation;
-            leftElbow.localEulerAngles = pose.leftElbowRotation;
-            rightWrist.localEulerAngles = pose.rightWristRotation;
-            leftWrist.localEulerAngles = pose.leftWristRotation;
-            rightHip.localEulerAngles = pose.rightHipRotation;
-            leftHip.localEulerAngles = pose.leftHipRotation;
-        }
+        animationRig.ApplyPose(pose);
     }
 
+    public void PlayWalkAnimation() {
+        PlayRandomAnimation(animationSet.WalkAnimations);
+    }
 
+    public void PlayIdleAnimation() {
+        PlayRandomAnimation(animationSet.IdleAnimations);
+    }
+
+    public void PlayReloadAnimation() {
+        PlayRandomAnimation(animationSet.ReloadAnimations);
+    }
+
+    public void PlayAttackAnimation() {
+        PlayRandomAnimation(animationSet.AttackAnimations);        
+    }
+
+    public void PlayDeathAnimation() {
+        PlayRandomAnimation(animationSet.DeathAnimations);
+    }
 
 }
