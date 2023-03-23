@@ -27,19 +27,19 @@ public class CharacterAnimator : MonoBehaviour
         ApplyPose(currentAnimation.CurrentPose);
     }
 
-    void ApplyPose(AnimationPose pose) {
+    void ApplyPose(AnimationPose.Pose pose) {
         if (null != pose) {
-            neck.localEulerAngles = pose.NeckRotation;
-            upper.localEulerAngles = pose.UpperRotation;
-            lower.localEulerAngles = pose.LowerRotation;
-            rightShoulder.localEulerAngles = pose.RightShoulderRotation;
-            leftShoulder.localEulerAngles = pose.LeftShoulderRotation;
-            rightElbow.localEulerAngles = pose.RightElbowRotation;
-            leftElbow.localEulerAngles = pose.LeftElbowRotation;
-            rightWrist.localEulerAngles = pose.RightWristRotation;
-            leftWrist.localEulerAngles = pose.LeftWristRotation;
-            rightHip.localEulerAngles = pose.RightHipRotation;
-            leftHip.localEulerAngles = pose.LeftHipRotation;
+            neck.localEulerAngles = pose.neckRotation;
+            upper.localEulerAngles = pose.upperRotation;
+            lower.localEulerAngles = pose.lowerRotation;
+            rightShoulder.localEulerAngles = pose.rightShoulderRotation;
+            leftShoulder.localEulerAngles = pose.leftShoulderRotation;
+            rightElbow.localEulerAngles = pose.rightElbowRotation;
+            leftElbow.localEulerAngles = pose.leftElbowRotation;
+            rightWrist.localEulerAngles = pose.rightWristRotation;
+            leftWrist.localEulerAngles = pose.leftWristRotation;
+            rightHip.localEulerAngles = pose.rightHipRotation;
+            leftHip.localEulerAngles = pose.leftHipRotation;
         }
     }
 

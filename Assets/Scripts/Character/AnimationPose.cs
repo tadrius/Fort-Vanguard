@@ -4,50 +4,45 @@ using UnityEngine;
 
 public class AnimationPose : MonoBehaviour
 {
-    [SerializeField] Vector3 neckRotation = Vector3.zero;
-    [SerializeField] Vector3 upperRotation = Vector3.zero;
-    [SerializeField] Vector3 lowerRotation = Vector3.zero;
+    [SerializeField] Pose pose;
 
-    [SerializeField] Vector3 rightShoulderRotation = Vector3.zero;
-    [SerializeField] Vector3 leftShoulderRotation = Vector3.zero;
+    public static Pose CreateTransitionPose(AnimationPose animPose1, AnimationPose animPose2, float transitionAmount, Transform parent) {
+        Pose pose = new Pose();
+        Pose pose1 = animPose1.pose;
+        Pose pose2 = animPose2.pose;
 
-    [SerializeField] Vector3 rightElbowRotation = Vector3.zero;
-    [SerializeField] Vector3 leftElbowRotation = Vector3.zero;
+        pose.neckRotation = Vector3.Lerp(pose1.neckRotation, pose2.neckRotation, transitionAmount);
+        pose.upperRotation = Vector3.Lerp(pose1.upperRotation, pose2.upperRotation, transitionAmount);
+        pose.lowerRotation = Vector3.Lerp(pose1.lowerRotation, pose2.lowerRotation, transitionAmount);
+        pose.rightShoulderRotation = Vector3.Lerp(pose1.rightShoulderRotation, pose2.rightShoulderRotation, transitionAmount);
+        pose.leftShoulderRotation = Vector3.Lerp(pose1.leftShoulderRotation, pose2.leftShoulderRotation, transitionAmount);
+        pose.rightElbowRotation = Vector3.Lerp(pose1.rightElbowRotation, pose2.rightElbowRotation, transitionAmount);
+        pose.leftElbowRotation = Vector3.Lerp(pose1.leftElbowRotation, pose2.leftElbowRotation, transitionAmount);
+        pose.rightWristRotation = Vector3.Lerp(pose1.rightWristRotation, pose2.rightWristRotation, transitionAmount);
+        pose.leftWristRotation = Vector3.Lerp(pose1.leftWristRotation, pose2.leftWristRotation, transitionAmount);
+        pose.rightHipRotation = Vector3.Lerp(pose1.rightHipRotation, pose2.rightHipRotation, transitionAmount);
+        pose.leftHipRotation = Vector3.Lerp(pose1.leftHipRotation, pose2.leftHipRotation, transitionAmount);
 
-    [SerializeField] Vector3 rightWristRotation = Vector3.zero;
-    [SerializeField] Vector3 leftWristRotation = Vector3.zero;
+        return pose;
+    }
 
-    [SerializeField] Vector3 rightHipRotation = Vector3.zero;
-    [SerializeField] Vector3 leftHipRotation = Vector3.zero;
+    [System.Serializable]
+    public class Pose {
+        public Vector3 neckRotation = Vector3.zero;
+        public Vector3 upperRotation = Vector3.zero;
+        public Vector3 lowerRotation = Vector3.zero;
 
-    public Vector3 NeckRotation { get { return neckRotation; }}
-    public Vector3 UpperRotation { get { return upperRotation; }}
-    public Vector3 LowerRotation { get { return lowerRotation; }}
-    public Vector3 RightShoulderRotation { get { return rightShoulderRotation; }}
-    public Vector3 LeftShoulderRotation { get { return leftShoulderRotation; }}
-    public Vector3 RightElbowRotation { get { return rightElbowRotation; }}
-    public Vector3 LeftElbowRotation { get { return leftElbowRotation; }}
-    public Vector3 RightWristRotation { get { return rightWristRotation; }}
-    public Vector3 LeftWristRotation { get { return leftWristRotation; }}
-    public Vector3 RightHipRotation { get { return rightHipRotation; }}
-    public Vector3 LeftHipRotation { get { return leftHipRotation; }}
+        public Vector3 rightShoulderRotation = Vector3.zero;
+        public Vector3 leftShoulderRotation = Vector3.zero;
 
-    public static AnimationPose CreateTransitionPose(AnimationPose pose1, AnimationPose pose2, float transitionAmount, Transform parent) {
-        AnimationPose transitionPose = GameObject.Instantiate<AnimationPose>(pose1, parent);
+        public Vector3 rightElbowRotation = Vector3.zero;
+        public Vector3 leftElbowRotation = Vector3.zero;
 
-        transitionPose.neckRotation = Vector3.Lerp(pose1.neckRotation, pose2.neckRotation, transitionAmount);
-        transitionPose.upperRotation = Vector3.Lerp(pose1.upperRotation, pose2.upperRotation, transitionAmount);
-        transitionPose.lowerRotation = Vector3.Lerp(pose1.lowerRotation, pose2.lowerRotation, transitionAmount);
-        transitionPose.rightShoulderRotation = Vector3.Lerp(pose1.rightShoulderRotation, pose2.rightShoulderRotation, transitionAmount);
-        transitionPose.leftShoulderRotation = Vector3.Lerp(pose1.leftShoulderRotation, pose2.leftShoulderRotation, transitionAmount);
-        transitionPose.rightElbowRotation = Vector3.Lerp(pose1.rightElbowRotation, pose2.rightElbowRotation, transitionAmount);
-        transitionPose.leftElbowRotation = Vector3.Lerp(pose1.leftElbowRotation, pose2.leftElbowRotation, transitionAmount);
-        transitionPose.rightWristRotation = Vector3.Lerp(pose1.rightWristRotation, pose2.rightWristRotation, transitionAmount);
-        transitionPose.leftWristRotation = Vector3.Lerp(pose1.leftWristRotation, pose2.leftWristRotation, transitionAmount);
-        transitionPose.rightHipRotation = Vector3.Lerp(pose1.rightHipRotation, pose2.rightHipRotation, transitionAmount);
-        transitionPose.leftHipRotation = Vector3.Lerp(pose1.leftHipRotation, pose2.leftHipRotation, transitionAmount);
+        public Vector3 rightWristRotation = Vector3.zero;
+        public Vector3 leftWristRotation = Vector3.zero;
 
-        return transitionPose;
+        public Vector3 rightHipRotation = Vector3.zero;
+        public Vector3 leftHipRotation = Vector3.zero;      
     }
 
 }

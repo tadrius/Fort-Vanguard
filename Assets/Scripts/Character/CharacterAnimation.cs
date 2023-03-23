@@ -10,8 +10,8 @@ public class CharacterAnimation : MonoBehaviour
     [SerializeField] List<AnimationPose> poses;
     [SerializeField] float transitionProgress = 0f; // how much time has elapsed transitioning from the current to next pose
 
-    AnimationPose currentPose;
-    public AnimationPose CurrentPose { get { return currentPose; }}
+    AnimationPose.Pose currentPose;
+    public AnimationPose.Pose CurrentPose { get { return currentPose; }}
 
     public AnimationPose GetPreviousPose() {
         return poses[previousPoseIndex];
@@ -37,11 +37,7 @@ public class CharacterAnimation : MonoBehaviour
     }
 
     void CreateCurrentPose() {
-        AnimationPose previousPose = currentPose;
         currentPose = AnimationPose.CreateTransitionPose(GetPreviousPose(), GetNextPose(), transitionProgress/transitionDuration, transform);
-        if (null != previousPose) {
-            Destroy(previousPose.gameObject);
-        }
     }
 
 }
