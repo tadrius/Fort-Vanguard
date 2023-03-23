@@ -23,6 +23,7 @@ public class CharacterAnimator : MonoBehaviour
     [SerializeField] Transform leftHip;
 
     void Update() {
+        currentAnimation.gameObject.SetActive(true);
         ApplyPose(currentAnimation.CurrentPose);
     }
 
