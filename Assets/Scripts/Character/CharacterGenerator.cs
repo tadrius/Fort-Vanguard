@@ -16,24 +16,24 @@ public class CharacterGenerator : MonoBehaviour
     [SerializeField] List<GameObject> forearmChoices; 
     [SerializeField] List<GameObject> handChoices; 
     [SerializeField] List<GameObject> legChoices; 
-    [SerializeField] List<GameObject> leftItemChoices;   
     [SerializeField] List<GameObject> rightItemChoices;
+    [SerializeField] List<GameObject> leftItemChoices;   
 
     [SerializeField] PartSelector head;
     [SerializeField] PartSelector mustache;
     [SerializeField] PartSelector beard;
     [SerializeField] PartSelector headwear;
     [SerializeField] PartSelector chest;
-    [SerializeField] PartSelector leftUpperArm;
     [SerializeField] PartSelector rightUpperArm;
-    [SerializeField] PartSelector leftForeArm;
+    [SerializeField] PartSelector leftUpperArm;
     [SerializeField] PartSelector rightForeArm;
-    [SerializeField] PartSelector leftHand;
+    [SerializeField] PartSelector leftForeArm;
     [SerializeField] PartSelector rightHand;
-    [SerializeField] PartSelector leftLeg;
+    [SerializeField] PartSelector leftHand;
     [SerializeField] PartSelector rightLeg;
-    [SerializeField] PartSelector leftItem;
+    [SerializeField] PartSelector leftLeg;
     [SerializeField] PartSelector rightItem;
+    [SerializeField] PartSelector leftItem;
 
     void Awake() {
         head.SetPossibleParts(headChoices);
@@ -41,16 +41,16 @@ public class CharacterGenerator : MonoBehaviour
         beard.SetPossibleParts(beardChoices);
         headwear.SetPossibleParts(headwearChoices);
         chest.SetPossibleParts(chestChoices);
-        leftUpperArm.SetPossibleParts(upperArmChoice);
         rightUpperArm.SetPossibleParts(upperArmChoice);
-        leftForeArm.SetPossibleParts(forearmChoices);
+        leftUpperArm.SetPossibleParts(upperArmChoice);
         rightForeArm.SetPossibleParts(forearmChoices);
-        leftHand.SetPossibleParts(handChoices);
+        leftForeArm.SetPossibleParts(forearmChoices);
         rightHand.SetPossibleParts(handChoices);
-        leftLeg.SetPossibleParts(legChoices);
+        leftHand.SetPossibleParts(handChoices);
         rightLeg.SetPossibleParts(legChoices);
-        leftItem.SetPossibleParts(leftItemChoices);
+        leftLeg.SetPossibleParts(legChoices);
         rightItem.SetPossibleParts(rightItemChoices);
+        leftItem.SetPossibleParts(leftItemChoices);
 
         // create parts
         head.CreateRandomPart(palette);
@@ -64,16 +64,16 @@ public class CharacterGenerator : MonoBehaviour
         leftItem.CreateRandomPart(palette);
 
         int index;
-        index = leftUpperArm.CreateRandomPart(palette);
-        rightUpperArm.CreatePart(index, palette); // create mirroring part
+        index = rightUpperArm.CreateRandomPart(palette);
+        leftUpperArm.CreatePart(index, palette); // create mirroring part
 
-        index = leftForeArm.CreateRandomPart(palette);
-        rightForeArm.CreatePart(index, palette);
+        index = rightForeArm.CreateRandomPart(palette);
+        leftForeArm.CreatePart(index, palette);
 
-        index = leftHand.CreateRandomPart(palette);
-        rightHand.CreatePart(index, palette);
+        index = rightHand.CreateRandomPart(palette);
+        leftHand.CreatePart(index, palette);
 
-        index = leftLeg.CreateRandomPart(palette);
-        rightLeg.CreatePart(index, palette);
+        index = rightLeg.CreateRandomPart(palette);
+        leftLeg.CreatePart(index, palette);
     }
 }
