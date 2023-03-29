@@ -2,62 +2,67 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(AnimationRig))]
 public class CharacterAnimator : MonoBehaviour
 {
 
     [SerializeField] CharacterAnimation currentAnimation;
 
-    AnimationSet animationSet;
     AnimationRig animationRig;
+    AnimationSet animationSet;
 
     void Awake() {
+        animationRig = GetComponent<AnimationRig>();
         animationSet = GetComponentInChildren<AnimationSet>();
-        animationRig = GetComponentInChildren<AnimationRig>();
     }
 
     void Update() {
-        PlayAnimation(currentAnimation);
-        ApplyPose(currentAnimation.CurrentPose);
-    }
-
-    void PlayRandomAnimation(List<CharacterAnimation> animations) {
-        if (animations.Count > 0) {
-            int index = Mathf.RoundToInt(Random.Range(0f, (float) animations.Count - 1));
-            PlayAnimation(animations[index]);
+        if (null == currentAnimation) {
+            LoadIdleAnimation();
+        } 
+        if (null != currentAnimation) {
+            PlayAnimation();
         }
     }
 
-    void PlayAnimation(CharacterAnimation animation) {
+    void PlayAnimation() {
+        currentAnimation.gameObject.SetActive(true);
+        animationRig.ApplyPose(currentAnimation.CurrentPose);
+    }
+
+    void LoadRandomAnimation(List<CharacterAnimation> animations) {
+        if (animations.Count > 0) {
+            int index = Mathf.RoundToInt(Random.Range(0f, (float) animations.Count - 1));
+            LoadAnimation(animations[index]);
+        }
+    }
+
+    void LoadAnimation(CharacterAnimation animation) {
         if (currentAnimation != animation) {
             currentAnimation.gameObject.SetActive(false);
         }
         currentAnimation = animation;
         currentAnimation.gameObject.SetActive(true);
-        ApplyPose(currentAnimation.CurrentPose);
     }
 
-    void ApplyPose(AnimationPose.Pose pose) {
-        animationRig.ApplyPose(pose);
+    public void LoadWalkAnimation() {
+        LoadRandomAnimation(animationSet.WalkAnimations);
     }
 
-    public void PlayWalkAnimation() {
-        PlayRandomAnimation(animationSet.WalkAnimations);
+    public void LoadIdleAnimation() {
+        LoadRandomAnimation(animationSet.IdleAnimations);
     }
 
-    public void PlayIdleAnimation() {
-        PlayRandomAnimation(animationSet.IdleAnimations);
+    public void LoadReloadAnimation() {
+        LoadRandomAnimation(animationSet.ReloadAnimations);
     }
 
-    public void PlayReloadAnimation() {
-        PlayRandomAnimation(animationSet.ReloadAnimations);
+    public void LoadAttackAnimation() {
+        LoadRandomAnimation(animationSet.AttackAnimations);        
     }
 
-    public void PlayAttackAnimation() {
-        PlayRandomAnimation(animationSet.AttackAnimations);        
-    }
-
-    public void PlayDeathAnimation() {
-        PlayRandomAnimation(animationSet.DeathAnimations);
+    public void LoadDeathAnimation() {
+        LoadRandomAnimation(animationSet.DeathAnimations);
     }
 
 }
