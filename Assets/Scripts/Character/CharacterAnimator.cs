@@ -17,7 +17,7 @@ public class CharacterAnimator : MonoBehaviour
     }
 
     void Update() {
-        if (null == currentAnimation) {
+        if (null != animationSet) {
             LoadIdleAnimation();
         } 
         if (null != currentAnimation) {
