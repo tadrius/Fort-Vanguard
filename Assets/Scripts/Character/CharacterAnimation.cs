@@ -13,6 +13,10 @@ public class CharacterAnimation : MonoBehaviour
     AnimationPose.Pose currentPose;
     public AnimationPose.Pose CurrentPose { get { return currentPose; }}
 
+    void Awake() {
+        CreateCurrentPose();
+    }
+
     public AnimationPose GetPreviousPose() {
         return poses[previousPoseIndex];
     }
@@ -24,16 +28,20 @@ public class CharacterAnimation : MonoBehaviour
         return poses[previousPoseIndex + 1];
     }
 
-    void Update() {
+    // returns if the animation has finished
+    public bool PlayAnimation() {
+        bool animationComplete = false;
         transitionProgress += Time.deltaTime;
         if (transitionProgress >= transitionDuration) {
             transitionProgress = transitionProgress - transitionDuration;
             previousPoseIndex++;
             if (previousPoseIndex >= poses.Count) { // reset animaation
                 previousPoseIndex = 0;
+                animationComplete = true;
             }
         }
         CreateCurrentPose();
+        return animationComplete;
     }
 
     void CreateCurrentPose() {

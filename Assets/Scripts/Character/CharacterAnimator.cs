@@ -17,17 +17,22 @@ public class CharacterAnimator : MonoBehaviour
     }
 
     void Update() {
-        if (null != animationSet) {
-            LoadIdleAnimation();
-        } 
-        if (null != currentAnimation) {
+        if (null == animationSet && null != currentAnimation) {
             PlayAnimation();
+        } else {
+            if (null != currentAnimation) {
+                bool animComplete = PlayAnimation();
+                if (animComplete) {
+                    LoadAttackAnimation();
+                }
+            }
         }
     }
 
-    void PlayAnimation() {
+    bool PlayAnimation() {
         currentAnimation.gameObject.SetActive(true);
         animationRig.ApplyPose(currentAnimation.CurrentPose);
+        return currentAnimation.PlayAnimation();
     }
 
     void LoadRandomAnimation(List<CharacterAnimation> animations) {
