@@ -36,6 +36,37 @@ public class CharacterGenerator : MonoBehaviour
     [SerializeField] PartSelector leftItem;
 
     void Awake() {
+        CreateParts(true);
+    }
+
+    public void CreateParts(bool overrideExisting) {
+        SetPossibleParts();
+
+        head.CreateRandomPart(palette, overrideExisting);
+        mustache.CreateRandomPart(palette, overrideExisting);
+        beard.CreateRandomPart(palette, overrideExisting);
+        headwear.CreateRandomPart(palette, overrideExisting);
+
+        chest.CreateRandomPart(palette, overrideExisting);
+
+        rightItem.CreateRandomPart(palette, overrideExisting);
+        leftItem.CreateRandomPart(palette, overrideExisting);
+
+        int index;
+        index = rightUpperArm.CreateRandomPart(palette, overrideExisting);
+        leftUpperArm.CreatePart(index, palette, overrideExisting); // create mirroring part
+
+        index = rightForeArm.CreateRandomPart(palette, overrideExisting);
+        leftForeArm.CreatePart(index, palette, overrideExisting);
+
+        index = rightHand.CreateRandomPart(palette, overrideExisting);
+        leftHand.CreatePart(index, palette, overrideExisting);
+
+        index = rightLeg.CreateRandomPart(palette, overrideExisting);
+        leftLeg.CreatePart(index, palette, overrideExisting);
+    }
+
+    void SetPossibleParts() {
         head.SetPossibleParts(headChoices);
         mustache.SetPossibleParts(mustacheChoices);
         beard.SetPossibleParts(beardChoices);
@@ -51,29 +82,5 @@ public class CharacterGenerator : MonoBehaviour
         leftLeg.SetPossibleParts(legChoices);
         rightItem.SetPossibleParts(rightItemChoices);
         leftItem.SetPossibleParts(leftItemChoices);
-
-        // create parts
-        head.CreateRandomPart(palette);
-        mustache.CreateRandomPart(palette);
-        beard.CreateRandomPart(palette);
-        headwear.CreateRandomPart(palette);
-
-        chest.CreateRandomPart(palette);
-
-        rightItem.CreateRandomPart(palette);
-        leftItem.CreateRandomPart(palette);
-
-        int index;
-        index = rightUpperArm.CreateRandomPart(palette);
-        leftUpperArm.CreatePart(index, palette); // create mirroring part
-
-        index = rightForeArm.CreateRandomPart(palette);
-        leftForeArm.CreatePart(index, palette);
-
-        index = rightHand.CreateRandomPart(palette);
-        leftHand.CreatePart(index, palette);
-
-        index = rightLeg.CreateRandomPart(palette);
-        leftLeg.CreatePart(index, palette);
     }
 }
