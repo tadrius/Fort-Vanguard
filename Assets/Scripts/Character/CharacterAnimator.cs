@@ -7,8 +7,10 @@ public class CharacterAnimator : MonoBehaviour
 {
 
     [SerializeField] CharacterAnimation currentAnimation;
-    [SerializeField] List<CharacterAnimation> animations;
+    [Tooltip("All animations will be scaled to play within the desired animation duration. Set to 0 to remove scaling.")]
+    [SerializeField] float desiredAnimationDuration = 0f;
 
+    List<CharacterAnimation> animations;
     AnimationRig animationRig;
     AnimationSet animationSet;
 
@@ -31,9 +33,13 @@ public class CharacterAnimator : MonoBehaviour
     }
 
     bool PlayAnimation() {
-        currentAnimation.gameObject.SetActive(true);
-        animationRig.ApplyPose(currentAnimation.CurrentPose);
-        return currentAnimation.PlayAnimation();
+        // scale time to play animation to the desired duration
+        float timeScaler = 1f;
+        if (0f != desiredAnimationDuration) {
+            timeScaler = currentAnimation.TotalDuration / desiredAnimationDuration;
+        }
+        
+        return currentAnimation.PlayAnimation(Time.deltaTime * timeScaler, animationRig);
     }
 
     void SetRandomAnimation(List<CharacterAnimation> animations) {

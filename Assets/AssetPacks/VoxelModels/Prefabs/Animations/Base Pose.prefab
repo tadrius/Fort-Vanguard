@@ -44,14 +44,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6807ec2b74da9a4f91959ccc30d047b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  neckRotation: {x: 0, y: 0, z: 0}
-  upperRotation: {x: 0, y: 0, z: 0}
-  lowerRotation: {x: 0, y: 0, z: 0}
-  leftShoulderRotation: {x: 0, y: 0, z: 0}
-  rightShoulderRotation: {x: 0, y: 0, z: 0}
-  leftElbowRotation: {x: 0, y: 0, z: 0}
-  rightElbowRotation: {x: 0, y: 0, z: 0}
-  leftWristRotation: {x: 0, y: 0, z: 0}
-  rightWristRotation: {x: 0, y: 0, z: 0}
-  leftHipRotation: {x: 0, y: 0, z: 0}
-  rightHipRotation: {x: 0, y: 0, z: 0}
+  pose:
+    neckRotation: {x: 0, y: 0, z: 0}
+    upperRotation: {x: 0, y: 0, z: 0}
+    lowerRotation: {x: 0, y: 0, z: 0}
+    rightShoulderRotation: {x: 0, y: 0, z: 0}
+    leftShoulderRotation: {x: 0, y: 0, z: 0}
+    rightElbowRotation: {x: 0, y: 0, z: 0}
+    leftElbowRotation: {x: 0, y: 0, z: 0}
+    rightWristRotation: {x: 0, y: 0, z: 0}
+    leftWristRotation: {x: 0, y: 0, z: 0}
+    rightHipRotation: {x: 0, y: 0, z: 0}
+    leftHipRotation: {x: 0, y: 0, z: 0}
+  transitionDuration: 0.3

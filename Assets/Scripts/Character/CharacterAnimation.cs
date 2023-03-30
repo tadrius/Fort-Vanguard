@@ -5,16 +5,27 @@ using UnityEngine;
 public class CharacterAnimation : MonoBehaviour
 {
 
-    [SerializeField] int previousPoseIndex = 0; // indicates the starting pose of the animation
-    [SerializeField] float transitionDuration = .25f;
     [SerializeField] List<AnimationPose> poses;
-    [SerializeField] float transitionProgress = 0f; // how much time has elapsed transitioning from the current to next pose
 
     AnimationPose.Pose currentPose;
+    int previousPoseIndex = 0;
+    float transitionProgress = 0f; // how much scaled time has elapsed transitioning from the current to next pose
+    float transitionDuration;
+    float totalDuration;
+
     public AnimationPose.Pose CurrentPose { get { return currentPose; }}
+    public float TotalDuration { get { return totalDuration; }}
 
     void Awake() {
         CreateCurrentPose();
+        ComputeTotalDuration();
+    }
+
+    void ComputeTotalDuration() {
+        totalDuration = 0f;
+        foreach (AnimationPose pose in poses) {
+            totalDuration += pose.TransitionDuration;
+        }
     }
 
     public AnimationPose GetPreviousPose() {
@@ -29,23 +40,25 @@ public class CharacterAnimation : MonoBehaviour
     }
 
     // returns if the animation has finished
-    public bool PlayAnimation() {
+    public bool PlayAnimation(float animationProgress, AnimationRig rig) {
         bool animationComplete = false;
-        transitionProgress += Time.deltaTime;
+        transitionProgress += animationProgress;
         if (transitionProgress >= transitionDuration) {
             transitionProgress = transitionProgress - transitionDuration;
             previousPoseIndex++;
-            if (previousPoseIndex >= poses.Count) { // reset animaation
+            if (previousPoseIndex >= poses.Count) { // reset animation
                 previousPoseIndex = 0;
                 animationComplete = true;
             }
         }
         CreateCurrentPose();
+        rig.ApplyPose(currentPose);
         return animationComplete;
     }
 
     void CreateCurrentPose() {
         currentPose = AnimationPose.CreateTransitionPose(GetPreviousPose(), GetNextPose(), transitionProgress/transitionDuration, transform);
+        transitionDuration = GetPreviousPose().TransitionDuration;
     }
 
 }

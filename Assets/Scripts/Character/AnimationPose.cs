@@ -4,7 +4,13 @@ using UnityEngine;
 
 public class AnimationPose : MonoBehaviour
 {
+    [Tooltip("The joint rotations that define this pose.")]
     [SerializeField] Pose pose;
+
+    [Tooltip("The amount of time it takes to transition from the previous pose into this current pose.")]
+    [SerializeField] float transitionDuration = .3f;
+    
+    public float TransitionDuration { get { return transitionDuration; } }
 
     public static Pose CreateTransitionPose(AnimationPose animPose1, AnimationPose animPose2, float transitionAmount, Transform parent) {
         Pose pose = new Pose();
