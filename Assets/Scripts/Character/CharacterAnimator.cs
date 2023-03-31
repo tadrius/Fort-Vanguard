@@ -29,15 +29,19 @@ public class CharacterAnimator : MonoBehaviour
         animationRig = GetComponent<AnimationRig>();
         animationSet = GetComponentInChildren<AnimationSet>();
         blendPose = GetComponent<AnimationPose>();
+    }
+
+    void OnEnable() {
         previousAnimationList = -1; // set previous animation list to negative to enable initial animation load
         LoadAnimations();
-        SetAnimation();
+        SetAnimation();       
     }
 
     void Update() {
         PlayAnimation();
+
         LoadAnimations(); // check if new animations must be loaded
-        if (animationCompleted) { 
+        if (animationCompleted) {
             SetAnimation(); // set another animation from the stored list and blend
         }
     }
@@ -68,7 +72,6 @@ public class CharacterAnimator : MonoBehaviour
         animationCompleted = false;
         animation.gameObject.SetActive(true);
 
-        animation.SetTransitionProgress(currentAnimation.TransitionProgress); // apply the excess progress to the next animation
         blendPose.SetPose(new AnimationPose.Pose(currentAnimation.CurrentPose)); // remove the blend pose if the animations are the same
 
         if (!currentAnimation.Equals(animation)) {   
@@ -104,7 +107,7 @@ public class CharacterAnimator : MonoBehaviour
                         break;
                 }
             }
-            animationCompleted = true;
+            animationCompleted = true; // set animation completed to begin a new animation
         }
     }
 

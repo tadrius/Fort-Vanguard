@@ -10,7 +10,7 @@ public class CharacterAnimation : MonoBehaviour
     [SerializeField] AnimationPose.Pose currentPose;
 
     int previousPoseIndex;
-    float transitionProgress = 0f; // how much scaled time has elapsed transitioning from the current to next pose
+    float transitionProgress; // how much scaled time has elapsed transitioning from the current to next pose
     float transitionDuration;
     float totalDuration;
 
@@ -19,10 +19,18 @@ public class CharacterAnimation : MonoBehaviour
     public float TransitionProgress { get { return transitionProgress; }}
 
     void Awake() {
-        previousPoseIndex = 0;
-        currentPose = GetPreviousPose().GetPose(); // initialize current pose to the first
         transitionDuration = GetPreviousPose().TransitionDuration;
         ComputeTotalDuration();
+    }
+
+    void OnEnable() {
+        ResetAnimation();
+    }
+
+    void ResetAnimation() {
+        previousPoseIndex = 0;
+        transitionProgress = 0;
+        currentPose = GetPreviousPose().GetPose(); // initialize current pose to the first
     }
 
     void ComputeTotalDuration() {
@@ -35,6 +43,11 @@ public class CharacterAnimation : MonoBehaviour
     public void SetTransitionProgress(float progress) {
         transitionProgress = progress;
     }
+
+    public void SetPreviousPoseIndex(int index) {
+        previousPoseIndex = index;
+    }
+
 
     public AnimationPose GetPreviousPose() {
         return poses[previousPoseIndex];
