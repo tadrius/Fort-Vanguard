@@ -12,8 +12,21 @@ public class AnimationPose : MonoBehaviour
     
     public float TransitionDuration { get { return transitionDuration; } }
 
+    public void CopyPose(Pose pose) {
+        this.pose.Copy(pose);
+    }
+
+    public void SetPose(Pose pose) {
+        this.pose = pose;
+    }
+
+    public Pose GetPose() {
+        return pose;
+    }
+
     public static Pose CreateTransitionPose(AnimationPose animPose1, AnimationPose animPose2, float transitionAmount, Transform parent) {
         Pose pose = new Pose();
+
         Pose pose1 = animPose1.pose;
         Pose pose2 = animPose2.pose;
 
@@ -48,7 +61,27 @@ public class AnimationPose : MonoBehaviour
         public Vector3 leftWristRotation = Vector3.zero;
 
         public Vector3 rightHipRotation = Vector3.zero;
-        public Vector3 leftHipRotation = Vector3.zero;      
+        public Vector3 leftHipRotation = Vector3.zero;
+
+        public Pose() {}
+
+        public Pose(Pose other) {
+            Copy(other);
+        }
+
+        public void Copy(Pose other) {
+            neckRotation = other.neckRotation;
+            upperRotation = other.upperRotation;
+            lowerRotation = other.lowerRotation;
+            rightShoulderRotation = other.rightShoulderRotation;
+            leftShoulderRotation = other.leftShoulderRotation;
+            rightElbowRotation = other.rightElbowRotation;
+            leftElbowRotation = other.leftElbowRotation;
+            rightWristRotation = other.rightWristRotation;
+            leftWristRotation = other.leftWristRotation;
+            rightHipRotation = other.rightHipRotation;
+            leftHipRotation = other.leftHipRotation;
+        }
     }
 
 }

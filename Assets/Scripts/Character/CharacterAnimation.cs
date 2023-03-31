@@ -7,17 +7,21 @@ public class CharacterAnimation : MonoBehaviour
 
     [SerializeField] List<AnimationPose> poses;
 
-    AnimationPose.Pose currentPose;
-    int previousPoseIndex = 0;
+    [SerializeField] AnimationPose.Pose currentPose;
+
+    int previousPoseIndex;
     float transitionProgress = 0f; // how much scaled time has elapsed transitioning from the current to next pose
     float transitionDuration;
     float totalDuration;
 
     public AnimationPose.Pose CurrentPose { get { return currentPose; }}
     public float TotalDuration { get { return totalDuration; }}
+    public float TransitionProgress { get { return transitionProgress; }}
 
     void Awake() {
-        CreateCurrentPose();
+        previousPoseIndex = 0;
+        currentPose = GetPreviousPose().GetPose(); // initialize current pose to the first
+        transitionDuration = GetPreviousPose().TransitionDuration;
         ComputeTotalDuration();
     }
 
@@ -26,6 +30,10 @@ public class CharacterAnimation : MonoBehaviour
         foreach (AnimationPose pose in poses) {
             totalDuration += pose.TransitionDuration;
         }
+    }
+
+    public void SetTransitionProgress(float progress) {
+        transitionProgress = progress;
     }
 
     public AnimationPose GetPreviousPose() {
@@ -39,26 +47,33 @@ public class CharacterAnimation : MonoBehaviour
         return poses[previousPoseIndex + 1];
     }
 
-    // returns if the animation has finished
-    public bool PlayAnimation(float animationProgress, AnimationRig rig) {
+    // returns a bool indicating if the animation has finished
+    public bool PlayAnimation(float animationProgress, AnimationRig rig, AnimationPose blendPose) {
         bool animationComplete = false;
+        // if this is the first pose in the sequence, replace the pose with the animation blend pose
+        if (0 == previousPoseIndex && null != blendPose.GetPose()) {
+            CreateCurrentPose(blendPose, GetNextPose());
+        } else {
+            CreateCurrentPose(GetPreviousPose(), GetNextPose());
+        }
+        rig.ApplyPose(currentPose);
+
         transitionProgress += animationProgress;
         if (transitionProgress >= transitionDuration) {
-            transitionProgress = transitionProgress - transitionDuration;
+            transitionProgress -= transitionDuration;
             previousPoseIndex++;
             if (previousPoseIndex >= poses.Count) { // reset animation
                 previousPoseIndex = 0;
                 animationComplete = true;
+                transitionDuration = GetPreviousPose().TransitionDuration;
             }
         }
-        CreateCurrentPose();
-        rig.ApplyPose(currentPose);
+
         return animationComplete;
     }
 
-    void CreateCurrentPose() {
-        currentPose = AnimationPose.CreateTransitionPose(GetPreviousPose(), GetNextPose(), transitionProgress/transitionDuration, transform);
-        transitionDuration = GetPreviousPose().TransitionDuration;
+    void CreateCurrentPose(AnimationPose pose1, AnimationPose pose2) {
+        currentPose = AnimationPose.CreateTransitionPose(pose1, pose2, transitionProgress/transitionDuration, transform);
     }
 
 }
