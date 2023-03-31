@@ -31,15 +31,14 @@ public class CharacterAnimator : MonoBehaviour
         blendPose = GetComponent<AnimationPose>();
         previousAnimationList = -1; // set previous animation list to negative to enable initial animation load
         LoadAnimations();
+        SetAnimation();
     }
 
     void Update() {
-        LoadAnimations();
-        if (null != currentAnimation) {
-            PlayAnimation();
-            if (animationCompleted) { 
-                SetRandomAnimation(); // set another animation from the stored list and blend
-            }
+        PlayAnimation();
+        LoadAnimations(); // check if new animations must be loaded
+        if (animationCompleted) { 
+            SetAnimation(); // set another animation from the stored list and blend
         }
     }
 
@@ -55,10 +54,13 @@ public class CharacterAnimator : MonoBehaviour
         animationCompleted = currentAnimation.PlayAnimation(Time.deltaTime * timeScaler, animationRig, blendPose);
     }
 
-    void SetRandomAnimation() {
+    void SetAnimation() {
         if (null != animations && 0 < animations.Count) {
             int index = Mathf.RoundToInt(Random.Range(0f, (float) animations.Count - 1));
             SetAnimation(animations[index]);
+        } else {
+             // default animation if there is no stored list
+            SetAnimation(currentAnimation); 
         }
     }
 
@@ -102,11 +104,7 @@ public class CharacterAnimator : MonoBehaviour
                         break;
                 }
             }
-            if (null != animations && 0 < animations.Count) { // animation from stored list
-                SetRandomAnimation();
-            } else { // default animation if there is no stored list
-                SetAnimation(currentAnimation); 
-            }
+            animationCompleted = true;
         }
     }
 
