@@ -11,9 +11,16 @@ public class CharacterAnimator : MonoBehaviour
     [Tooltip("All animations will be scaled to play within the desired animation duration. Set to 0 to remove scaling.")]
     [SerializeField] float desiredAnimationDuration = 0f;
 
-    [Tooltip("Which animation list in the animation set is currrently active. 0 = Idle, 1 = Walk, 2 = Aim, 3 = Attack, 4 = Reload, 5 = Death.")]
+    [Tooltip("Which animation list in the animation set is currrently active. 0 = Idle, 1 = Walk, 2 = Aim, 3 = Attack, 4 = Reload, 5 = Death, 6 = Special.")]
     [Range(0, 5)]
     [SerializeField] int currentAnimationList = 0;
+
+
+    [Tooltip("If false, after the current animation has played a random animation from the same list will load.")]
+    [SerializeField] bool lockAnimation = true;
+
+    bool forceAnimationChange;
+
     int previousAnimationList;
 
     List<CharacterAnimation> animations;
@@ -33,16 +40,16 @@ public class CharacterAnimator : MonoBehaviour
 
     void OnEnable() {
         previousAnimationList = -1; // set previous animation list to negative to enable initial animation load
+        forceAnimationChange = true; // load an animation at the start
         LoadAnimations();
-        SetAnimation();       
+        SetAnimation();
     }
 
     void Update() {
         PlayAnimation();
-
         LoadAnimations(); // check if new animations must be loaded
         if (animationCompleted) {
-            SetAnimation(); // set another animation from the stored list and blend
+            SetAnimation(); // set animation and blend with previous, using bool flags to determine if a new animation should be laoded
         }
     }
 
@@ -59,9 +66,12 @@ public class CharacterAnimator : MonoBehaviour
     }
 
     void SetAnimation() {
-        if (null != animations && 0 < animations.Count) {
+        if (null != animations                              // load a new animation if there is a loaded list
+            && 0 < animations.Count                         // with 1 or more elements
+            && (!lockAnimation || forceAnimationChange)) {  // the animation lock is false OR an animation change is being forced
             int index = Mathf.RoundToInt(Random.Range(0f, (float) animations.Count - 1));
             SetAnimation(animations[index]);
+            forceAnimationChange = false; // should only be true for a single update after loading a new animation list
         } else {
              // default animation if there is no stored list
             SetAnimation(currentAnimation); 
@@ -81,7 +91,7 @@ public class CharacterAnimator : MonoBehaviour
         currentAnimation = animation;
     }
 
-    // Load an animation list based on the currentAnimationsList int value. 0 = Idle, 1 = Walk, 2 = Aim, 3 = Attack, 4 = Reload, 5 = Death."
+    // Load an animation list based on the currentAnimationsList int value. 0 = Idle, 1 = Walk, 2 = Aim, 3 = Attack, 4 = Reload, 5 = Death, 6 = Special."
     void LoadAnimations() {
         if (previousAnimationList != currentAnimationList) { // only perform the following if the current list has changed
             previousAnimationList = currentAnimationList;
@@ -105,9 +115,13 @@ public class CharacterAnimator : MonoBehaviour
                     case 5:
                         animations = animationSet.DeathAnimations;
                         break;
+                    case 6:
+                        animations = animationSet.SpecialAnimations;
+                        break;
                 }
             }
-            animationCompleted = true; // set animation completed to begin a new animation
+            animationCompleted = true; // set to begin a new animation
+            forceAnimationChange = true; // set so an animation from the set list will be loaded
         }
     }
 
@@ -138,6 +152,11 @@ public class CharacterAnimator : MonoBehaviour
 
     public void LoadDeathAnimations() {
         currentAnimationList = 5;
+        LoadAnimations();
+    }
+
+    public void LoadSpecialAnimations() {
+        currentAnimationList = 6;
         LoadAnimations();
     }
 
