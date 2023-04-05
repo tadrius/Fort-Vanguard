@@ -19,7 +19,7 @@ public class CharacterAnimation : MonoBehaviour
     public float TransitionProgress { get { return transitionProgress; }}
 
     void Awake() {
-        transitionDuration = GetPreviousPose().TransitionDuration;
+        AssignTransitionDuration();
         ComputeTotalDuration();
     }
 
@@ -30,7 +30,7 @@ public class CharacterAnimation : MonoBehaviour
     void ResetAnimation() {
         previousPoseIndex = 0;
         transitionProgress = 0;
-        currentPose = GetPreviousPose().GetPose(); // initialize current pose to the first
+        CreateCurrentPose(GetPreviousPose(), null); // initialize current pose to the first
     }
 
     void ComputeTotalDuration() {
@@ -50,14 +50,22 @@ public class CharacterAnimation : MonoBehaviour
 
 
     public AnimationPose GetPreviousPose() {
-        return poses[previousPoseIndex];
+        if (0 < poses.Count) {
+            return poses[previousPoseIndex];
+        } else {
+            return null;
+        }
     }
 
     public AnimationPose GetNextPose() {
-        if (previousPoseIndex + 1 >= poses.Count) {
-            return poses[0];
+        if (0 < poses.Count) {
+            if (previousPoseIndex + 1 >= poses.Count) {
+                return poses[0];
+            }
+            return poses[previousPoseIndex + 1];
+        } else {
+            return null;
         }
-        return poses[previousPoseIndex + 1];
     }
 
     // returns a bool indicating if the animation has finished
@@ -78,11 +86,20 @@ public class CharacterAnimation : MonoBehaviour
             if (previousPoseIndex >= poses.Count) { // reset animation
                 previousPoseIndex = 0;
                 animationComplete = true;
-                transitionDuration = GetPreviousPose().TransitionDuration;
+                AssignTransitionDuration();
             }
         }
 
         return animationComplete;
+    }
+
+    void AssignTransitionDuration() {
+        AnimationPose previousPose = GetPreviousPose();
+        if (null != previousPose) {
+            transitionDuration = GetPreviousPose().TransitionDuration;       
+        } else {
+            transitionDuration = float.MaxValue;
+        }
     }
 
     void CreateCurrentPose(AnimationPose pose1, AnimationPose pose2) {

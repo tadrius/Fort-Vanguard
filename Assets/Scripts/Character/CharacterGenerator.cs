@@ -6,6 +6,7 @@ public class CharacterGenerator : MonoBehaviour
 {
 
     [SerializeField] Material palette;
+    [SerializeField] bool generateOnAwake = true;
 
     [SerializeField] List<GameObject> headChoices;
     [SerializeField] List<GameObject> mustacheChoices; 
@@ -36,7 +37,9 @@ public class CharacterGenerator : MonoBehaviour
     [SerializeField] PartSelector leftItem;
 
     void Awake() {
-        CreateParts(true);
+        if (generateOnAwake) {
+            CreateParts(true);
+        }
     }
 
     public void CreateParts(bool overrideExisting) {

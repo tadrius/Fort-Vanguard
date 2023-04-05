@@ -53,7 +53,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7988064408459029390, guid: 0631abc1f0cc58d4187704941e045a7c, type: 3}
       propertyPath: m_Name
-      value: Walk Animation
+      value: Walk
       objectReference: {fileID: 0}
     - target: {fileID: 8182617157621928727, guid: 0631abc1f0cc58d4187704941e045a7c, type: 3}
       propertyPath: poses.Array.size
@@ -83,5 +83,13 @@ PrefabInstance:
       propertyPath: poses.Array.data[5]
       value: 
       objectReference: {fileID: 1162734754293657653, guid: 90a75e8c69a47354c8ffa3c855d77c42, type: 3}
+    - target: {fileID: 8182617157621928727, guid: 0631abc1f0cc58d4187704941e045a7c, type: 3}
+      propertyPath: poses.Array.data[6]
+      value: 
+      objectReference: {fileID: 1162734754293657653, guid: 00a4faaa11e76d74c876378ea5ed7b2a, type: 3}
+    - target: {fileID: 8182617157621928727, guid: 0631abc1f0cc58d4187704941e045a7c, type: 3}
+      propertyPath: poses.Array.data[7]
+      value: 
+      objectReference: {fileID: 1162734754293657653, guid: c9567ec71997ff8479231d7f2b283b13, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0631abc1f0cc58d4187704941e045a7c, type: 3}

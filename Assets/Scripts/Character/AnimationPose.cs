@@ -28,20 +28,26 @@ public class AnimationPose : MonoBehaviour
     public static Pose CreateTransitionPose(AnimationPose animPose1, AnimationPose animPose2, float transitionAmount, Transform parent) {
         Pose pose = new Pose();
 
-        Pose pose1 = animPose1.pose;
-        Pose pose2 = animPose2.pose;
+        if (null != animPose1 && null != animPose2) {
+            Pose pose1 = animPose1.pose;
+            Pose pose2 = animPose2.pose;
 
-        pose.neckRotation = Vector3.Lerp(pose1.neckRotation, pose2.neckRotation, transitionAmount);
-        pose.upperRotation = Vector3.Lerp(pose1.upperRotation, pose2.upperRotation, transitionAmount);
-        pose.lowerRotation = Vector3.Lerp(pose1.lowerRotation, pose2.lowerRotation, transitionAmount);
-        pose.rightShoulderRotation = Vector3.Lerp(pose1.rightShoulderRotation, pose2.rightShoulderRotation, transitionAmount);
-        pose.leftShoulderRotation = Vector3.Lerp(pose1.leftShoulderRotation, pose2.leftShoulderRotation, transitionAmount);
-        pose.rightElbowRotation = Vector3.Lerp(pose1.rightElbowRotation, pose2.rightElbowRotation, transitionAmount);
-        pose.leftElbowRotation = Vector3.Lerp(pose1.leftElbowRotation, pose2.leftElbowRotation, transitionAmount);
-        pose.rightWristRotation = Vector3.Lerp(pose1.rightWristRotation, pose2.rightWristRotation, transitionAmount);
-        pose.leftWristRotation = Vector3.Lerp(pose1.leftWristRotation, pose2.leftWristRotation, transitionAmount);
-        pose.rightHipRotation = Vector3.Lerp(pose1.rightHipRotation, pose2.rightHipRotation, transitionAmount);
-        pose.leftHipRotation = Vector3.Lerp(pose1.leftHipRotation, pose2.leftHipRotation, transitionAmount);
+            pose.neckRotation = Vector3.Lerp(pose1.neckRotation, pose2.neckRotation, transitionAmount);
+            pose.upperRotation = Vector3.Lerp(pose1.upperRotation, pose2.upperRotation, transitionAmount);
+            pose.lowerRotation = Vector3.Lerp(pose1.lowerRotation, pose2.lowerRotation, transitionAmount);
+            pose.rightShoulderRotation = Vector3.Lerp(pose1.rightShoulderRotation, pose2.rightShoulderRotation, transitionAmount);
+            pose.leftShoulderRotation = Vector3.Lerp(pose1.leftShoulderRotation, pose2.leftShoulderRotation, transitionAmount);
+            pose.rightElbowRotation = Vector3.Lerp(pose1.rightElbowRotation, pose2.rightElbowRotation, transitionAmount);
+            pose.leftElbowRotation = Vector3.Lerp(pose1.leftElbowRotation, pose2.leftElbowRotation, transitionAmount);
+            pose.rightWristRotation = Vector3.Lerp(pose1.rightWristRotation, pose2.rightWristRotation, transitionAmount);
+            pose.leftWristRotation = Vector3.Lerp(pose1.leftWristRotation, pose2.leftWristRotation, transitionAmount);
+            pose.rightHipRotation = Vector3.Lerp(pose1.rightHipRotation, pose2.rightHipRotation, transitionAmount);
+            pose.leftHipRotation = Vector3.Lerp(pose1.leftHipRotation, pose2.leftHipRotation, transitionAmount);
+        } else if (null == animPose1 && null != animPose2) {
+            pose.Copy(animPose2.pose);
+        } else if (null != animPose1 && null == animPose2) {
+            pose.Copy(animPose1.pose);
+        }
 
         return pose;
     }
