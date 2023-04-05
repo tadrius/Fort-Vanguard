@@ -214,7 +214,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentAnimation: {fileID: 8391803758968130025}
   desiredAnimationDuration: 0
-  currentAnimationList: 0
+  currentAnimationList: 1
+  lockAnimation: 1
 --- !u!114 &4070966625352001809
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -972,6 +973,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   palette: {fileID: 0}
+  generateOnAwake: 1
   headChoices:
   - {fileID: 919132149155446097, guid: bb48116d088cd4a4289d8ea303653e9d, type: 3}
   - {fileID: 919132149155446097, guid: 39f5ccd0469c6a04393e73ec86175552, type: 3}

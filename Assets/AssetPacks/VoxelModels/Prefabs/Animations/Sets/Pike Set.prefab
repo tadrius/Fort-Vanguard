@@ -136,6 +136,74 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e695d59c6edccba4b84c2b131ecace54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1001 &4547833509646501086
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 6845830299698120277}
+    m_Modifications:
+    - target: {fileID: 1291773675417560274, guid: 1323074016d04bd4088664b7a1d659dd, type: 3}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1291773675417560274, guid: 1323074016d04bd4088664b7a1d659dd, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1291773675417560274, guid: 1323074016d04bd4088664b7a1d659dd, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1291773675417560274, guid: 1323074016d04bd4088664b7a1d659dd, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1291773675417560274, guid: 1323074016d04bd4088664b7a1d659dd, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1291773675417560274, guid: 1323074016d04bd4088664b7a1d659dd, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1291773675417560274, guid: 1323074016d04bd4088664b7a1d659dd, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1291773675417560274, guid: 1323074016d04bd4088664b7a1d659dd, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1291773675417560274, guid: 1323074016d04bd4088664b7a1d659dd, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1291773675417560274, guid: 1323074016d04bd4088664b7a1d659dd, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1291773675417560274, guid: 1323074016d04bd4088664b7a1d659dd, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8827185247390094858, guid: 1323074016d04bd4088664b7a1d659dd, type: 3}
+      propertyPath: m_Name
+      value: Walk L Loose R Lean
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 1323074016d04bd4088664b7a1d659dd, type: 3}
+--- !u!114 &6541585110669339213 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7337848703261552275, guid: 1323074016d04bd4088664b7a1d659dd, type: 3}
+  m_PrefabInstance: {fileID: 4547833509646501086}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e695d59c6edccba4b84c2b131ecace54, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &6588181767093553024
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -261,7 +329,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2475964481777671021, guid: c638af19b0b1b904bb596bd8f77fbef7, type: 3}
       propertyPath: walkAnimations.Array.size
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2475964481777671021, guid: c638af19b0b1b904bb596bd8f77fbef7, type: 3}
       propertyPath: idleAnimations.Array.data[0]
@@ -278,7 +346,11 @@ PrefabInstance:
     - target: {fileID: 2475964481777671021, guid: c638af19b0b1b904bb596bd8f77fbef7, type: 3}
       propertyPath: walkAnimations.Array.data[0]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 683083272182893126}
+    - target: {fileID: 2475964481777671021, guid: c638af19b0b1b904bb596bd8f77fbef7, type: 3}
+      propertyPath: walkAnimations.Array.data[1]
+      value: 
+      objectReference: {fileID: 6541585110669339213}
     - target: {fileID: 4547313766506126770, guid: c638af19b0b1b904bb596bd8f77fbef7, type: 3}
       propertyPath: m_Name
       value: Pike Set
@@ -290,3 +362,71 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 166693284491845535, guid: c638af19b0b1b904bb596bd8f77fbef7, type: 3}
   m_PrefabInstance: {fileID: 6724279739018156490}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &7831630118929704149
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 6845830299698120277}
+    m_Modifications:
+    - target: {fileID: 1291773675417560274, guid: 603b31dd657bf564a87f22f6a8dffe5c, type: 3}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1291773675417560274, guid: 603b31dd657bf564a87f22f6a8dffe5c, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1291773675417560274, guid: 603b31dd657bf564a87f22f6a8dffe5c, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1291773675417560274, guid: 603b31dd657bf564a87f22f6a8dffe5c, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1291773675417560274, guid: 603b31dd657bf564a87f22f6a8dffe5c, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1291773675417560274, guid: 603b31dd657bf564a87f22f6a8dffe5c, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1291773675417560274, guid: 603b31dd657bf564a87f22f6a8dffe5c, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1291773675417560274, guid: 603b31dd657bf564a87f22f6a8dffe5c, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1291773675417560274, guid: 603b31dd657bf564a87f22f6a8dffe5c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1291773675417560274, guid: 603b31dd657bf564a87f22f6a8dffe5c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1291773675417560274, guid: 603b31dd657bf564a87f22f6a8dffe5c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8827185247390094858, guid: 603b31dd657bf564a87f22f6a8dffe5c, type: 3}
+      propertyPath: m_Name
+      value: Walk Dual Grip Vertical
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 603b31dd657bf564a87f22f6a8dffe5c, type: 3}
+--- !u!114 &683083272182893126 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7337848703261552275, guid: 603b31dd657bf564a87f22f6a8dffe5c, type: 3}
+  m_PrefabInstance: {fileID: 7831630118929704149}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e695d59c6edccba4b84c2b131ecace54, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
