@@ -81,8 +81,9 @@ public class CharacterAnimator : MonoBehaviour
     void SetAnimation(CharacterAnimation animation) {
         animationCompleted = false;
         animation.gameObject.SetActive(true);
+        animation.ResetAnimation();
 
-        blendPose.SetPose(new AnimationPose.Pose(currentAnimation.CurrentPose)); // remove the blend pose if the animations are the same
+        blendPose.SetPose(new AnimationPose.Pose(currentAnimation.CurrentPose)); // set the blend pose to the current pose before switching to a new animation 
 
         if (!currentAnimation.Equals(animation)) {   
             currentAnimation.gameObject.SetActive(false);

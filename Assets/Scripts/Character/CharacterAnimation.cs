@@ -19,17 +19,13 @@ public class CharacterAnimation : MonoBehaviour
     public float TransitionProgress { get { return transitionProgress; }}
 
     void Awake() {
-        AssignTransitionDuration();
         ComputeTotalDuration();
     }
 
-    void OnEnable() {
-        ResetAnimation();
-    }
-
-    void ResetAnimation() {
+    public void ResetAnimation() {
         previousPoseIndex = 0;
         transitionProgress = 0;
+        AssignTransitionDuration();
         CreateCurrentPose(GetPreviousPose(), null); // initialize current pose to the first
     }
 
@@ -40,29 +36,21 @@ public class CharacterAnimation : MonoBehaviour
         }
     }
 
-    public void SetTransitionProgress(float progress) {
-        transitionProgress = progress;
-    }
-
-    public void SetPreviousPoseIndex(int index) {
-        previousPoseIndex = index;
-    }
-
-
-    public AnimationPose GetPreviousPose() {
-        if (0 < poses.Count) {
+    AnimationPose GetPreviousPose() {
+        if (0 < poses.Count) { // if there is more than one pose
             return poses[previousPoseIndex];
         } else {
             return null;
         }
     }
 
-    public AnimationPose GetNextPose() {
+    AnimationPose GetNextPose() {
         if (0 < poses.Count) {
-            if (previousPoseIndex + 1 >= poses.Count) {
+            int nextPoseIndex = previousPoseIndex + 1;
+            if (nextPoseIndex >= poses.Count) {
                 return poses[0];
             }
-            return poses[previousPoseIndex + 1];
+            return poses[nextPoseIndex];
         } else {
             return null;
         }
@@ -71,6 +59,7 @@ public class CharacterAnimation : MonoBehaviour
     // returns a bool indicating if the animation has finished
     public bool PlayAnimation(float animationProgress, AnimationRig rig, AnimationPose blendPose) {
         bool animationComplete = false;
+
         // if this is the first pose in the sequence, replace the pose with the animation blend pose
         if (0 == previousPoseIndex && null != blendPose.GetPose()) {
             CreateCurrentPose(blendPose, GetNextPose());
@@ -86,17 +75,17 @@ public class CharacterAnimation : MonoBehaviour
             if (previousPoseIndex >= poses.Count) { // reset animation
                 previousPoseIndex = 0;
                 animationComplete = true;
-                AssignTransitionDuration();
             }
+            AssignTransitionDuration();
         }
 
         return animationComplete;
     }
 
     void AssignTransitionDuration() {
-        AnimationPose previousPose = GetPreviousPose();
-        if (null != previousPose) {
-            transitionDuration = previousPose.TransitionDuration;       
+        AnimationPose nextPose = GetNextPose();
+        if (null != nextPose) {
+            transitionDuration = nextPose.TransitionDuration;       
         } else {
             transitionDuration = float.MaxValue;
         }
