@@ -33,8 +33,8 @@ public class AnimationPose : MonoBehaviour
             Pose pose2 = animPose2.pose;
 
             pose.neckRotation = Vector3.Lerp(pose1.neckRotation, pose2.neckRotation, transitionAmount);
-            pose.upperRotation = Vector3.Lerp(pose1.upperRotation, pose2.upperRotation, transitionAmount);
-            pose.lowerRotation = Vector3.Lerp(pose1.lowerRotation, pose2.lowerRotation, transitionAmount);
+            pose.waistRotation = Vector3.Lerp(pose1.waistRotation, pose2.waistRotation, transitionAmount);
+            pose.groundRotation = Vector3.Lerp(pose1.groundRotation, pose2.groundRotation, transitionAmount);
             pose.rightShoulderRotation = Vector3.Lerp(pose1.rightShoulderRotation, pose2.rightShoulderRotation, transitionAmount);
             pose.leftShoulderRotation = Vector3.Lerp(pose1.leftShoulderRotation, pose2.leftShoulderRotation, transitionAmount);
             pose.rightElbowRotation = Vector3.Lerp(pose1.rightElbowRotation, pose2.rightElbowRotation, transitionAmount);
@@ -55,8 +55,8 @@ public class AnimationPose : MonoBehaviour
     [System.Serializable]
     public class Pose {
         public Vector3 neckRotation = Vector3.zero;
-        public Vector3 upperRotation = Vector3.zero;
-        public Vector3 lowerRotation = Vector3.zero;
+        public Vector3 waistRotation = Vector3.zero;
+        public Vector3 groundRotation = Vector3.zero;
 
         public Vector3 rightShoulderRotation = Vector3.zero;
         public Vector3 leftShoulderRotation = Vector3.zero;
@@ -78,8 +78,8 @@ public class AnimationPose : MonoBehaviour
 
         public void Copy(Pose other) {
             neckRotation = other.neckRotation;
-            upperRotation = other.upperRotation;
-            lowerRotation = other.lowerRotation;
+            waistRotation = other.waistRotation;
+            groundRotation = other.groundRotation;
             rightShoulderRotation = other.rightShoulderRotation;
             leftShoulderRotation = other.leftShoulderRotation;
             rightElbowRotation = other.rightElbowRotation;

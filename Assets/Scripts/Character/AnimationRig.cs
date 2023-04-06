@@ -5,8 +5,8 @@ using UnityEngine;
 public class AnimationRig : MonoBehaviour
 {
     [SerializeField] Transform neck;
-    [SerializeField] Transform upper;
-    [SerializeField] Transform lower;
+    [SerializeField] Transform waist;
+    [SerializeField] Transform ground;
 
     [SerializeField] Transform rightShoulder;
     [SerializeField] Transform leftShoulder;
@@ -23,8 +23,8 @@ public class AnimationRig : MonoBehaviour
     public void ApplyPose(AnimationPose.Pose pose) {
         if (null != pose) {
             neck.localEulerAngles = pose.neckRotation;
-            upper.localEulerAngles = pose.upperRotation;
-            lower.localEulerAngles = pose.lowerRotation;
+            waist.localEulerAngles = pose.waistRotation;
+            ground.localEulerAngles = pose.groundRotation;
             rightShoulder.localEulerAngles = pose.rightShoulderRotation;
             leftShoulder.localEulerAngles = pose.leftShoulderRotation;
             rightElbow.localEulerAngles = pose.rightElbowRotation;

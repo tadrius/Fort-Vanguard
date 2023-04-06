@@ -54,7 +54,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4877537767068634562}
   m_Layer: 0
-  m_Name: lower joint
+  m_Name: ground joint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -72,10 +72,11 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 4023425689359481353}
   - {fileID: 7551894756868114025}
   - {fileID: 7551894757678057494}
   m_Father: {fileID: 7551894758634428155}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5204081546641435382
 GameObject:
@@ -198,7 +199,7 @@ Transform:
   m_Children:
   - {fileID: 21857029749769128}
   m_Father: {fileID: 7551894758634428155}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &9126325573118944202
 MonoBehaviour:
@@ -229,8 +230,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   neck: {fileID: 7551894756683607649}
-  upper: {fileID: 4023425689359481353}
-  lower: {fileID: 4877537767068634562}
+  waist: {fileID: 4023425689359481353}
+  ground: {fileID: 4877537767068634562}
   rightShoulder: {fileID: 7551894756860916526}
   leftShoulder: {fileID: 7551894757679242606}
   rightElbow: {fileID: 7551894758798240156}
@@ -254,8 +255,8 @@ MonoBehaviour:
   transitionDuration: 0.3
   pose:
     neckRotation: {x: 0, y: 0, z: 0}
-    upperRotation: {x: 0, y: 0, z: 0}
-    lowerRotation: {x: 0, y: 0, z: 0}
+    waistRotation: {x: 0, y: 0, z: 0}
+    groundRotation: {x: 0, y: 0, z: 0}
     rightShoulderRotation: {x: 0, y: 0, z: 0}
     leftShoulderRotation: {x: 0, y: 0, z: 0}
     rightElbowRotation: {x: 0, y: 0, z: 0}
@@ -362,7 +363,7 @@ Transform:
   m_Children:
   - {fileID: 7551894758399591777}
   m_Father: {fileID: 4877537767068634562}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7551894757009047582
 GameObject:
@@ -647,7 +648,7 @@ Transform:
   m_Children:
   - {fileID: 7551894757608312248}
   m_Father: {fileID: 4877537767068634562}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7551894757679242593
 GameObject:
@@ -954,7 +955,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 4023425689359481353}
   - {fileID: 4877537767068634562}
   - {fileID: 1035843701762402513}
   m_Father: {fileID: 0}
@@ -1120,7 +1120,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4023425689359481353}
   m_Layer: 0
-  m_Name: upper joint
+  m_Name: waist joint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1133,7 +1133,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7761288162105944340}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 1.4, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1142,7 +1142,7 @@ Transform:
   - {fileID: 7551894757415757962}
   - {fileID: 7551894756860916526}
   - {fileID: 7551894757679242606}
-  m_Father: {fileID: 7551894758634428155}
+  m_Father: {fileID: 4877537767068634562}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8899448100914836861
