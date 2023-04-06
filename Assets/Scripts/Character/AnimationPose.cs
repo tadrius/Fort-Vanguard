@@ -43,6 +43,8 @@ public class AnimationPose : MonoBehaviour
             pose.leftWristRotation = Vector3.Lerp(pose1.leftWristRotation, pose2.leftWristRotation, transitionAmount);
             pose.rightHipRotation = Vector3.Lerp(pose1.rightHipRotation, pose2.rightHipRotation, transitionAmount);
             pose.leftHipRotation = Vector3.Lerp(pose1.leftHipRotation, pose2.leftHipRotation, transitionAmount);
+            pose.rightItemRotation = Vector3.Lerp(pose1.rightItemRotation, pose2.rightItemRotation, transitionAmount);
+            pose.leftItemRotation = Vector3.Lerp(pose1.leftItemRotation, pose2.leftItemRotation, transitionAmount);
         } else if (null == animPose1 && null != animPose2) {
             pose.Copy(animPose2.pose);
         } else if (null != animPose1 && null == animPose2) {
@@ -70,6 +72,9 @@ public class AnimationPose : MonoBehaviour
         public Vector3 rightHipRotation = Vector3.zero;
         public Vector3 leftHipRotation = Vector3.zero;
 
+        public Vector3 rightItemRotation = Vector3.zero;
+        public Vector3 leftItemRotation = Vector3.zero;
+
         public Pose() {}
 
         public Pose(Pose other) {
@@ -88,6 +93,8 @@ public class AnimationPose : MonoBehaviour
             leftWristRotation = other.leftWristRotation;
             rightHipRotation = other.rightHipRotation;
             leftHipRotation = other.leftHipRotation;
+            rightItemRotation = other.rightItemRotation;
+            leftItemRotation = other.leftItemRotation;
         }
     }
 

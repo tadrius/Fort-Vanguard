@@ -20,6 +20,9 @@ public class AnimationRig : MonoBehaviour
     [SerializeField] Transform rightHip;
     [SerializeField] Transform leftHip;
 
+    [SerializeField] Transform rightItem;
+    [SerializeField] Transform leftItem;
+
     public void ApplyPose(AnimationPose.Pose pose) {
         if (null != pose) {
             neck.localEulerAngles = pose.neckRotation;
@@ -33,6 +36,8 @@ public class AnimationRig : MonoBehaviour
             leftWrist.localEulerAngles = pose.leftWristRotation;
             rightHip.localEulerAngles = pose.rightHipRotation;
             leftHip.localEulerAngles = pose.leftHipRotation;
+            rightItem.localEulerAngles = pose.rightItemRotation;
+            leftItem.localEulerAngles = pose.leftItemRotation;
         }
     }
 
