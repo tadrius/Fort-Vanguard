@@ -96,7 +96,7 @@ public class CharacterAnimation : MonoBehaviour
     void AssignTransitionDuration() {
         AnimationPose previousPose = GetPreviousPose();
         if (null != previousPose) {
-            transitionDuration = GetPreviousPose().TransitionDuration;       
+            transitionDuration = previousPose.TransitionDuration;       
         } else {
             transitionDuration = float.MaxValue;
         }
