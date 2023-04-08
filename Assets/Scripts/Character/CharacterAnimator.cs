@@ -12,7 +12,7 @@ public class CharacterAnimator : MonoBehaviour
     [SerializeField] float desiredAnimationDuration = 0f;
 
     [Tooltip("Which animation list in the animation set is currrently active. 0 = Idle, 1 = Walk, 2 = Aim, 3 = Attack, 4 = Reload, 5 = Death, 6 = Special.")]
-    [Range(0, 5)]
+    [Range(0, 6)]
     [SerializeField] int currentAnimationList = 0;
 
 
