@@ -9,7 +9,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 875918285660276450, guid: ca668f24630b787469f8df9e8a071937, type: 3}
       propertyPath: m_Name
-      value: Pose 1
+      value: Pose 3
       objectReference: {fileID: 0}
     - target: {fileID: 6228803090766424080, guid: ca668f24630b787469f8df9e8a071937, type: 3}
       propertyPath: m_RootOrder
@@ -60,8 +60,12 @@ PrefabInstance:
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7201395127411052540, guid: ca668f24630b787469f8df9e8a071937, type: 3}
-      propertyPath: rightHipRotation.x
-      value: -15
+      propertyPath: leftHipRotation.x
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 7201395127411052540, guid: ca668f24630b787469f8df9e8a071937, type: 3}
+      propertyPath: leftHipRotation.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7201395127411052540, guid: ca668f24630b787469f8df9e8a071937, type: 3}
       propertyPath: rightHipRotation.y
@@ -69,35 +73,31 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7201395127411052540, guid: ca668f24630b787469f8df9e8a071937, type: 3}
       propertyPath: transitionDuration
-      value: 0.6
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 7201395127411052540, guid: ca668f24630b787469f8df9e8a071937, type: 3}
       propertyPath: pose.neckRotation.x
-      value: -2.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7201395127411052540, guid: ca668f24630b787469f8df9e8a071937, type: 3}
       propertyPath: pose.neckRotation.y
-      value: 75
+      value: 90
       objectReference: {fileID: 0}
     - target: {fileID: 7201395127411052540, guid: ca668f24630b787469f8df9e8a071937, type: 3}
       propertyPath: pose.neckRotation.z
-      value: 12.5
+      value: 17.5
       objectReference: {fileID: 0}
     - target: {fileID: 7201395127411052540, guid: ca668f24630b787469f8df9e8a071937, type: 3}
       propertyPath: pose.upperRotation.x
-      value: 2.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7201395127411052540, guid: ca668f24630b787469f8df9e8a071937, type: 3}
       propertyPath: pose.upperRotation.y
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7201395127411052540, guid: ca668f24630b787469f8df9e8a071937, type: 3}
-      propertyPath: pose.waistRotation.x
-      value: 2.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 7201395127411052540, guid: ca668f24630b787469f8df9e8a071937, type: 3}
-      propertyPath: pose.waistRotation.y
-      value: 15
+      propertyPath: pose.waistRotation.z
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 7201395127411052540, guid: ca668f24630b787469f8df9e8a071937, type: 3}
       propertyPath: pose.groundRotation.y
@@ -108,11 +108,11 @@ PrefabInstance:
       value: -15
       objectReference: {fileID: 0}
     - target: {fileID: 7201395127411052540, guid: ca668f24630b787469f8df9e8a071937, type: 3}
-      propertyPath: pose.leftHipRotation.y
+      propertyPath: pose.leftHipRotation.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7201395127411052540, guid: ca668f24630b787469f8df9e8a071937, type: 3}
-      propertyPath: pose.rightHipRotation.x
+      propertyPath: pose.leftHipRotation.y
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7201395127411052540, guid: ca668f24630b787469f8df9e8a071937, type: 3}
@@ -125,15 +125,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7201395127411052540, guid: ca668f24630b787469f8df9e8a071937, type: 3}
       propertyPath: pose.leftElbowRotation.x
-      value: -15
-      objectReference: {fileID: 0}
-    - target: {fileID: 7201395127411052540, guid: ca668f24630b787469f8df9e8a071937, type: 3}
-      propertyPath: pose.leftElbowRotation.y
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7201395127411052540, guid: ca668f24630b787469f8df9e8a071937, type: 3}
+      propertyPath: pose.leftElbowRotation.y
+      value: -75
+      objectReference: {fileID: 0}
+    - target: {fileID: 7201395127411052540, guid: ca668f24630b787469f8df9e8a071937, type: 3}
       propertyPath: pose.leftElbowRotation.z
-      value: 45
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 7201395127411052540, guid: ca668f24630b787469f8df9e8a071937, type: 3}
       propertyPath: pose.rightElbowRotation.x
@@ -144,16 +144,12 @@ PrefabInstance:
       value: 45
       objectReference: {fileID: 0}
     - target: {fileID: 7201395127411052540, guid: ca668f24630b787469f8df9e8a071937, type: 3}
-      propertyPath: pose.rightElbowRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7201395127411052540, guid: ca668f24630b787469f8df9e8a071937, type: 3}
       propertyPath: pose.leftShoulderRotation.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7201395127411052540, guid: ca668f24630b787469f8df9e8a071937, type: 3}
       propertyPath: pose.leftShoulderRotation.y
-      value: 120
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 7201395127411052540, guid: ca668f24630b787469f8df9e8a071937, type: 3}
       propertyPath: pose.leftShoulderRotation.z
@@ -161,11 +157,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7201395127411052540, guid: ca668f24630b787469f8df9e8a071937, type: 3}
       propertyPath: pose.rightShoulderRotation.x
-      value: -47.5
+      value: -60
       objectReference: {fileID: 0}
     - target: {fileID: 7201395127411052540, guid: ca668f24630b787469f8df9e8a071937, type: 3}
       propertyPath: pose.rightShoulderRotation.y
-      value: -15
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7201395127411052540, guid: ca668f24630b787469f8df9e8a071937, type: 3}
       propertyPath: pose.rightShoulderRotation.z

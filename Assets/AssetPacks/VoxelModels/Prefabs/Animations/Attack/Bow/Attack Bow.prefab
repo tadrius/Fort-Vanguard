@@ -53,11 +53,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7988064408459029390, guid: 0631abc1f0cc58d4187704941e045a7c, type: 3}
       propertyPath: m_Name
-      value: Aim Bow
+      value: Attack Bow
       objectReference: {fileID: 0}
     - target: {fileID: 8182617157621928727, guid: 0631abc1f0cc58d4187704941e045a7c, type: 3}
       propertyPath: poses.Array.size
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8182617157621928727, guid: 0631abc1f0cc58d4187704941e045a7c, type: 3}
       propertyPath: transitionDuration
@@ -66,15 +66,15 @@ PrefabInstance:
     - target: {fileID: 8182617157621928727, guid: 0631abc1f0cc58d4187704941e045a7c, type: 3}
       propertyPath: poses.Array.data[0]
       value: 
-      objectReference: {fileID: 1162734754293657653, guid: e6671752c9f016447a6f438d30fc196b, type: 3}
+      objectReference: {fileID: 1162734754293657653, guid: 3d5fb68fbe29acc48abdf7c27026eafe, type: 3}
     - target: {fileID: 8182617157621928727, guid: 0631abc1f0cc58d4187704941e045a7c, type: 3}
       propertyPath: poses.Array.data[1]
       value: 
-      objectReference: {fileID: 1162734754293657653, guid: 1e61b162008277d4abd71c1da59397a8, type: 3}
+      objectReference: {fileID: 1162734754293657653, guid: e6671752c9f016447a6f438d30fc196b, type: 3}
     - target: {fileID: 8182617157621928727, guid: 0631abc1f0cc58d4187704941e045a7c, type: 3}
       propertyPath: poses.Array.data[2]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1162734754293657653, guid: 1e61b162008277d4abd71c1da59397a8, type: 3}
     - target: {fileID: 8182617157621928727, guid: 0631abc1f0cc58d4187704941e045a7c, type: 3}
       propertyPath: poses.Array.data[3]
       value: 
