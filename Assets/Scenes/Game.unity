@@ -57845,6 +57845,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1645678376}
     m_Modifications:
+    - target: {fileID: 409958426852555020, guid: 85f11484b0cb0564783a77878893e74a, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2662393133278524028, guid: 85f11484b0cb0564783a77878893e74a, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -57949,6 +57953,10 @@ PrefabInstance:
       propertyPath: enableOnAwake
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3604031613690529150, guid: 85f11484b0cb0564783a77878893e74a, type: 3}
+      propertyPath: pauseMenuToggler
+      value: 
+      objectReference: {fileID: 5620964124924783173}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 85f11484b0cb0564783a77878893e74a, type: 3}
 --- !u!224 &1391723807 stripped
@@ -88678,6 +88686,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   initialSubscreen: {fileID: 1662175259}
+  pauseMenuToggler: {fileID: 0}
   winTextString: Victory!
   loseTextString: Defeat...
   titleText: {fileID: 408809451}
@@ -89903,6 +89912,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 7651012046659139669, guid: f1360e15819cd8b4e9e0a19408026412, type: 3}
   m_PrefabInstance: {fileID: 2606590209697059345}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &5620964124924783173 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8200978164641223310, guid: f1360e15819cd8b4e9e0a19408026412, type: 3}
+  m_PrefabInstance: {fileID: 2606590209697059345}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e024d9c1a59cc345ab805e1bd4cb220, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &5709871422463999038
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -11,11 +11,12 @@ public class ScreenToggler : MonoBehaviour
     [SerializeField] string screenIsActiveText = "Return";
     [SerializeField] string screenIsInactiveText = "Menu";
     [SerializeField] Image selectionIcon;
-    [SerializeField] bool hotkeyEnabled;
-
+    
+    bool hotkeyEnabled = false;
     TMP_Text text;
 
     void Awake() {
+        hotkeyEnabled = false;
         text = GetComponentInChildren<TMP_Text>();
     }
 
@@ -58,6 +59,10 @@ public class ScreenToggler : MonoBehaviour
         } else {
             text.text = screenIsInactiveText;
         }
+    }
+
+    public void EnableHotkey() {
+        hotkeyEnabled = true;
     }
 
 }

@@ -6,6 +6,7 @@ public class MenuScreen : MonoBehaviour
 {
 
     [SerializeField] MenuScreen initialSubscreen;
+    [SerializeField] ScreenToggler pauseMenuToggler;
 
     MenuScreen returnScreen;
 
@@ -36,6 +37,10 @@ public class MenuScreen : MonoBehaviour
         } else {
             UnpauseGame(); // only unpause game if there is not another screen to return to
         }
+
+        if (null != pauseMenuToggler) { // enable the hotkey to open the pause menu
+            pauseMenuToggler.EnableHotkey();
+        } 
     }
 
     public void StartGame() {
