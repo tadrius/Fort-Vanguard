@@ -19,8 +19,8 @@ public class EnemyMover : MonoBehaviour
         gridManager = FindObjectOfType<GridManager>();
     }
 
-    // Start is called before the first frame update
-    void OnEnable() {
+    public void BeginMoving() {
+        enemy.PlayWalkAnimations(speed);
         MoveToPathStart();
         FindPath(true);
     }

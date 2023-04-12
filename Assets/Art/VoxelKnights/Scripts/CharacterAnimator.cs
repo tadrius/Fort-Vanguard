@@ -8,8 +8,11 @@ public class CharacterAnimator : MonoBehaviour
 {
 
     [SerializeField] CharacterAnimation currentAnimation;
-    [Tooltip("All animations will be scaled to play within the desired animation duration. Set to 0 to remove scaling.")]
-    [SerializeField] float desiredAnimationDuration = 0f;
+    [Tooltip("Animations will be scaled to play within the desired animation duration (when speed is set to 1). Set to 0 to remove scaling.")]
+    [SerializeField] float animationDuration = 0f;
+
+    [Tooltip("How quickly the animation will play after it has been scaled to the animation duration.")]
+    [SerializeField] float animationSpeed = 1f;
 
     [Tooltip("Which animation list in the animation set is currrently active. 0 = Idle, 1 = Walk, 2 = Aim, 3 = Attack, 4 = Reload, 5 = Death, 6 = Special.")]
     [Range(0, 6)]
@@ -55,11 +58,15 @@ public class CharacterAnimator : MonoBehaviour
 
     // return whether or not the animation was completed
     void PlayAnimation() {
+
         // scale time to play animation to the desired duration
         float timeScaler = 1f;
-        if (0f != desiredAnimationDuration) {
-            timeScaler = currentAnimation.TotalDuration / desiredAnimationDuration;
+        if (0f != animationDuration) {
+            timeScaler = currentAnimation.TotalDuration / animationDuration;
         }
+
+        // multiply the time scaler by the animation speed
+        timeScaler *= animationSpeed;
 
         // play the animation
         animationCompleted = currentAnimation.PlayAnimation(Time.deltaTime * timeScaler, animationRig, blendPose);
@@ -90,6 +97,14 @@ public class CharacterAnimator : MonoBehaviour
         }
 
         currentAnimation = animation;
+    }
+
+    public void SetAnimationDuration(float duration) {
+        animationDuration = duration;
+    }
+
+    public void SetAnimationSpeed(float speed) {
+        animationSpeed = speed;
     }
 
     // Load an animation list based on the currentAnimationsList int value. 0 = Idle, 1 = Walk, 2 = Aim, 3 = Attack, 4 = Reload, 5 = Death, 6 = Special."

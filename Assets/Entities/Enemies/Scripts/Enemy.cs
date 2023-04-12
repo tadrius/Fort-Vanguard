@@ -16,16 +16,22 @@ public class Enemy : MonoBehaviour
     Bank bank;
     PlayerHealth playerHealth;
     RuntimeSpawns runtimeSpawns;
+    CharacterAnimator animator;
 
-    // Start is called before the first frame update
-    void Start()
-    {
+    void Awake() {
+        animator = GetComponentInChildren<CharacterAnimator>();
+
         GameObject player = GameObject.FindGameObjectWithTag(Player.playerTag);
         runtimeSpawns = GameObject.FindGameObjectWithTag(RuntimeSpawns.runtimeSpawnsTag)
             .GetComponent<RuntimeSpawns>();
         scoreKeeper = player.GetComponent<ScoreKeeper>(); 
         bank = player.GetComponent<Bank>();
         playerHealth = player.GetComponent<PlayerHealth>();
+    }
+
+    void OnEnable()
+    {
+        GetComponent<EnemyMover>().BeginMoving();
     }
 
     public void DepositReward() {
@@ -43,6 +49,7 @@ public class Enemy : MonoBehaviour
         }
     }
 
+    // FX Methods
     public void SpawnDeathFX() {
         runtimeSpawns.SpawnObject(deathFX, transform.position);
     }
@@ -50,4 +57,16 @@ public class Enemy : MonoBehaviour
     public void SpawnPenaltyFX() {
         runtimeSpawns.SpawnObject(penaltyFX, transform.position);
     }
+
+    // Animation Methods
+    public void PlayWalkAnimations(float animationSpeed) {
+        animator.LoadWalkAnimations();
+        animator.SetAnimationSpeed(animationSpeed);
+    }
+
+    public void PlayDeathAnimations(float animationSpeed) {
+        animator.LoadDeathAnimations();
+        animator.SetAnimationSpeed(animationSpeed);
+    }
+
 }
