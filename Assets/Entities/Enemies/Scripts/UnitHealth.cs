@@ -2,21 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Enemy))]
-public class EnemyHealth : MonoBehaviour
+[RequireComponent(typeof(Unit))]
+public class UnitHealth : MonoBehaviour
 {
 
     [SerializeField] int maxHitPoints = 10;
-    [Tooltip("By how much the enemy's health will increase each time it is killed, " 
-        + "resulting in stronger enemies over time.")]
-    [SerializeField] int hitPointRamp = 1; // TODO - can remove after waves are implemented
     [SerializeField] ParticleSystem damageParticles;
 
     int currentHitPoints = 0;
-    Enemy enemy;
+    Unit unit;
 
     void Start() {
-        enemy = GetComponent<Enemy>();
+        unit = GetComponent<Unit>();
     }
 
     void OnEnable()
@@ -33,10 +30,10 @@ public class EnemyHealth : MonoBehaviour
     }
 
     void Kill() {
-        enemy.SpawnDeathFX();
-        enemy.DepositReward();
+        unit.SpawnDeathFX();
+        unit.PlayDeathAnimation();
+        unit.DepositReward();
         gameObject.SetActive(false);
-        maxHitPoints += hitPointRamp;     
     }
 
     void PlayDamageFX() {

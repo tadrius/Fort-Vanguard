@@ -7,13 +7,13 @@ public class CharacterAnimation : MonoBehaviour
 
     [SerializeField] List<AnimationPose> poses;
 
-    [SerializeField] AnimationPose.Pose currentPose;
-
+    AnimationPose.Pose currentPose;
     int previousPoseIndex;
     float transitionProgress; // how much scaled time has elapsed transitioning from the current to next pose
     float transitionDuration;
     float totalDuration;
 
+    public bool useBlendPose;
     public AnimationPose.Pose CurrentPose { get { return currentPose; }}
     public float TotalDuration { get { return totalDuration; }}
     public float TransitionProgress { get { return transitionProgress; }}
@@ -59,9 +59,9 @@ public class CharacterAnimation : MonoBehaviour
     // returns a bool indicating if the animation has finished
     public bool PlayAnimation(float animationProgress, AnimationRig rig, AnimationPose blendPose) {
         bool animationComplete = false;
-
-        // if this is the first pose in the sequence, replace the pose with the animation blend pose
-        if (0 == previousPoseIndex && null != blendPose.GetPose()) {
+        // if this is the start of the animation and blending is enabled, replace the first pose with the blend pose
+        if (0 == previousPoseIndex && useBlendPose && null != blendPose.GetPose()) {
+            Debug.Log("Using blend pose.");
             CreateCurrentPose(blendPose, GetNextPose());
         } else {
             CreateCurrentPose(GetPreviousPose(), GetNextPose());
@@ -72,9 +72,10 @@ public class CharacterAnimation : MonoBehaviour
         if (transitionProgress >= transitionDuration) {
             transitionProgress -= transitionDuration;
             previousPoseIndex++;
-            if (previousPoseIndex >= poses.Count) { // reset animation
-                previousPoseIndex = 0;
+            if (previousPoseIndex == poses.Count - 1) { // if the previous pose is the last pose, mark the animation as complete
                 animationComplete = true;
+            } else if (previousPoseIndex >= poses.Count) { // if the previous pose is after the last available, set back to the beginning
+                previousPoseIndex = 0;
             }
             AssignTransitionDuration();
         }

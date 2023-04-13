@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(EnemyHealth))]
-[RequireComponent(typeof(EnemyMover))]
-public class Enemy : MonoBehaviour
+[RequireComponent(typeof(UnitHealth))]
+[RequireComponent(typeof(UnitMover))]
+public class Unit : MonoBehaviour
 {
     [SerializeField] int pointReward = 1;
     [SerializeField] int goldReward = 7;
@@ -19,7 +19,7 @@ public class Enemy : MonoBehaviour
     CharacterAnimator animator;
 
     void Awake() {
-        animator = GetComponentInChildren<CharacterAnimator>();
+        animator = transform.parent.GetComponentInChildren<CharacterAnimator>();
 
         GameObject player = GameObject.FindGameObjectWithTag(Player.playerTag);
         runtimeSpawns = GameObject.FindGameObjectWithTag(RuntimeSpawns.runtimeSpawnsTag)
@@ -31,7 +31,7 @@ public class Enemy : MonoBehaviour
 
     void OnEnable()
     {
-        GetComponent<EnemyMover>().BeginMoving();
+        GetComponent<UnitMover>().BeginMoving();
     }
 
     public void DepositReward() {
@@ -59,14 +59,15 @@ public class Enemy : MonoBehaviour
     }
 
     // Animation Methods
-    public void PlayWalkAnimations(float animationSpeed) {
-        animator.LoadWalkAnimations();
+    public void PlayWalkAnimation(float animationSpeed) {
+        animator.UseWalkAnimations();
         animator.SetAnimationSpeed(animationSpeed);
     }
 
-    public void PlayDeathAnimations(float animationSpeed) {
-        animator.LoadDeathAnimations();
-        animator.SetAnimationSpeed(animationSpeed);
+    public void PlayDeathAnimation() {
+        animator.UseDeathAnimations();
+        animator.SetAnimationSpeed(1f);
+        animator.SetLooping(false);
     }
 
 }

@@ -126,7 +126,7 @@ public class Pathfinder : MonoBehaviour
     }
 
     public void NotifyReceivers() {
-        BroadcastMessage(EnemyMover.findPathMethodName, 
+        BroadcastMessage(UnitMover.findPathMethodName, 
             false, SendMessageOptions.DontRequireReceiver);
     }
 

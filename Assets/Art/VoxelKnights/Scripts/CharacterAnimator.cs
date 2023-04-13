@@ -22,6 +22,9 @@ public class CharacterAnimator : MonoBehaviour
     [Tooltip("If false, after the current animation has played a random animation from the same list will load.")]
     [SerializeField] bool lockAnimation = true;
 
+    [Tooltip("If true, animations will play one after another.")]
+    [SerializeField] bool looping = true;
+
     bool forceAnimationChange;
 
     int previousAnimationList;
@@ -49,9 +52,11 @@ public class CharacterAnimator : MonoBehaviour
     }
 
     void Update() {
-        PlayAnimation();
+        if (!animationCompleted) {
+            PlayAnimation();
+        }
         LoadAnimations(); // check if new animations must be loaded
-        if (animationCompleted) {
+        if (animationCompleted || forceAnimationChange) {
             SetAnimation(); // set animation and blend with previous, using bool flags to determine if a new animation should be laoded
         }
     }
@@ -74,29 +79,30 @@ public class CharacterAnimator : MonoBehaviour
 
     void SetAnimation() {
         if (null != animations                              // load a new animation if there is a loaded list
-            && 0 < animations.Count                         // with 1 or more elements
-            && (!lockAnimation || forceAnimationChange)) {  // the animation lock is false OR an animation change is being forced
+                && 0 < animations.Count                         // with 1 or more elements
+                && (!lockAnimation || forceAnimationChange)) {  // the animation lock is false OR an animation change is being forced
+
             int index = Mathf.RoundToInt(Random.Range(0f, (float) animations.Count - 1));
             SetAnimation(animations[index]);
-            forceAnimationChange = false; // should only be true for a single update after loading a new animation list
         } else {
-             // default animation if there is no stored list
             SetAnimation(currentAnimation); 
         }
     }
 
     void SetAnimation(CharacterAnimation animation) {
-        animationCompleted = false;
-        animation.gameObject.SetActive(true);
-        animation.ResetAnimation();
+        animationCompleted = !(forceAnimationChange || looping); // mark animation completed false if looping or force animation change is enabled
+        forceAnimationChange = false; // should only be true for a single update after loading a new animation list
 
-        blendPose.SetPose(new AnimationPose.Pose(currentAnimation.CurrentPose)); // set the blend pose to the current pose before switching to a new animation 
-
-        if (!currentAnimation.Equals(animation)) {   
+        if (!currentAnimation.Equals(animation)) {
+            animation.gameObject.SetActive(true);
+            animation.ResetAnimation();
+            blendPose.SetPose(new AnimationPose.Pose(currentAnimation.CurrentPose)); // set the blend pose to the current pose before switching to a new animation 
             currentAnimation.gameObject.SetActive(false);
+            currentAnimation = animation;
+            currentAnimation.useBlendPose = true;
+        } else {
+            currentAnimation.useBlendPose = false;
         }
-
-        currentAnimation = animation;
     }
 
     public void SetAnimationDuration(float duration) {
@@ -105,6 +111,10 @@ public class CharacterAnimator : MonoBehaviour
 
     public void SetAnimationSpeed(float speed) {
         animationSpeed = speed;
+    }
+
+    public void SetLooping(bool looping) {
+        this.looping = looping;
     }
 
     // Load an animation list based on the currentAnimationsList int value. 0 = Idle, 1 = Walk, 2 = Aim, 3 = Attack, 4 = Reload, 5 = Death, 6 = Special."
@@ -136,44 +146,36 @@ public class CharacterAnimator : MonoBehaviour
                         break;
                 }
             }
-            animationCompleted = true; // set to begin a new animation
-            forceAnimationChange = true; // set so an animation from the set list will be loaded
+            forceAnimationChange = true; // set so an animation from the set list will be loaded instantly
         }
     }
 
-    public void LoadIdleAnimations() {
+    public void UseIdleAnimations() {
         currentAnimationList = 0;
-        LoadAnimations();
     }
 
-    public void LoadWalkAnimations() {
+    public void UseWalkAnimations() {
         currentAnimationList = 1;
-        LoadAnimations();
     }
 
-    public void LoadAimAnimations() {
+    public void UseAimAnimations() {
         currentAnimationList = 2;
-        LoadAnimations();
     }
 
-    public void LoadAttackAnimations() {
+    public void UseAttackAnimations() {
         currentAnimationList = 3;
-        LoadAnimations();
     }
 
-    public void LoadReloadAnimations() {
+    public void UseReloadAnimations() {
         currentAnimationList = 4;
-        LoadAnimations();
     }
 
-    public void LoadDeathAnimations() {
+    public void UseDeathAnimations() {
         currentAnimationList = 5;
-        LoadAnimations();
     }
 
-    public void LoadSpecialAnimations() {
+    public void UseSpecialAnimations() {
         currentAnimationList = 6;
-        LoadAnimations();
     }
 
 }

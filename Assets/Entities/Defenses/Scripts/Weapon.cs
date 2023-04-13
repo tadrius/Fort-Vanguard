@@ -43,8 +43,8 @@ public class Weapon : MonoBehaviour
     void FindClosestTarget() {
         Transform closestTarget = null;
         float maxDistance = range;
-        Enemy[] enemies = FindObjectsOfType<Enemy>();
-        foreach (Enemy en in enemies) {
+        Unit[] enemies = FindObjectsOfType<Unit>();
+        foreach (Unit en in enemies) {
             float enemyDistance = Vector3.Distance(transform.position, en.transform.position);
             if (en.gameObject.activeSelf && enemyDistance < maxDistance) {
                 closestTarget = en.transform;
