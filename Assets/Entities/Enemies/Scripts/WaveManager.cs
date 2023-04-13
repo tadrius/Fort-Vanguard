@@ -7,7 +7,7 @@ public class WaveManager : MonoBehaviour
 
     [Tooltip("The number of seconds between the end of the previous wave and the start of the next wave.")]
     [SerializeField] float waveDelay = 10f;
-    [Tooltip("A short time buffer, in seconds, waves and their delays.")]
+    [Tooltip("A short time buffer, in seconds, between waves and their delays.")]
     [SerializeField] [Range(0f, 1f)] float transitionBuffer = 1f;
     [SerializeField] List<Wave> waves = new List<Wave>();
 
@@ -51,7 +51,7 @@ public class WaveManager : MonoBehaviour
             }
         } else {
             if (waves[currentWaveIndex].AllSpawned // End current wave if the contained enemies have all spawned
-                && !waves[currentWaveIndex].gameObject.activeSelf) { // And the wave is disabled
+                && waves[currentWaveIndex].WaveCompleted) { // And the wave is completed
                 EndCurrentWave();
             }
         }      

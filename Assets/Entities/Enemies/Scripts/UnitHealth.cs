@@ -11,6 +11,11 @@ public class UnitHealth : MonoBehaviour
 
     int currentHitPoints = 0;
     Unit unit;
+    Decomposer decomposer;
+
+    void Awake() {
+        decomposer = GetComponentInParent<Decomposer>();
+    }
 
     void Start() {
         unit = GetComponent<Unit>();
@@ -33,6 +38,7 @@ public class UnitHealth : MonoBehaviour
         unit.SpawnDeathFX();
         unit.PlayDeathAnimation();
         unit.DepositReward();
+        decomposer.BeginDecomposing();
         gameObject.SetActive(false);
     }
 

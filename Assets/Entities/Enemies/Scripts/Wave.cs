@@ -9,16 +9,22 @@ public class Wave : ObjectPool {
     public int GoldReward{ get { return goldReward; }}
     public int PointReward{ get { return pointReward; }}
 
-    List<GameObject> spawnedEnemies = new List<GameObject>(); // to keep track of what enemies have been spawned once already
+    List<Unit> spawnedEnemies = new List<Unit>(); // to keep track of what enemies have been spawned once already
     bool allSpawned = false;
-    public bool AllSpawned{ get { return allSpawned; }}
+    bool waveCompleted = false;
+    public bool AllSpawned { get { return allSpawned; }}
+    public bool WaveCompleted { get { return waveCompleted; }}
 
     public void Start() {
         StartCoroutine(SpawnEnemies());
     }
 
     void Update() {
-        // deactivate wave if all objects are inactive and all objects have spawned
+        // mark wave completed if the number of remaining enemies is 0
+        if (0 == CountRemainingEnemies()) {
+            waveCompleted = true;
+        }
+        // deactivate wave if all objects have spawned and all objects are inactive (this is done after marking the wave is completed to allow enemy corpses)
         if (allSpawned && !ObjectsAreActive()) {
             gameObject.SetActive(false);
         }
@@ -28,7 +34,7 @@ public class Wave : ObjectPool {
         allSpawned = false;
         foreach (GameObject obj in objects) {
             obj.SetActive(true);
-            spawnedEnemies.Add(obj);
+            spawnedEnemies.Add(obj.GetComponentInChildren<Unit>());
             yield return new WaitForSeconds(spawnDelay);
         }
         allSpawned = true;
@@ -40,8 +46,8 @@ public class Wave : ObjectPool {
 
     int CountDestroyedEnemies() {
         int count = 0;
-        foreach (GameObject enemy in spawnedEnemies) {
-            if (!enemy.activeSelf) {
+        foreach (Unit enemy in spawnedEnemies) {
+            if (!enemy.gameObject.activeSelf) {
                 count++;
             }
         }
