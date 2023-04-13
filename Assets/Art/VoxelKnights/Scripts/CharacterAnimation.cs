@@ -7,7 +7,7 @@ public class CharacterAnimation : MonoBehaviour
 
     [SerializeField] List<AnimationPose> poses;
 
-    AnimationPose.Pose currentPose;
+    AnimationPose.Pose currentPose = new AnimationPose.Pose(); // set to a new empty pose to avoid null exceptions
     int previousPoseIndex;
     float transitionProgress; // how much scaled time has elapsed transitioning from the current to next pose
     float transitionDuration;
@@ -20,6 +20,7 @@ public class CharacterAnimation : MonoBehaviour
 
     void Awake() {
         ComputeTotalDuration();
+        ResetAnimation();
     }
 
     public void ResetAnimation() {
@@ -61,7 +62,6 @@ public class CharacterAnimation : MonoBehaviour
         bool animationComplete = false;
         // if this is the start of the animation and blending is enabled, replace the first pose with the blend pose
         if (0 == previousPoseIndex && useBlendPose && null != blendPose.GetPose()) {
-            Debug.Log("Using blend pose.");
             CreateCurrentPose(blendPose, GetNextPose());
         } else {
             CreateCurrentPose(GetPreviousPose(), GetNextPose());
