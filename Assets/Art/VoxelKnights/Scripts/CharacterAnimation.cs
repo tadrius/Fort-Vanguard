@@ -12,11 +12,13 @@ public class CharacterAnimation : MonoBehaviour
     float transitionProgress; // how much scaled time has elapsed transitioning from the current to next pose
     float transitionDuration;
     float totalDuration;
+    bool poseTrigger;
 
     public bool useBlendPose;
     public AnimationPose.Pose CurrentPose { get { return currentPose; }}
     public float TotalDuration { get { return totalDuration; }}
     public float TransitionProgress { get { return transitionProgress; }}
+    public bool PoseTrigger { get { return poseTrigger; }}
 
     void Awake() {
         ComputeTotalDuration();
@@ -24,6 +26,7 @@ public class CharacterAnimation : MonoBehaviour
     }
 
     public void ResetAnimation() {
+        poseTrigger = false;
         previousPoseIndex = 0;
         transitionProgress = 0;
         AssignTransitionDuration();
@@ -73,11 +76,14 @@ public class CharacterAnimation : MonoBehaviour
             transitionProgress -= transitionDuration;
             previousPoseIndex++;
             if (previousPoseIndex == poses.Count - 1) { // if the previous pose is the last pose, mark the animation as complete
-                animationComplete = true;
+                animationComplete = true; 
             } else if (previousPoseIndex >= poses.Count) { // if the previous pose is after the last available, set back to the beginning
                 previousPoseIndex = 0;
             }
+            poseTrigger = GetPreviousPose().PoseTrigger; // only use pose's trigger when the pose is reached 
             AssignTransitionDuration();
+        } else {
+            poseTrigger = false; // reset to default false
         }
 
         return animationComplete;

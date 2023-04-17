@@ -7,15 +7,24 @@ public class Weapon : MonoBehaviour
 
     [Tooltip("The maximum range at which an enemy will be targeted.")]
     [SerializeField] float range = 50f;
-    [Tooltip("How much time must pass between each attack.")]
-    [SerializeField] float attackDelay = 2f;
+    [Tooltip("How much time must pass between each attack animation. Set to 0 to use the default animation length.")]
+    [SerializeField] float reloadSpeed = 1f;
+    [Tooltip("How quickly the attack animation plays. Set to 0 to use the default animation length.")]
+    [SerializeField] float attackSpeed = 0f;
     [SerializeField] AudioSource attackAudio;
 
     ParticleSystem[] projectileParticleSystems;
     Transform target;
     Building building;
+    CharacterAnimator animator;
 
-    float attackTimer = 0f;
+    int currentAction = 0; // 0 = Idle, 1 = Walk, 2 = Aim, 3 = Attack, 4 = Reload, 5 = Death, 6 = Special
+
+    float reloadTimer = 0f;
+
+    void Awake() {
+        animator = GetComponentInChildren<CharacterAnimator>();
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -30,9 +39,9 @@ public class Weapon : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        UpdateAttackTimer();
+        Reload();
         if (TargetIsValid()) {
-            AimWeapon(); 
+            AimWeapon();
             AttackTarget();
         } else {
             DropTarget();
@@ -64,28 +73,48 @@ public class Weapon : MonoBehaviour
         return false;
     }
 
-    void UpdateAttackTimer() {
-        if (attackTimer > 0) {
-            attackTimer -= Time.deltaTime;
+    void Reload() {
+        if ((0 == currentAction || 4 == currentAction) && 0f < reloadTimer) { // if idle or reloading
+            currentAction = 4; // set to reloading
+            animator.UseReloadAnimations();
+            animator.SetAnimationDuration(reloadSpeed);
+            reloadTimer -= Time.deltaTime;
+            if (0f >= reloadTimer) {
+                currentAction = 0; // set to idle
+            }
         }
     }
 
+
     void AttackTarget() {
-        if (attackTimer <= 0) {
-            EmitProjectileParticles();
-            if (null != attackAudio) {
-                attackAudio.Play();
+        if ((0 == currentAction || 3 == currentAction)) { // if idle or attacking
+            currentAction = 3; // set to attacking
+            animator.UseAttackAnimations();
+            animator.SetAnimationDuration(attackSpeed);
+            if (animator.GetPoseTrigger() && 0f >= reloadTimer) {
+                EmitProjectileParticles();
+                if (null != attackAudio) {
+                    attackAudio.Play();
+                }
+                reloadTimer = reloadSpeed;
             }
-            attackTimer = attackDelay;
+            if (animator.AnimationCompleted) {
+                currentAction = 0; // set to idle
+            }
         }
     }
 
     void AimWeapon() {
         transform.LookAt(target);
+        if (0 == currentAction) { // if idle
+            animator.UseAimAnimations();
+        }
     }
 
     void DropTarget() {
-        target = null;      
+        currentAction = 0;
+        target = null;
+        animator.UseIdleAnimations();
     }
 
     void EmitProjectileParticles() {

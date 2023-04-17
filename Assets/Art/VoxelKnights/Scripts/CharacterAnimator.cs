@@ -38,6 +38,8 @@ public class CharacterAnimator : MonoBehaviour
     bool animationCompleted;
     float excessProgress;
 
+    public bool AnimationCompleted { get { return animationCompleted; }}
+
     void Awake() {
         animationRig = GetComponent<AnimationRig>();
         animationSet = GetComponentInChildren<AnimationSet>();
@@ -52,12 +54,12 @@ public class CharacterAnimator : MonoBehaviour
     }
 
     void Update() {
-        if (!animationCompleted) {
-            PlayAnimation();
-        }
         LoadAnimations(); // check if new animations must be loaded
         if (animationCompleted || forceAnimationChange) {
             SetAnimation(); // set animation and blend with previous, using bool flags to determine if a new animation should be laoded
+        } 
+        if (!animationCompleted) {
+            PlayAnimation();
         }
     }
 
@@ -115,6 +117,10 @@ public class CharacterAnimator : MonoBehaviour
 
     public void SetLooping(bool looping) {
         this.looping = looping;
+    }
+
+    public bool GetPoseTrigger() {
+        return currentAnimation.PoseTrigger;
     }
 
     // Load an animation list based on the currentAnimationsList int value. 0 = Idle, 1 = Walk, 2 = Aim, 3 = Attack, 4 = Reload, 5 = Death, 6 = Special."

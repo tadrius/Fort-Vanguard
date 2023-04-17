@@ -10,8 +10,12 @@ public class AnimationPose : MonoBehaviour
 
     [Tooltip("The joint rotations that define this pose.")]
     [SerializeField] Pose pose;
-    
+
+    [Tooltip("A boolean that can determine whether something should happen when this pose is reached.")]
+    [SerializeField] bool poseTrigger = false;
+
     public float TransitionDuration { get { return transitionDuration; } }
+    public bool PoseTrigger { get { return poseTrigger; } }
 
     public void CopyPose(Pose pose) {
         this.pose.Copy(pose);
