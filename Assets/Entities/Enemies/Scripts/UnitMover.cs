@@ -73,6 +73,6 @@ public class UnitMover : MonoBehaviour
     void FinishPath() {
         unit.SpawnPenaltyFX();
         unit.IncurPenalty();
-        gameObject.SetActive(false);
+        transform.parent.gameObject.SetActive(false);
     }
 }
