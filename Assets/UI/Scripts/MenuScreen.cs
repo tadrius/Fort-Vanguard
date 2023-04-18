@@ -9,6 +9,7 @@ public class MenuScreen : MonoBehaviour
     [SerializeField] ScreenToggler pauseMenuToggler;
 
     MenuScreen returnScreen;
+    Player player; 
 
     public void Open(MenuScreen returnScreen) {
         Open();
@@ -44,7 +45,8 @@ public class MenuScreen : MonoBehaviour
     }
 
     public void StartGame() {
-        Close();
+        Player player = GameObject.FindGameObjectWithTag(Player.playerTag).GetComponent<Player>();
+        player.StartGame();       
     }
 
     public void RestartGame() {

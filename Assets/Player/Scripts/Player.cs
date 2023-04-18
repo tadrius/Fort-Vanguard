@@ -19,19 +19,12 @@ public class Player : MonoBehaviour
     PlayerHealth playerHealth;
     ScoreKeeper scoreKeeper;
     Builder builder;
-    StartupManager startupManager;
 
     void Awake() {
         bank = GetComponent<Bank>();
         playerHealth = GetComponent<PlayerHealth>();
         scoreKeeper = GetComponent<ScoreKeeper>();
         builder = GetComponent<Builder>();
-
-        startupManager = GameObject.FindObjectOfType<StartupManager>();
-    }
-
-    void Start() {
-        startupManager.Startup();
     }
 
     public void WinGame() {
@@ -44,13 +37,13 @@ public class Player : MonoBehaviour
         gameOverScreen.OpenLoseScreen();
     }
 
+    public void StartGame() {
+        LoadNextScene();
+    }
+
     public void RestartGame() {
         scoreKeeper.UpdateScoreboard();
         ReloadScene();
-    }
-
-    void ExecuteGameOverSequence() {
-        scoreKeeper.UpdateScoreboard();
     }
 
     public void PauseGame() {
@@ -93,13 +86,13 @@ public class Player : MonoBehaviour
     }
 
     IEnumerator LoadSceneWithDelay(int sceneBuildIndex, float loadDelay) {
+        loadingScreen.gameObject.SetActive(true);
         // delay
         for (float time = loadDelay; time >= 0; time -= Time.unscaledDeltaTime)
         {
             yield return null;
         }
         // load next scene if scene count is greater than next scene index
-        loadingScreen.gameObject.SetActive(true);
         if (SceneManager.sceneCountInBuildSettings > sceneBuildIndex)
         {
             loadingScreen.LoadScene(sceneBuildIndex);
