@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Weapon : MonoBehaviour
+public class Attacker : MonoBehaviour
 {
 
     [Tooltip("The maximum range at which an enemy will be targeted.")]
@@ -11,25 +11,28 @@ public class Weapon : MonoBehaviour
     [SerializeField] float reloadSpeed = 1f;
     [Tooltip("How quickly the attack animation plays. Set to 0 to use the default animation length.")]
     [SerializeField] float attackSpeed = 0f;
-    [SerializeField] AudioSource attackAudio;
 
-    ParticleSystem[] projectileParticleSystems;
+    CharacterAnimator characterAnimator;
+    AudioSource attackAudio;
+    ParticleSystem[] attackParticleSystems;
+
     Transform target;
     Building building;
-    CharacterAnimator animator;
 
     int currentAction = 0; // 0 = Idle, 1 = Walk, 2 = Aim, 3 = Attack, 4 = Reload, 5 = Death, 6 = Special
 
     float reloadTimer = 0f;
 
     void Awake() {
-        animator = GetComponentInChildren<CharacterAnimator>();
+        characterAnimator = GetComponentInChildren<CharacterAnimator>();
+        attackAudio = GetComponentInChildren<AudioSource>();
+        attackParticleSystems = GetComponentsInChildren<ParticleSystem>();
+        
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        projectileParticleSystems = GetComponentsInChildren<ParticleSystem>();
         building = GetComponentInParent<Building>();
         if (building.IsElevated) {
             range *= 2;
@@ -76,8 +79,8 @@ public class Weapon : MonoBehaviour
     void Reload() {
         if ((0 == currentAction || 4 == currentAction) && 0f < reloadTimer) { // if idle or reloading
             currentAction = 4; // set to reloading
-            animator.UseReloadAnimations();
-            animator.SetAnimationDuration(reloadSpeed);
+            characterAnimator.UseReloadAnimations();
+            characterAnimator.SetAnimationDuration(reloadSpeed);
             reloadTimer -= Time.deltaTime;
             if (0f >= reloadTimer) {
                 currentAction = 0; // set to idle
@@ -89,37 +92,43 @@ public class Weapon : MonoBehaviour
     void AttackTarget() {
         if ((0 == currentAction || 3 == currentAction)) { // if idle or attacking
             currentAction = 3; // set to attacking
-            animator.UseAttackAnimations();
-            animator.SetAnimationDuration(attackSpeed);
-            if (animator.GetPoseTrigger() && 0f >= reloadTimer) {
+            characterAnimator.UseAttackAnimations();
+            characterAnimator.SetAnimationDuration(attackSpeed);
+            if (characterAnimator.GetPoseTrigger() && 0f >= reloadTimer) {
                 EmitProjectileParticles();
                 if (null != attackAudio) {
                     attackAudio.Play();
                 }
                 reloadTimer = reloadSpeed;
             }
-            if (animator.AnimationCompleted) {
+            if (characterAnimator.AnimationCompleted) {
                 currentAction = 0; // set to idle
             }
         }
     }
 
     void AimWeapon() {
-        transform.LookAt(target);
+        Vector3 levelTargetPosition = target.position; // the target's x and z positions and the attacker's y position.
+        levelTargetPosition.y = transform.position.y;
+
+        transform.LookAt(levelTargetPosition);
+        foreach (ParticleSystem pSystem in attackParticleSystems) {
+            pSystem.transform.LookAt(target);
+        }
         if (0 == currentAction) { // if idle
-            animator.UseAimAnimations();
+            characterAnimator.UseAimAnimations();
         }
     }
 
     void DropTarget() {
         currentAction = 0;
         target = null;
-        animator.UseIdleAnimations();
+        characterAnimator.UseIdleAnimations();
     }
 
     void EmitProjectileParticles() {
-        foreach (ParticleSystem projectileParticles in projectileParticleSystems) {
-            projectileParticles.Emit(1);
+        foreach (ParticleSystem pSystem in attackParticleSystems) {
+            pSystem.Emit(1);
         }
     }
 }
