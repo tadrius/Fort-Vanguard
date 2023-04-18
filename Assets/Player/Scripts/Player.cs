@@ -11,6 +11,7 @@ public class Player : MonoBehaviour
 {
     [SerializeField] float loadDelay = 1f;
     [SerializeField] GameOverScreen gameOverScreen;
+    [SerializeField] LoadingScreen loadingScreen;
 
     readonly public static string playerTag = "Player";
 
@@ -98,14 +99,15 @@ public class Player : MonoBehaviour
             yield return null;
         }
         // load next scene if scene count is greater than next scene index
+        loadingScreen.gameObject.SetActive(true);
         if (SceneManager.sceneCountInBuildSettings > sceneBuildIndex)
         {
-            SceneManager.LoadScene(sceneBuildIndex);
+            loadingScreen.LoadScene(sceneBuildIndex);
         }
         else
         {
             Debug.Log("Scene build index is greater than scene count. Loading the first scene.");
-            SceneManager.LoadScene(0);
+            loadingScreen.LoadScene(0);
         }
     }
 
