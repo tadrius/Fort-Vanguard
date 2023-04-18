@@ -27,6 +27,7 @@ public class Wave : ObjectPool {
         // deactivate wave if all objects have spawned and all objects are inactive (this is done after marking the wave is completed to allow enemy corpses)
         if (allSpawned && !ObjectsAreActive()) {
             gameObject.SetActive(false);
+            Destroy(gameObject);
         }
     }
 
@@ -47,7 +48,9 @@ public class Wave : ObjectPool {
     int CountDestroyedEnemies() {
         int count = 0;
         foreach (Unit enemy in spawnedEnemies) {
-            if (!enemy.gameObject.activeSelf) {
+            if (null == enemy) {
+                count++; // if the object is destroyed
+            } else if (!enemy.gameObject.activeSelf) {
                 count++;
             }
         }

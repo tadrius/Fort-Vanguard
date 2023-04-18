@@ -42,7 +42,7 @@ public class ObjectPool : MonoBehaviour
 
     public bool ObjectsAreActive() {
         foreach (GameObject poolObject in objects) {
-            if (poolObject.activeSelf) {
+            if (null != poolObject && poolObject.activeSelf) { // null check to handle destroyed objects
                 return true;
             }
         }

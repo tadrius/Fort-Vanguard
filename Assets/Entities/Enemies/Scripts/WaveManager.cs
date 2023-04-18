@@ -32,13 +32,12 @@ public class WaveManager : MonoBehaviour
         scoreKeeper = playerObject.GetComponent<ScoreKeeper>(); 
         bank = playerObject.GetComponent<Bank>();
         playerHealth = playerObject.GetComponent<PlayerHealth>();
-
-        foreach (Wave wave in waves) {
-            wave.gameObject.SetActive(false);
-        }
     }
 
     void Start() {
+        foreach (Wave wave in waves) {
+            wave.gameObject.SetActive(false);
+        }
         ResetTimers();
     }
 

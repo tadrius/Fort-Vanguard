@@ -75,5 +75,6 @@ public class UnitMover : MonoBehaviour
         unit.IncurPenalty();
         unit.gameObject.SetActive(false);
         transform.parent.gameObject.SetActive(false);
+        Destroy(transform.parent.gameObject);
     }
 }
