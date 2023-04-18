@@ -26,12 +26,16 @@ public class WaveManager : MonoBehaviour
     Bank bank;
     PlayerHealth playerHealth;
 
+    Game game;
+
     void Awake() {
         GameObject playerObject = GameObject.FindGameObjectWithTag(Player.playerTag);
         player = playerObject.GetComponent<Player>();
         scoreKeeper = playerObject.GetComponent<ScoreKeeper>(); 
         bank = playerObject.GetComponent<Bank>();
         playerHealth = playerObject.GetComponent<PlayerHealth>();
+        
+        game = FindObjectOfType<Game>();
     }
 
     void Start() {
@@ -44,7 +48,7 @@ public class WaveManager : MonoBehaviour
     void Update() {
         if (!waveIsRunning) {
             if (noMoreWaves) {
-                player.WinGame();
+                game.WinGame();
             } else {
                 StartCurrentWave();               
             }

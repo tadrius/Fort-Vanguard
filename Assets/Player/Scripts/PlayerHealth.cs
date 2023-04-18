@@ -9,9 +9,11 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] int health = 100;
     
     Player player;
+    Game game;
 
     void Awake() {
         player = GetComponent<Player>();
+        game = FindObjectOfType<Game>();
     }
 
     public int Health { get { return health; }}
@@ -24,6 +26,6 @@ public class PlayerHealth : MonoBehaviour
     }
 
     void Die() {
-        player.LoseGame();
+        game.LoseGame();
     }
 }
