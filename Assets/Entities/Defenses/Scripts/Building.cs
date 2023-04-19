@@ -9,7 +9,7 @@ public class Building : MonoBehaviour
     [SerializeField] int cost = 50;
     [Tooltip("Whether or not this building can be constructed on a platform.")]
     [SerializeField] bool isPlatformBuildable = false;
-    [Tooltip("The parts that comprise the fully constructed building.")]
+    [Tooltip("The parts that comprise the fully constructed building. The first part should be the main Structure.")]
     [SerializeField] GameObject[] parts;
     [Tooltip("Particles that play when the building is being constructed.")]
     [SerializeField] ParticleSystem[] constructionParticles;
@@ -55,7 +55,10 @@ public class Building : MonoBehaviour
     void SetPartsActive(bool isActive) {
         foreach (GameObject part in parts) {
             part.SetActive(isActive);
-        }        
+        }
+        if (isElevated) {   // hide ground structure if this building is elevated
+            parts[0].SetActive(false);
+        }
     }
 
     void PlayConstructionFX() {

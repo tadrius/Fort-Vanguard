@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 698266068393428701}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 3.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -154,7 +154,7 @@ Transform:
   m_GameObject: {fileID: 1551672262830878890}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8448565300324979653}
@@ -203,10 +203,9 @@ Transform:
   m_GameObject: {fileID: 4119922997949259095}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 8534998867102415291}
+  m_Children: []
   m_Father: {fileID: 2785287966467507742}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -236,7 +235,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7798412533850915748}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 2.25, z: 0.5}
+  m_LocalPosition: {x: 0, y: 4.5, z: 1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5080,65 +5079,3 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
---- !u!1001 &4455929195795849002
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 8448565300324979653}
-    m_Modifications:
-    - target: {fileID: 5450705480621237904, guid: 8cb55272c7da46e45bf08f3cdd15e52a, type: 3}
-      propertyPath: m_Name
-      value: Duke Light Bow
-      objectReference: {fileID: 0}
-    - target: {fileID: 5450705480621237905, guid: 8cb55272c7da46e45bf08f3cdd15e52a, type: 3}
-      propertyPath: m_RootOrder
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5450705480621237905, guid: 8cb55272c7da46e45bf08f3cdd15e52a, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5450705480621237905, guid: 8cb55272c7da46e45bf08f3cdd15e52a, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5450705480621237905, guid: 8cb55272c7da46e45bf08f3cdd15e52a, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5450705480621237905, guid: 8cb55272c7da46e45bf08f3cdd15e52a, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5450705480621237905, guid: 8cb55272c7da46e45bf08f3cdd15e52a, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5450705480621237905, guid: 8cb55272c7da46e45bf08f3cdd15e52a, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5450705480621237905, guid: 8cb55272c7da46e45bf08f3cdd15e52a, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5450705480621237905, guid: 8cb55272c7da46e45bf08f3cdd15e52a, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5450705480621237905, guid: 8cb55272c7da46e45bf08f3cdd15e52a, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5450705480621237905, guid: 8cb55272c7da46e45bf08f3cdd15e52a, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 8cb55272c7da46e45bf08f3cdd15e52a, type: 3}
---- !u!4 &8534998867102415291 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 5450705480621237905, guid: 8cb55272c7da46e45bf08f3cdd15e52a, type: 3}
-  m_PrefabInstance: {fileID: 4455929195795849002}
-  m_PrefabAsset: {fileID: 0}

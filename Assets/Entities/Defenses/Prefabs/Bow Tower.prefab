@@ -83,7 +83,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 538049276389529403, guid: 7fd311129ca81594e9f16eb1e38e93e3, type: 3}
       propertyPath: cost
-      value: 100
+      value: 90
       objectReference: {fileID: 0}
     - target: {fileID: 538049276389529403, guid: 7fd311129ca81594e9f16eb1e38e93e3, type: 3}
       propertyPath: parts.Array.size
@@ -213,9 +213,21 @@ PrefabInstance:
       propertyPath: InitialModule.startSize.scalar
       value: 6.25
       objectReference: {fileID: 0}
+    - target: {fileID: 6196864169865906536, guid: 7fd311129ca81594e9f16eb1e38e93e3, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6326313055194710703, guid: 7fd311129ca81594e9f16eb1e38e93e3, type: 3}
       propertyPath: m_Name
-      value: Platform Def Base
+      value: Bow Tower
+      objectReference: {fileID: 0}
+    - target: {fileID: 6798066012409569658, guid: 7fd311129ca81594e9f16eb1e38e93e3, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: -2432090755550338912, guid: 1993d009d3ec71245b16d11e62cba8ea, type: 3}
+    - target: {fileID: 6824219582505702354, guid: 7fd311129ca81594e9f16eb1e38e93e3, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7193794125315858181, guid: 7fd311129ca81594e9f16eb1e38e93e3, type: 3}
       propertyPath: m_Enabled
@@ -235,70 +247,74 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7fd311129ca81594e9f16eb1e38e93e3, type: 3}
+--- !u!4 &2254092607720078193 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2984823660985155782, guid: 7fd311129ca81594e9f16eb1e38e93e3, type: 3}
+  m_PrefabInstance: {fileID: 3901273991919090615}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &3274118476100186190 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1969231298231798777, guid: 7fd311129ca81594e9f16eb1e38e93e3, type: 3}
   m_PrefabInstance: {fileID: 3901273991919090615}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &8247489867776161740 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4922685428900875387, guid: 7fd311129ca81594e9f16eb1e38e93e3, type: 3}
-  m_PrefabInstance: {fileID: 3901273991919090615}
-  m_PrefabAsset: {fileID: 0}
---- !u!1001 &8445256884860538733
+--- !u!1001 &9148768211687117783
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 8247489867776161740}
+    m_TransformParent: {fileID: 2254092607720078193}
     m_Modifications:
-    - target: {fileID: 8367930010546097921, guid: 7990df5d14c5d674ab9392935d4f6bc2, type: 3}
-      propertyPath: m_Name
-      value: Tower_Standing
-      objectReference: {fileID: 0}
-    - target: {fileID: 9181446211039532475, guid: 7990df5d14c5d674ab9392935d4f6bc2, type: 3}
+    - target: {fileID: 1227252851825275507, guid: 054bb9e1388f5744487fe7780f9dd65e, type: 3}
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 9181446211039532475, guid: 7990df5d14c5d674ab9392935d4f6bc2, type: 3}
+    - target: {fileID: 1227252851825275507, guid: 054bb9e1388f5744487fe7780f9dd65e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 9181446211039532475, guid: 7990df5d14c5d674ab9392935d4f6bc2, type: 3}
+    - target: {fileID: 1227252851825275507, guid: 054bb9e1388f5744487fe7780f9dd65e, type: 3}
       propertyPath: m_LocalPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 9181446211039532475, guid: 7990df5d14c5d674ab9392935d4f6bc2, type: 3}
+    - target: {fileID: 1227252851825275507, guid: 054bb9e1388f5744487fe7780f9dd65e, type: 3}
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 9181446211039532475, guid: 7990df5d14c5d674ab9392935d4f6bc2, type: 3}
+    - target: {fileID: 1227252851825275507, guid: 054bb9e1388f5744487fe7780f9dd65e, type: 3}
       propertyPath: m_LocalRotation.w
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 9181446211039532475, guid: 7990df5d14c5d674ab9392935d4f6bc2, type: 3}
+    - target: {fileID: 1227252851825275507, guid: 054bb9e1388f5744487fe7780f9dd65e, type: 3}
       propertyPath: m_LocalRotation.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 9181446211039532475, guid: 7990df5d14c5d674ab9392935d4f6bc2, type: 3}
+    - target: {fileID: 1227252851825275507, guid: 054bb9e1388f5744487fe7780f9dd65e, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 9181446211039532475, guid: 7990df5d14c5d674ab9392935d4f6bc2, type: 3}
+    - target: {fileID: 1227252851825275507, guid: 054bb9e1388f5744487fe7780f9dd65e, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 9181446211039532475, guid: 7990df5d14c5d674ab9392935d4f6bc2, type: 3}
+    - target: {fileID: 1227252851825275507, guid: 054bb9e1388f5744487fe7780f9dd65e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 9181446211039532475, guid: 7990df5d14c5d674ab9392935d4f6bc2, type: 3}
+    - target: {fileID: 1227252851825275507, guid: 054bb9e1388f5744487fe7780f9dd65e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 9181446211039532475, guid: 7990df5d14c5d674ab9392935d4f6bc2, type: 3}
+    - target: {fileID: 1227252851825275507, guid: 054bb9e1388f5744487fe7780f9dd65e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2461185177998214343, guid: 054bb9e1388f5744487fe7780f9dd65e, type: 3}
+      propertyPath: m_Name
+      value: Attacker Bow
+      objectReference: {fileID: 0}
+    - target: {fileID: 9036936270949920944, guid: 054bb9e1388f5744487fe7780f9dd65e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 7990df5d14c5d674ab9392935d4f6bc2, type: 3}
+  m_SourcePrefab: {fileID: 100100000, guid: 054bb9e1388f5744487fe7780f9dd65e, type: 3}
