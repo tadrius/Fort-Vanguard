@@ -130,11 +130,16 @@ public class Attacker : MonoBehaviour
         projectileParticles.Emit(1);
         if (null != attackAudio) {
             attackAudio.Play();
-        }        
+        }
+        yield return new WaitUntil(() => animator.AnimationCompleted);
         reloadRequired = true;
     }
 
     void PointWeapon() {
+        if (null == target) {
+            return;
+        }
+
         Vector3 levelTargetPosition = target.position; // use the target's x and z positions and the attacker's y position.
         levelTargetPosition.y = transform.position.y;
 

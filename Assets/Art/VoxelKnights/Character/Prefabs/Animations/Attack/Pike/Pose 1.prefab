@@ -69,7 +69,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7201395127411052540, guid: ca668f24630b787469f8df9e8a071937, type: 3}
       propertyPath: transitionDuration
-      value: 0.3
+      value: 0.35
       objectReference: {fileID: 0}
     - target: {fileID: 7201395127411052540, guid: ca668f24630b787469f8df9e8a071937, type: 3}
       propertyPath: pose.neckRotation.x
@@ -100,6 +100,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7201395127411052540, guid: ca668f24630b787469f8df9e8a071937, type: 3}
+      propertyPath: pose.waistRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7201395127411052540, guid: ca668f24630b787469f8df9e8a071937, type: 3}
       propertyPath: pose.groundRotation.y
       value: 90
       objectReference: {fileID: 0}
@@ -120,12 +124,16 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7201395127411052540, guid: ca668f24630b787469f8df9e8a071937, type: 3}
+      propertyPath: pose.rightHipRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7201395127411052540, guid: ca668f24630b787469f8df9e8a071937, type: 3}
       propertyPath: rightShoulderRotation.x
       value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 7201395127411052540, guid: ca668f24630b787469f8df9e8a071937, type: 3}
       propertyPath: pose.leftElbowRotation.x
-      value: 0
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 7201395127411052540, guid: ca668f24630b787469f8df9e8a071937, type: 3}
       propertyPath: pose.leftElbowRotation.z
@@ -133,7 +141,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7201395127411052540, guid: ca668f24630b787469f8df9e8a071937, type: 3}
       propertyPath: pose.leftWristRotation.x
-      value: 30
+      value: 45
       objectReference: {fileID: 0}
     - target: {fileID: 7201395127411052540, guid: ca668f24630b787469f8df9e8a071937, type: 3}
       propertyPath: pose.leftWristRotation.y
@@ -145,11 +153,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7201395127411052540, guid: ca668f24630b787469f8df9e8a071937, type: 3}
       propertyPath: pose.rightElbowRotation.x
-      value: 25
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7201395127411052540, guid: ca668f24630b787469f8df9e8a071937, type: 3}
       propertyPath: pose.rightElbowRotation.y
-      value: -15
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7201395127411052540, guid: ca668f24630b787469f8df9e8a071937, type: 3}
       propertyPath: pose.rightElbowRotation.z
@@ -157,7 +165,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7201395127411052540, guid: ca668f24630b787469f8df9e8a071937, type: 3}
       propertyPath: pose.rightWristRotation.x
-      value: 0
+      value: 80
       objectReference: {fileID: 0}
     - target: {fileID: 7201395127411052540, guid: ca668f24630b787469f8df9e8a071937, type: 3}
       propertyPath: pose.rightWristRotation.y
@@ -169,19 +177,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7201395127411052540, guid: ca668f24630b787469f8df9e8a071937, type: 3}
       propertyPath: pose.leftShoulderRotation.x
-      value: 0
+      value: -40
       objectReference: {fileID: 0}
     - target: {fileID: 7201395127411052540, guid: ca668f24630b787469f8df9e8a071937, type: 3}
       propertyPath: pose.leftShoulderRotation.y
-      value: -30
+      value: -45
+      objectReference: {fileID: 0}
+    - target: {fileID: 7201395127411052540, guid: ca668f24630b787469f8df9e8a071937, type: 3}
+      propertyPath: pose.leftShoulderRotation.z
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7201395127411052540, guid: ca668f24630b787469f8df9e8a071937, type: 3}
       propertyPath: pose.rightShoulderRotation.x
-      value: 45
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7201395127411052540, guid: ca668f24630b787469f8df9e8a071937, type: 3}
       propertyPath: pose.rightShoulderRotation.y
-      value: -45
+      value: -85
       objectReference: {fileID: 0}
     - target: {fileID: 7201395127411052540, guid: ca668f24630b787469f8df9e8a071937, type: 3}
       propertyPath: pose.rightShoulderRotation.z
