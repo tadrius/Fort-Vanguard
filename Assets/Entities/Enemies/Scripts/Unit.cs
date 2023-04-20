@@ -29,8 +29,7 @@ public class Unit : MonoBehaviour
         playerHealth = player.GetComponent<PlayerHealth>();
     }
 
-    void OnEnable()
-    {
+    void OnEnable() {
         GetComponent<UnitMover>().BeginMoving();
     }
 
