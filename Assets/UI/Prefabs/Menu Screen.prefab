@@ -545,7 +545,7 @@ MonoBehaviour:
 
     To build Defences...
 
-    Select a type of Defence, such as Ballista.
+    Select a type of Defence, such as Bow.
 
     Click
     on a valid Tile, highlighted in green.
@@ -559,13 +559,13 @@ MonoBehaviour:
     Click on a Defence''s tile to refund
     it for half its Gold cost.
 
-    Ballistae can be built atop Towers.
+    Bows and Crossbows can be built atop Towers.
 
     You
-    cannot refund a Tower if it is holding a Ballista.
+    cannot refund a Tower before refunding any Defences built atop it.
 
-    You cannot fully block
-    the Enemies'' path.'
+    You cannot
+    fully block the Enemies'' path.'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: df8cf892e7aad12478ce487673b0088f, type: 2}
   m_sharedMaterial: {fileID: 1906073875616529429, guid: df8cf892e7aad12478ce487673b0088f, type: 2}
