@@ -12,11 +12,9 @@ public class ScreenToggler : MonoBehaviour
     [SerializeField] string screenIsInactiveText = "Menu";
     [SerializeField] Image selectionIcon;
     
-    bool hotkeyEnabled = false;
     TMP_Text text;
 
     void Awake() {
-        hotkeyEnabled = false;
         text = GetComponentInChildren<TMP_Text>();
     }
 
@@ -27,9 +25,7 @@ public class ScreenToggler : MonoBehaviour
 
     void Update() {
         if (Input.GetKeyDown(KeyCode.Escape)) {
-            if (hotkeyEnabled) {
-                GetComponent<Button>().onClick.Invoke();
-            }
+            GetComponent<Button>().onClick.Invoke();
         }
     }
 
@@ -59,10 +55,6 @@ public class ScreenToggler : MonoBehaviour
         } else {
             text.text = screenIsInactiveText;
         }
-    }
-
-    public void EnableHotkey() {
-        hotkeyEnabled = true;
     }
 
 }
