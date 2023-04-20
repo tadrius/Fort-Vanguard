@@ -12,22 +12,24 @@ public class Attacker : MonoBehaviour
     [Tooltip("How quickly the attack animation plays. Set to 0 to use the default animation length.")]
     [SerializeField] float attackSpeed = 0f;
 
-    CharacterAnimator characterAnimator;
+    CharacterAnimator animator;
     AudioSource attackAudio;
-    ParticleSystem[] attackParticleSystems;
+    ParticleSystem projectileParticles;
 
     Transform target;
     Building building;
+    WaveManager waveManager;
 
-    int currentAction = 0; // 0 = Idle, 1 = Walk, 2 = Aim, 3 = Attack, 4 = Reload, 5 = Death, 6 = Special
+    bool reloadRequired;
+    Action currentAction;
+    enum Action { Idle, Walk, Aim, Attack, Reload, Death, Special };
 
-    float reloadTimer = 0f;
 
     void Awake() {
-        characterAnimator = GetComponentInChildren<CharacterAnimator>();
+        animator = GetComponentInChildren<CharacterAnimator>();
         attackAudio = GetComponentInChildren<AudioSource>();
-        attackParticleSystems = GetComponentsInChildren<ParticleSystem>();
-        
+        projectileParticles = GetComponentInChildren<ParticleSystem>();
+        waveManager = FindObjectOfType<WaveManager>();
     }
 
     // Start is called before the first frame update
@@ -37,98 +39,131 @@ public class Attacker : MonoBehaviour
         if (building.IsElevated) {
             range *= 2;
         }
+        reloadRequired = false;
+        currentAction = Action.Idle;
+        UseIdleAnimations();
     }
 
     // Update is called once per frame
     void Update()
     {
-        Reload();
-        if (TargetIsValid()) {
-            AimWeapon();
-            AttackTarget();
-        } else {
-            DropTarget();
-            FindClosestTarget();
+        switch (currentAction) {
+            case Action.Idle:
+                FindClosestTarget();
+                if (TargetIsValid()) {
+                    currentAction = Action.Aim;
+                    UseAimAnimations();
+                }
+                break;
+            case Action.Aim:
+                PointWeapon();
+                StartCoroutine(Aim());
+                break;
+            case Action.Attack:
+                PointWeapon();
+                break;
+            case Action.Reload:
+                PointWeapon();
+                break;
         }
     }
 
     void FindClosestTarget() {
         Transform closestTarget = null;
         float maxDistance = range;
-        Unit[] enemies = FindObjectsOfType<Unit>();
-        foreach (Unit en in enemies) {
-            float enemyDistance = Vector3.Distance(transform.position, en.transform.position);
-            if (en.gameObject.activeSelf && enemyDistance < maxDistance) {
-                closestTarget = en.transform;
-                maxDistance = enemyDistance;
+
+        Wave wave = waveManager.Waves[waveManager.CurrentWaveIndex]; // only need to consider at enemies in current wave
+        if (null != wave) {
+            foreach (Unit en in wave.SpawnedEnemies) {
+                if (null != en) {
+                    float enemyDistance = Vector3.Distance(transform.position, en.transform.position);
+                    if (en.gameObject.activeSelf && enemyDistance < maxDistance) {
+                        closestTarget = en.transform;
+                        maxDistance = enemyDistance;
+                    }
+                }
             }
+            target = closestTarget;
         }
-        target = closestTarget;
     }
 
     bool TargetIsValid() {
         if (null != target && target.gameObject.activeSelf) {
             float targetDistance = Vector3.Distance(transform.position, target.position);
-            if (targetDistance <= range) {
+            if (range >= targetDistance) {
                 return true;
             }
         }
         return false;
     }
 
-    void Reload() {
-        if ((0 == currentAction || 4 == currentAction) && 0f < reloadTimer) { // if idle or reloading
-            currentAction = 4; // set to reloading
-            characterAnimator.UseReloadAnimations();
-            characterAnimator.SetAnimationDuration(reloadSpeed);
-            reloadTimer -= Time.deltaTime;
-            if (0f >= reloadTimer) {
-                currentAction = 0; // set to idle
+    void DropTarget() {
+        currentAction = Action.Idle;
+        UseIdleAnimations();
+        target = null;
+    }
+
+    IEnumerator Aim() {
+        if (TargetIsValid()) {
+            yield return StartCoroutine(Attack());
+            if (reloadRequired) {
+                yield return StartCoroutine(Reload());
             }
+            UseAimAnimations();
+            currentAction = Action.Aim;
+        } else {
+            DropTarget();                            
         }
     }
 
-
-    void AttackTarget() {
-        if ((0 == currentAction || 3 == currentAction)) { // if idle or attacking
-            currentAction = 3; // set to attacking
-            characterAnimator.UseAttackAnimations();
-            characterAnimator.SetAnimationDuration(attackSpeed);
-            if (characterAnimator.GetPoseTrigger() && 0f >= reloadTimer) {
-                EmitProjectileParticles();
-                if (null != attackAudio) {
-                    attackAudio.Play();
-                }
-                reloadTimer = reloadSpeed;
-            }
-            if (characterAnimator.AnimationCompleted) {
-                currentAction = 0; // set to idle
-            }
-        }
+    IEnumerator Reload() {
+        currentAction = Action.Reload;
+        UseReloadAnimation();
+        yield return new WaitForSeconds(reloadSpeed);
+        reloadRequired = false;
     }
 
-    void AimWeapon() {
-        Vector3 levelTargetPosition = target.position; // the target's x and z positions and the attacker's y position.
+    IEnumerator Attack() {
+        currentAction = Action.Attack;
+        UseAttackAnimations();
+        yield return new WaitUntil(() => animator.GetPoseTrigger());
+        projectileParticles.Emit(1);
+        if (null != attackAudio) {
+            attackAudio.Play();
+        }        
+        reloadRequired = true;
+    }
+
+    void PointWeapon() {
+        Vector3 levelTargetPosition = target.position; // use the target's x and z positions and the attacker's y position.
         levelTargetPosition.y = transform.position.y;
 
         transform.LookAt(levelTargetPosition);
-        foreach (ParticleSystem pSystem in attackParticleSystems) {
-            pSystem.transform.LookAt(target);
-        }
-        if (0 == currentAction) { // if idle
-            characterAnimator.UseAimAnimations();
+        projectileParticles.transform.LookAt(target);
+    }
+
+    void UseIdleAnimations() {
+        animator.UseIdleAnimations();
+        animator.SetAnimationDuration(0f);
+    }
+
+    void UseAimAnimations() {
+        animator.UseAimAnimations();
+        animator.SetAnimationDuration(0f);
+    }
+
+    void UseAttackAnimations() {
+        animator.UseAttackAnimations();
+        animator.SetAnimationDuration(attackSpeed);
+    }
+
+    void UseReloadAnimation() {
+        int animationCount = animator.UseReloadAnimations();
+        if (0 >= animationCount) { // if the animator has no reload animations use the aim animation
+            UseAimAnimations();
+        } else {
+            animator.SetAnimationDuration(reloadSpeed);
         }
     }
 
-    void DropTarget() {
-        currentAction = 0;
-        target = null;
-        characterAnimator.UseIdleAnimations();
-    }
-
-    void EmitProjectileParticles() {
-        foreach (ParticleSystem pSystem in attackParticleSystems) {
-            pSystem.Emit(1);
-        }
-    }
 }

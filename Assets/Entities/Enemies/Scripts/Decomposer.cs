@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Decomposer : MonoBehaviour
 {
-
     [SerializeField] float delay = 3f;
     [SerializeField] float duration = 3f;
     [SerializeField] float depth = 3f;

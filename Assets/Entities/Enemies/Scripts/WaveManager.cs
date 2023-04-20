@@ -17,9 +17,10 @@ public class WaveManager : MonoBehaviour
     bool waveIsRunning = false;
     bool noMoreWaves = false;
 
-    public int CurrentWaveIndex { get { return currentWaveIndex; } }
-    public bool WaveIsRunning { get { return waveIsRunning; } }
-    public float StartTimer { get { return startTimer; } }
+    public List<Wave> Waves { get { return waves; }}
+    public int CurrentWaveIndex { get { return currentWaveIndex; }}
+    public bool WaveIsRunning { get { return waveIsRunning; }}
+    public float StartTimer { get { return startTimer; }}
 
     Player player;
     ScoreKeeper scoreKeeper;

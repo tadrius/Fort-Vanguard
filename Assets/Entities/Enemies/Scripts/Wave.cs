@@ -14,6 +14,7 @@ public class Wave : ObjectPool {
     bool waveCompleted = false;
     public bool AllSpawned { get { return allSpawned; }}
     public bool WaveCompleted { get { return waveCompleted; }}
+    public List<Unit> SpawnedEnemies { get { return spawnedEnemies; }}
 
     public void Start() {
         StartCoroutine(SpawnEnemies());
