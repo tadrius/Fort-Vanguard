@@ -159,36 +159,43 @@ public class CharacterAnimator : MonoBehaviour
     // returns the number of animations in the list
     public int UseIdleAnimations() {
         currentAnimationList = 0;
+        LoadAnimations();
         return animations.Count;
     }
 
     public int UseWalkAnimations() {
         currentAnimationList = 1;
+        LoadAnimations();
         return animations.Count;
     }
 
     public int UseAimAnimations() {
         currentAnimationList = 2;
+        LoadAnimations();
         return animations.Count;
     }
 
     public int UseAttackAnimations() {
         currentAnimationList = 3;
+        LoadAnimations();
         return animations.Count;
     }
 
     public int UseReloadAnimations() {
         currentAnimationList = 4;
+        LoadAnimations();
         return animations.Count;
     }
 
     public int UseDeathAnimations() {
         currentAnimationList = 5;
+        LoadAnimations();
         return animations.Count;
     }
 
     public int UseSpecialAnimations() {
         currentAnimationList = 6;
+        LoadAnimations();
         return animations.Count;
     }
 

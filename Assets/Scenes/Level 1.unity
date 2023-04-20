@@ -9274,7 +9274,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7059593739647533533, guid: 53ceef4d79cb31d4c88cd2ed80ee8113, type: 3}
       propertyPath: poolSize
-      value: 100
+      value: 145
       objectReference: {fileID: 0}
     - target: {fileID: 7059593739647533533, guid: 53ceef4d79cb31d4c88cd2ed80ee8113, type: 3}
       propertyPath: goldReward
@@ -14065,7 +14065,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7059593739647533533, guid: 53ceef4d79cb31d4c88cd2ed80ee8113, type: 3}
       propertyPath: poolSize
-      value: 70
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 7059593739647533533, guid: 53ceef4d79cb31d4c88cd2ed80ee8113, type: 3}
       propertyPath: goldReward
@@ -15061,7 +15061,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7059593739647533533, guid: 53ceef4d79cb31d4c88cd2ed80ee8113, type: 3}
       propertyPath: poolSize
-      value: 50
+      value: 70
       objectReference: {fileID: 0}
     - target: {fileID: 7059593739647533533, guid: 53ceef4d79cb31d4c88cd2ed80ee8113, type: 3}
       propertyPath: goldReward
@@ -33553,7 +33553,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7059593739647533533, guid: 53ceef4d79cb31d4c88cd2ed80ee8113, type: 3}
       propertyPath: poolSize
-      value: 30
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 7059593739647533533, guid: 53ceef4d79cb31d4c88cd2ed80ee8113, type: 3}
       propertyPath: goldReward
@@ -38509,7 +38509,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7059593739647533533, guid: 53ceef4d79cb31d4c88cd2ed80ee8113, type: 3}
       propertyPath: poolSize
-      value: 90
+      value: 130
       objectReference: {fileID: 0}
     - target: {fileID: 7059593739647533533, guid: 53ceef4d79cb31d4c88cd2ed80ee8113, type: 3}
       propertyPath: goldReward
@@ -45439,7 +45439,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7059593739647533533, guid: 53ceef4d79cb31d4c88cd2ed80ee8113, type: 3}
       propertyPath: poolSize
-      value: 20
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 7059593739647533533, guid: 53ceef4d79cb31d4c88cd2ed80ee8113, type: 3}
       propertyPath: goldReward
@@ -54321,7 +54321,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7059593739647533533, guid: 53ceef4d79cb31d4c88cd2ed80ee8113, type: 3}
       propertyPath: poolSize
-      value: 60
+      value: 85
       objectReference: {fileID: 0}
     - target: {fileID: 7059593739647533533, guid: 53ceef4d79cb31d4c88cd2ed80ee8113, type: 3}
       propertyPath: goldReward
@@ -55267,7 +55267,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7059593739647533533, guid: 53ceef4d79cb31d4c88cd2ed80ee8113, type: 3}
       propertyPath: poolSize
-      value: 80
+      value: 115
       objectReference: {fileID: 0}
     - target: {fileID: 7059593739647533533, guid: 53ceef4d79cb31d4c88cd2ed80ee8113, type: 3}
       propertyPath: goldReward
@@ -67422,7 +67422,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7059593739647533533, guid: 53ceef4d79cb31d4c88cd2ed80ee8113, type: 3}
       propertyPath: poolSize
-      value: 40
+      value: 55
       objectReference: {fileID: 0}
     - target: {fileID: 7059593739647533533, guid: 53ceef4d79cb31d4c88cd2ed80ee8113, type: 3}
       propertyPath: goldReward
@@ -90279,6 +90279,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3675356452793326948, guid: ee61e3a84ce80b749a923d1ca9aa09cf, type: 3}
+      propertyPath: startingBalance
+      value: 250
+      objectReference: {fileID: 0}
     - target: {fileID: 3675356452793326949, guid: ee61e3a84ce80b749a923d1ca9aa09cf, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -91097,6 +91101,10 @@ PrefabInstance:
     - target: {fileID: 7059593739647533532, guid: 53ceef4d79cb31d4c88cd2ed80ee8113, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7059593739647533533, guid: 53ceef4d79cb31d4c88cd2ed80ee8113, type: 3}
+      propertyPath: poolSize
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7059593739647533533, guid: 53ceef4d79cb31d4c88cd2ed80ee8113, type: 3}
       propertyPath: spawnDelay
