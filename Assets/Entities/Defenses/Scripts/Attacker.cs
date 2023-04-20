@@ -50,14 +50,11 @@ public class Attacker : MonoBehaviour
         switch (currentAction) {
             case Action.Idle:
                 FindClosestTarget();
-                if (TargetIsValid()) {
-                    currentAction = Action.Aim;
-                    UseAimAnimations();
-                }
+                AttemptAim();
                 break;
             case Action.Aim:
                 PointWeapon();
-                StartCoroutine(Aim());
+                StartCoroutine(StartAimSequence());
                 break;
             case Action.Attack:
                 PointWeapon();
@@ -103,17 +100,21 @@ public class Attacker : MonoBehaviour
         target = null;
     }
 
-    IEnumerator Aim() {
+    void AttemptAim() {
         if (TargetIsValid()) {
-            yield return StartCoroutine(Attack());
-            if (reloadRequired) {
-                yield return StartCoroutine(Reload());
-            }
             UseAimAnimations();
             currentAction = Action.Aim;
         } else {
-            DropTarget();                            
+            DropTarget();
         }
+    }
+
+    IEnumerator StartAimSequence() {
+        yield return StartCoroutine(Attack());
+        if (reloadRequired) {
+            yield return StartCoroutine(Reload());
+        }
+        AttemptAim();
     }
 
     IEnumerator Reload() {
@@ -127,24 +128,27 @@ public class Attacker : MonoBehaviour
         currentAction = Action.Attack;
         UseAttackAnimations();
         yield return new WaitUntil(() => animator.GetPoseTrigger());
-        projectileParticles.Emit(1);
-        if (null != attackAudio) {
-            attackAudio.Play();
+        
+        if (TargetIsValid()) {
+            projectileParticles.Emit(1);
+            if (null != attackAudio) {
+                attackAudio.Play();
+            }
+            yield return new WaitUntil(() => animator.AnimationCompleted);
+            reloadRequired = true;
+        } else {
+            DropTarget();
         }
-        yield return new WaitUntil(() => animator.AnimationCompleted);
-        reloadRequired = true;
     }
 
     void PointWeapon() {
-        if (null == target) {
-            return;
+        if (null != target) {
+            Vector3 levelTargetPosition = target.position; // use the target's x and z positions and the attacker's y position.
+            levelTargetPosition.y = transform.position.y;
+
+            transform.LookAt(levelTargetPosition);
+            projectileParticles.transform.LookAt(target);
         }
-
-        Vector3 levelTargetPosition = target.position; // use the target's x and z positions and the attacker's y position.
-        levelTargetPosition.y = transform.position.y;
-
-        transform.LookAt(levelTargetPosition);
-        projectileParticles.transform.LookAt(target);
     }
 
     void UseIdleAnimations() {
