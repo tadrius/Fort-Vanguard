@@ -126,7 +126,7 @@ public class Pathfinder : MonoBehaviour
     }
 
     public void NotifyReceivers() {
-        BroadcastMessage(UnitMover.findPathMethodName, 
+        BroadcastMessage(UnitMover.findPathMethodName,  // Broadcast message only reaches this GameObject and its children.
             false, SendMessageOptions.DontRequireReceiver);
     }
 

@@ -56,7 +56,7 @@ public class CharacterAnimator : MonoBehaviour
     void Update() {
         LoadAnimations(); // check if new animations must be loaded
         if (animationCompleted || forceAnimationChange) {
-            SetAnimation(); // set animation and blend with previous, using bool flags to determine if a new animation should be laoded
+            SetAnimation(); // set animation and blend with previous, using bool flags to determine if a new animation should be loaded
         } 
         if (!animationCompleted) {
             PlayAnimation();
@@ -65,7 +65,6 @@ public class CharacterAnimator : MonoBehaviour
 
     // return whether or not the animation was completed
     void PlayAnimation() {
-
         // scale time to play animation to the desired duration
         float timeScaler = 1f;
         if (0f != animationDuration) {
