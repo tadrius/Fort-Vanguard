@@ -43,6 +43,7 @@ public class WaveManager : MonoBehaviour
             wave.gameObject.SetActive(false);
         }
         ResetTimers();
+        startTimer *= 2f; // double the time before the first wave
     }
 
     void Update() {
