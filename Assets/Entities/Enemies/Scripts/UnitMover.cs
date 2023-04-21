@@ -2,34 +2,31 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Unit))]
 public class UnitMover : MonoBehaviour
 {
 
-    [SerializeField] [Range(0f, 10f)] float speed = 1f;
+    float speed = 1f;
 
     Unit unit;
     Pathfinder pathfinder;
     GridManager gridManager;
     List<Node> path = new List<Node>();
 
-    Transform entity; // manipulate the entity's transform to move the entire entity, including the mesh and FX
-
     void Awake() {
-        entity = transform.parent;
-        unit = GetComponent<Unit>();
+        unit = transform.parent.GetComponent<Unit>();
         pathfinder = FindObjectOfType<Pathfinder>();
         gridManager = FindObjectOfType<GridManager>();
     }
 
-    public void BeginMoving() {
+    public void BeginMoving(float speed) {
+        this.speed = speed;
         unit.PlayWalkAnimation(speed);
         MoveToPathStart();
         FindPath(true);
     }
 
     void MoveToPathStart() {
-        entity.position = gridManager.GetPositionFromCoordinates(pathfinder.StartCoordinates);
+        unit.transform.position = gridManager.GetPositionFromCoordinates(pathfinder.StartCoordinates);
     }
 
     readonly public static string findPathMethodName = "FindPath";
@@ -39,7 +36,7 @@ public class UnitMover : MonoBehaviour
             startCoordinates = pathfinder.StartCoordinates;
             endCoordinates = pathfinder.EndCoordinates;
         } else {
-            startCoordinates = gridManager.GetCoordinatesFromPosition(entity.position);
+            startCoordinates = gridManager.GetCoordinatesFromPosition(unit.transform.position);
             endCoordinates = pathfinder.EndCoordinates;
         }
         StopAllCoroutines();
@@ -52,15 +49,15 @@ public class UnitMover : MonoBehaviour
 
     // Coroutine to move along the path
     IEnumerator FollowPath() {
-        for (int i = 1; i < path.Count; i++) { // skip the starting node (enemy will already be there)
-            Vector3 startPos = entity.position;
+        for (int i = 1; i < path.Count; i++) { // skip the starting node
+            Vector3 startPos = unit.transform.position;
             Vector3 endPos = gridManager.GetPositionFromCoordinates(path[i].coordinates);
             float travelPercent = 0f;
 
-            entity.LookAt(endPos);
+            unit.transform.LookAt(endPos);
 
             while(travelPercent < 1f) {
-                entity.position = Vector3.Lerp(startPos, endPos, travelPercent);
+                unit.transform.position = Vector3.Lerp(startPos, endPos, travelPercent);
                 travelPercent += speed * Time.deltaTime;
                 yield return new WaitForEndOfFrame();
             }
@@ -75,6 +72,5 @@ public class UnitMover : MonoBehaviour
         unit.IncurPenalty();
         unit.gameObject.SetActive(false);
         transform.parent.gameObject.SetActive(false);
-        Destroy(transform.parent.gameObject);
     }
 }

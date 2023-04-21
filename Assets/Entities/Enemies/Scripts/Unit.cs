@@ -2,35 +2,48 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(UnitHealth))]
-[RequireComponent(typeof(UnitMover))]
 public class Unit : MonoBehaviour
 {
+    [SerializeField] int maxHitPoints = 10;
+    [SerializeField] [Range(0f, 10f)] float speed = 1f;
     [SerializeField] int pointReward = 1;
     [SerializeField] int goldReward = 7;
     [SerializeField] int healthPenalty = 20;
+    [SerializeField] ParticleSystem damageParticles;
     [SerializeField] GameObject penaltyFX;
     [SerializeField] GameObject deathFX;
 
+    // child components
+    CharacterAnimator animator;
+    UnitHealth unitHealth;
+    UnitMover unitMover;
+
+    // external object components
     ScoreKeeper scoreKeeper;
     Bank bank;
     PlayerHealth playerHealth;
     RuntimeSpawns runtimeSpawns;
-    CharacterAnimator animator;
+
+    public CharacterAnimator Animator { get { return animator; }}
+    public ParticleSystem DamageParticles { get { return damageParticles; }}
 
     void Awake() {
-        animator = transform.parent.GetComponentInChildren<CharacterAnimator>();
+        animator = GetComponentInChildren<CharacterAnimator>(true);
+        unitHealth = GetComponentInChildren<UnitHealth>(true);
+        unitMover = GetComponentInChildren<UnitMover>(true);
 
         GameObject player = GameObject.FindGameObjectWithTag(Player.playerTag);
-        runtimeSpawns = GameObject.FindGameObjectWithTag(RuntimeSpawns.runtimeSpawnsTag)
-            .GetComponent<RuntimeSpawns>();
+        runtimeSpawns = GameObject.FindGameObjectWithTag(RuntimeSpawns.runtimeSpawnsTag).GetComponent<RuntimeSpawns>();
         scoreKeeper = player.GetComponent<ScoreKeeper>(); 
         bank = player.GetComponent<Bank>();
         playerHealth = player.GetComponent<PlayerHealth>();
     }
 
     void OnEnable() {
-        GetComponent<UnitMover>().BeginMoving();
+        unitHealth.gameObject.SetActive(true); // should be the same game object as unit mover
+
+        unitHealth.SetHitPoints(maxHitPoints);
+        unitMover.BeginMoving(speed);
     }
 
     public void DepositReward() {
@@ -61,6 +74,7 @@ public class Unit : MonoBehaviour
     public void PlayWalkAnimation(float animationSpeed) {
         animator.UseWalkAnimations();
         animator.SetAnimationSpeed(animationSpeed);
+        animator.SetLooping(true);
     }
 
     public void PlayDeathAnimation() {

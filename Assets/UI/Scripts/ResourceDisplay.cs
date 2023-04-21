@@ -72,7 +72,7 @@ public class ResourceDisplay : MonoBehaviour
     public void UpdateCountdown() {
         int countdown = 0;
         if (null != waveManager) {
-            if (waveManager.WaveIsRunning) { // show enemies remaining in wave
+            if (waveManager.State == WaveManager.ManagerState.WaveIsRunning) { // show enemies remaining in wave
                 countdown = waveManager.GetCurrentWave().CountRemainingEnemies();
             } else { // show seconds until wave start
                 countdown = Mathf.CeilToInt(Mathf.Max(waveManager.StartTimer, 0f)); // max to keep countdown above 0

@@ -24,18 +24,15 @@ public class Decomposer : MonoBehaviour
         Vector3 startPos = transform.position;
         Vector3 endPos = new Vector3();
         endPos.Set(startPos.x, startPos.y - depth, startPos.z);
-        Vector3 startScale = transform.localScale;
         Vector3 endScale = Vector3.zero;
 
         while (decayTimeElapsed < duration) {
             decayTimeElapsed += Time.deltaTime;
             transform.position = Vector3.Lerp(startPos, endPos, decayTimeElapsed/duration);
-            transform.localScale = Vector3.Lerp(startScale, endScale, decayTimeElapsed/duration);
             yield return new WaitForEndOfFrame();
         }
 
         gameObject.SetActive(false);
-        Destroy(gameObject);
     }
 
 

@@ -11,23 +11,22 @@ public class WaveManager : MonoBehaviour
     [SerializeField] [Range(0f, 1f)] float transitionBuffer = 1f;
     [SerializeField] List<Wave> waves = new List<Wave>();
 
-    float startTimer;
-    float endTimer;
-    int currentWaveIndex = 0;
-    bool waveIsRunning = false;
-    bool noMoreWaves = false;
-
-    public List<Wave> Waves { get { return waves; }}
-    public int CurrentWaveIndex { get { return currentWaveIndex; }}
-    public bool WaveIsRunning { get { return waveIsRunning; }}
-    public float StartTimer { get { return startTimer; }}
-
     Player player;
     ScoreKeeper scoreKeeper;
     Bank bank;
     PlayerHealth playerHealth;
-
     Game game;
+    
+    float startTimer;
+    int currentWaveIndex = 0;
+    ManagerState state = ManagerState.WaveIsReady;
+
+    public List<Wave> Waves { get { return waves; }}
+    public int CurrentWaveIndex { get { return currentWaveIndex; }}
+    public ManagerState State { get { return state; }}
+    public float StartTimer { get { return startTimer; }}
+
+    public enum ManagerState{ WaveIsReady, WaveIsStarting, WaveIsRunning, WaveCompleted, NoMoreWaves, TransitioningWaves };
 
     void Awake() {
         GameObject playerObject = GameObject.FindGameObjectWithTag(Player.playerTag);
@@ -47,52 +46,66 @@ public class WaveManager : MonoBehaviour
     }
 
     void Update() {
-        if (!waveIsRunning) {
-            if (noMoreWaves) {
+        switch (state) {
+            case ManagerState.WaveIsReady:
+                StartCoroutine(StartCurrentWave());
+                break;
+            // case ManagerState.WaveIsStarting:
+            //     break;
+            case ManagerState.WaveIsRunning:
+                CheckForWaveCompletion();
+                break;
+            case ManagerState.WaveCompleted:
+                StartCoroutine(TransitionWaves());
+                break;
+            // case ManagerState.TransitioningWaves:
+            //     break;
+            case ManagerState.NoMoreWaves:
                 game.WinGame();
-            } else {
-                StartCurrentWave();               
-            }
-        } else {
-            if (waves[currentWaveIndex].AllSpawned // End current wave if the contained enemies have all spawned
-                && waves[currentWaveIndex].WaveCompleted) { // And the wave is completed
-                EndCurrentWave();
-            }
-        }      
+                break;
+        }
     }
 
-    void StartCurrentWave() {
-        if (-transitionBuffer < startTimer) { // start delay with buffer
+    IEnumerator StartCurrentWave() {
+        state = ManagerState.WaveIsStarting;
+        while (-transitionBuffer < startTimer) {
             startTimer -= Time.deltaTime;
-            return;
+            yield return new WaitForEndOfFrame();
         }
-        waveIsRunning = true;
         waves[currentWaveIndex].gameObject.SetActive(true);
+        state = ManagerState.WaveIsRunning;
     }
 
-    void EndCurrentWave() {
-        if (-transitionBuffer < endTimer) { // end delay with buffer
-            endTimer -= Time.deltaTime;
-            return;
+    void CheckForWaveCompletion() {
+        if (waves[currentWaveIndex].WaveCompleted) {
+            state = ManagerState.WaveCompleted;
         }
+    }
+
+    IEnumerator TransitionWaves() {
+        state = ManagerState.TransitioningWaves;
+        yield return StartCoroutine(EndCurrentWave());
+        PrepareNextWave();
+    }
+
+    IEnumerator EndCurrentWave() {
+        yield return new WaitForSeconds(transitionBuffer);
         bank.Deposit(waves[currentWaveIndex].GoldReward); // deposit rewards
         scoreKeeper.AddToScore(waves[currentWaveIndex].PointReward);        
-        waveIsRunning = false;
-        PrepareNextWave();
     }
 
     void PrepareNextWave() {
         if (currentWaveIndex + 1 < waves.Count) {
             currentWaveIndex++;
             ResetTimers();
+            state = ManagerState.WaveIsReady;
         } else {
-            noMoreWaves = true;
+            state = ManagerState.NoMoreWaves;
         }
     }
 
     void ResetTimers() {
         startTimer = waveDelay; // reset start timer
-        endTimer = 0f; // reset end timer       
     }
 
     public Wave GetCurrentWave() {

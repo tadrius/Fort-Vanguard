@@ -2,28 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Unit))]
 public class UnitHealth : MonoBehaviour
 {
+    int maxHitPoints = 10;
+    int currentHitPoints;
 
-    [SerializeField] int maxHitPoints = 10;
-    [SerializeField] ParticleSystem damageParticles;
-
-    int currentHitPoints = 0;
     Unit unit;
     Decomposer decomposer;
 
-    void Awake() {
-        decomposer = GetComponentInParent<Decomposer>();
-    }
-
     void Start() {
-        unit = GetComponent<Unit>();
+        unit = transform.parent.GetComponent<Unit>();
+        decomposer = transform.parent.GetComponent<Decomposer>();
     }
 
-    void OnEnable()
-    {
-        currentHitPoints = maxHitPoints;
+    public void SetHitPoints(int hitPoints) {
+        this.maxHitPoints = hitPoints;
+        this.currentHitPoints = hitPoints;
     }
 
     void OnParticleCollision(GameObject other) {
@@ -39,12 +33,15 @@ public class UnitHealth : MonoBehaviour
         unit.PlayDeathAnimation();
         unit.DepositReward();
         decomposer.BeginDecomposing();
+
+        // disable unit component and object with function components (including UnitHealth and UnitMover)
+        unit.enabled = false;
         gameObject.SetActive(false);
     }
 
     void PlayDamageFX() {
-        if (null != damageParticles) {
-            damageParticles.Play();
+        if (null != unit.DamageParticles) {
+            unit.DamageParticles.Play();
         }
     }
 }

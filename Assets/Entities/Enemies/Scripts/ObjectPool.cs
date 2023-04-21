@@ -5,11 +5,12 @@ using UnityEngine;
 public class ObjectPool : MonoBehaviour
 {
 
-    [SerializeField] [Range(0, 200)] protected int poolSize = 50;
-    [SerializeField] [Range(0.05f, 20f)] protected float spawnDelay = 1.75f;
+    [SerializeField] [Range(0, 200)] int poolSize = 50;
     [SerializeField] GameObject objectPrefab;
 
-    protected GameObject[] objects;
+    GameObject[] objects;
+
+    public int PoolSize { get { return poolSize; }}
 
     void Awake() {
         PopulatePool();
@@ -24,25 +25,33 @@ public class ObjectPool : MonoBehaviour
         }
     }
 
-    void EnableObjectInPool() {
+    // Enable any object in the pool. Return a boolean indicating success.
+    public GameObject EnableObject() {
         foreach (GameObject obj in objects) {
             if (!obj.activeSelf) {
                 obj.SetActive(true);
-                return;
+                return obj; // object enabled
             }
         }
+        return null; // no objects to enable
     }
 
-    IEnumerator SpawnObjectsContinuously() {
-        while (true) {
-            EnableObjectInPool();
-            yield return new WaitForSeconds(spawnDelay);
+    // Enable the object at the given index and return it. If the obj 
+    public GameObject EnableObject(int index) {
+        if (index < poolSize) {
+            GameObject obj = objects[index];
+            if (!obj.activeSelf) {
+                obj.SetActive(true);
+                return obj;
+            }
         }
+        return null; // index is out-of-bounds or object is already enabled
     }
 
+    // Returns true if any object in the pool is active.
     public bool ObjectsAreActive() {
-        foreach (GameObject poolObject in objects) {
-            if (null != poolObject && poolObject.activeSelf) { // null check to handle destroyed objects
+        foreach (GameObject obj in objects) {
+            if (null != obj && obj.activeSelf) {
                 return true;
             }
         }

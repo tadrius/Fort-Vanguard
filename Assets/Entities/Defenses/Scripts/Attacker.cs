@@ -70,13 +70,13 @@ public class Attacker : MonoBehaviour
         float maxDistance = range;
 
         Wave wave = waveManager.Waves[waveManager.CurrentWaveIndex]; // only need to consider at enemies in current wave
-        if (null != wave) {
-            foreach (Unit en in wave.SpawnedEnemies) {
-                if (null != en) {
-                    float enemyDistance = Vector3.Distance(transform.position, en.transform.position);
-                    if (en.gameObject.activeSelf && enemyDistance < maxDistance) {
-                        closestTarget = en.transform;
-                        maxDistance = enemyDistance;
+        if (null != wave && null != wave.SpawnedUnits) {
+            foreach (Unit un in wave.SpawnedUnits) {
+                if (un.isActiveAndEnabled) {
+                    float distance = Vector3.Distance(transform.position, un.transform.position);
+                    if (distance < maxDistance) {
+                        closestTarget = un.transform;
+                        maxDistance = distance;
                     }
                 }
             }
@@ -85,7 +85,7 @@ public class Attacker : MonoBehaviour
     }
 
     bool TargetIsValid() {
-        if (null != target && target.gameObject.activeSelf) {
+        if (null != target && target.GetComponent<Unit>().isActiveAndEnabled) {
             float targetDistance = Vector3.Distance(transform.position, target.position);
             if (range >= targetDistance) {
                 return true;
