@@ -22,8 +22,11 @@ public class CharacterAnimator : MonoBehaviour
     [Tooltip("If false, after the current animation has played a random animation from the same list will load.")]
     [SerializeField] bool lockAnimation = true;
 
-    [Tooltip("If true, animations will play one after another.")]
-    [SerializeField] bool looping = true;
+    [Tooltip("If true, animations from the current list will play one after another.")]
+    [SerializeField] bool loopAnimations = true;
+
+    [Tooltip("If true, animations will blend into one another.")]
+    [SerializeField] bool blendAnimations = true;
 
     bool forceAnimationChange;
 
@@ -36,6 +39,7 @@ public class CharacterAnimator : MonoBehaviour
     // for transitioning from one animation to another
     AnimationPose blendPose;
     bool animationCompleted;
+    bool looping = false; // indicates whether or not the current animation is looping (in which case it should not use the blend pose)
     float excessProgress;
 
     public bool AnimationCompleted { get { return animationCompleted; }}
@@ -75,7 +79,8 @@ public class CharacterAnimator : MonoBehaviour
         timeScaler *= animationSpeed;
 
         // play the animation
-        animationCompleted = currentAnimation.PlayAnimation(Time.deltaTime * timeScaler, animationRig, blendPose);
+        animationCompleted = currentAnimation.PlayAnimation(Time.deltaTime * timeScaler, animationRig, blendPose, 
+            blendAnimations && !looping);   // only blend if blending is set and the animation is not looping
     }
 
     void SetAnimation() {
@@ -91,7 +96,7 @@ public class CharacterAnimator : MonoBehaviour
     }
 
     void SetAnimation(CharacterAnimation animation) {
-        animationCompleted = !(forceAnimationChange || looping); // mark animation completed false if looping or force animation change is enabled
+        animationCompleted = !(forceAnimationChange || loopAnimations); // mark animation completed false if looping or force animation change is enabled
         forceAnimationChange = false; // should only be true for a single update after loading a new animation list
 
         if (!currentAnimation.Equals(animation)) {
@@ -100,9 +105,9 @@ public class CharacterAnimator : MonoBehaviour
             blendPose.SetPose(new AnimationPose.Pose(currentAnimation.CurrentPose)); // set the blend pose to the current pose before switching to a new animation 
             currentAnimation.gameObject.SetActive(false);
             currentAnimation = animation;
-            currentAnimation.useBlendPose = true;
+            looping = false;
         } else {
-            currentAnimation.useBlendPose = false;
+            looping = true; // playing the same animation
         }
     }
 
@@ -114,8 +119,12 @@ public class CharacterAnimator : MonoBehaviour
         animationSpeed = speed;
     }
 
-    public void SetLooping(bool looping) {
-        this.looping = looping;
+    public void SetLoopAnimations(bool loop) {
+        this.loopAnimations = loop;
+    }
+
+    public void SetBlendAnimations(bool blend) {
+        this.blendAnimations = blend;
     }
 
     public bool GetPoseTrigger() {

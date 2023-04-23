@@ -72,15 +72,17 @@ public class Unit : MonoBehaviour
 
     // Animation Methods
     public void PlayWalkAnimation(float animationSpeed) {
+        animator.SetBlendAnimations(false); // unit should snap to walking (prevents blending from death animation if was killed then respawned)
         animator.UseWalkAnimations();
         animator.SetAnimationSpeed(animationSpeed);
-        animator.SetLooping(true);
+        animator.SetLoopAnimations(true);
     }
 
     public void PlayDeathAnimation() {
+        animator.SetBlendAnimations(true);
         animator.UseDeathAnimations();
         animator.SetAnimationSpeed(1f);
-        animator.SetLooping(false);
+        animator.SetLoopAnimations(false);
     }
 
 }

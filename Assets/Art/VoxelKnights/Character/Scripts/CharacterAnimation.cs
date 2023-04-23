@@ -14,7 +14,6 @@ public class CharacterAnimation : MonoBehaviour
     float totalDuration;
     bool poseTrigger;
 
-    public bool useBlendPose;
     public AnimationPose.Pose CurrentPose { get { return currentPose; }}
     public float TotalDuration { get { return totalDuration; }}
     public float TransitionProgress { get { return transitionProgress; }}
@@ -61,10 +60,10 @@ public class CharacterAnimation : MonoBehaviour
     }
 
     // returns a bool indicating if the animation has finished
-    public bool PlayAnimation(float animationProgress, AnimationRig rig, AnimationPose blendPose) {
+    public bool PlayAnimation(float animationProgress, AnimationRig rig, AnimationPose blendPose, bool blend) {
         bool animationComplete = false;
         // if this is the start of the animation and blending is enabled, replace the first pose with the blend pose
-        if (0 == previousPoseIndex && useBlendPose && null != blendPose.GetPose()) {
+        if (0 == previousPoseIndex && blend && null != blendPose.GetPose()) {
             CreateCurrentPose(blendPose, GetNextPose());
         } else {
             CreateCurrentPose(GetPreviousPose(), GetNextPose());
