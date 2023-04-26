@@ -8,8 +8,12 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 25887222321070501, guid: aff4e09874e9de44c8156947fa07a756, type: 3}
+      propertyPath: m_text
+      value: 0,0
+      objectReference: {fileID: 0}
+    - target: {fileID: 25887222321070501, guid: aff4e09874e9de44c8156947fa07a756, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 25887222321070501, guid: aff4e09874e9de44c8156947fa07a756, type: 3}
       propertyPath: m_fontColor.b
@@ -22,6 +26,10 @@ PrefabInstance:
     - target: {fileID: 25887222321070501, guid: aff4e09874e9de44c8156947fa07a756, type: 3}
       propertyPath: m_fontColor.r
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 25887222321070501, guid: aff4e09874e9de44c8156947fa07a756, type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4286611584
       objectReference: {fileID: 0}
     - target: {fileID: 386491482599796199, guid: aff4e09874e9de44c8156947fa07a756, type: 3}
       propertyPath: isOccupied
@@ -86,10 +94,10 @@ PrefabInstance:
     - target: {fileID: 6042331486175856313, guid: aff4e09874e9de44c8156947fa07a756, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: -2432149286581523428, guid: 188ea90cdfe6c634eb85f7a132fcebeb, type: 3}
+      objectReference: {fileID: -8469494145858465668, guid: 11e3509b14eaebb4e8b6023d85880990, type: 3}
     - target: {fileID: 7133444902226534957, guid: aff4e09874e9de44c8156947fa07a756, type: 3}
       propertyPath: m_Mesh
       value: 
-      objectReference: {fileID: -2432090755550338912, guid: fa1397209d9adee4db5f8a2bba8327f0, type: 3}
+      objectReference: {fileID: -2432090755550338912, guid: 11e3509b14eaebb4e8b6023d85880990, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: aff4e09874e9de44c8156947fa07a756, type: 3}
