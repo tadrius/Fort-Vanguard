@@ -7,6 +7,8 @@ public class WaveManager : MonoBehaviour
 
     [Tooltip("The number of seconds between the end of the previous wave and the start of the next wave.")]
     [SerializeField] float waveDelay = 10f;
+    [Tooltip("The first wave will start after the wave delay times the multiplier.")]
+    [SerializeField] float startDelayMultipler = 3f;
     [Tooltip("A short time buffer, in seconds, between waves and their delays.")]
     [SerializeField] [Range(0f, 1f)] float transitionBuffer = 1f;
     [SerializeField] List<Wave> waves = new List<Wave>();
@@ -43,7 +45,7 @@ public class WaveManager : MonoBehaviour
             wave.gameObject.SetActive(false);
         }
         ResetTimers();
-        startTimer *= 2f; // double the time before the first wave
+        startTimer *= startDelayMultipler; // double the time before the first wave
     }
 
     void Update() {
