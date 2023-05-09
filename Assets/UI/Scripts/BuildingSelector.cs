@@ -28,7 +28,7 @@ public class BuildingSelector : MonoBehaviour
     }
 
     void WriteBuildingInfo() {
-        nameText.text = building.name;
+        nameText.text = building.BuildingName;
         costText.text = $"{building.Cost}";
     }
 

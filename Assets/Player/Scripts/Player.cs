@@ -9,6 +9,8 @@ using UnityEngine.SceneManagement;
 [RequireComponent(typeof(Builder))]
 public class Player : MonoBehaviour
 {
+    [SerializeField] Faction playerFaction;
+
     readonly public static string playerTag = "Player";
 
     Bank bank;
@@ -16,6 +18,7 @@ public class Player : MonoBehaviour
     ScoreKeeper scoreKeeper;
     Builder builder;
 
+    public Faction PlayerFaction { get { return playerFaction; } }
     public ScoreKeeper ScoreKeeper { get { return scoreKeeper; } }
 
     void Awake() {
