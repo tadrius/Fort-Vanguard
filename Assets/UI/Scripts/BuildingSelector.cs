@@ -7,24 +7,28 @@ using TMPro;
 public class BuildingSelector : MonoBehaviour
 {
 
-    [Tooltip("Indicates if this selector is activated at the start. Only one selector should have this enabled.")]
-    [SerializeField] bool isInitialSelection = false;
     [SerializeField] Building building;
     [SerializeField] TMP_Text nameText;
     [SerializeField] TMP_Text costText;
     [SerializeField] Image selectionIcon;
 
-    BuildingSelector[] selectors;
+    BuildingPanel buildPanel;
 
     Builder builder;
 
+    public void SetBuilding(Building building)
+    {
+        this.building = building;
+    }
+
     void Awake() {
-        selectors = FindObjectsOfType<BuildingSelector>();
+        buildPanel = FindObjectOfType<BuildingPanel>();
         builder = GameObject.FindGameObjectWithTag(Player.playerTag).GetComponent<Builder>();
-        WriteBuildingInfo();
-        if (isInitialSelection) {
-            Select();
-        }
+    }
+
+    private void Start()
+    {
+        WriteBuildingInfo(); // write building info at start (text objects are null on awake)
     }
 
     void WriteBuildingInfo() {
@@ -37,7 +41,7 @@ public class BuildingSelector : MonoBehaviour
         builder.SetBuildingPrefab(building);
 
         // Deselect all other building selectors
-        foreach (BuildingSelector selector in selectors) {
+        foreach (BuildingSelector selector in buildPanel.BuildSelectors) {
             if (this != selector) {
                 selector.Deselect();
             }           

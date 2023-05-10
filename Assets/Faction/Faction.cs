@@ -9,11 +9,8 @@ public class Faction : MonoBehaviour
 
     [Header("Player Entities")]
     [SerializeField] Building playerHeadquarters;
-    [SerializeField] Building pike;
-    [SerializeField] Building bow;
-    [SerializeField] Building crossbow;
-    [SerializeField] Building bowTower;
-    [SerializeField] Building crossbowTower;
+    [Tooltip("All constructable buildings. Order of list determines order of buttons in the building panel.")]
+    [SerializeField] List<Building> constructables;
 
     [Header("Enemy Entities")]
     [SerializeField] Building enemyHeadquarters;
@@ -28,5 +25,6 @@ public class Faction : MonoBehaviour
     [SerializeField] Unit lightChampion;
 
     public enum FactionName { Duke, Sheikh, Jarl };
+    public List<Building> Constructables { get { return constructables; } }
 
 }

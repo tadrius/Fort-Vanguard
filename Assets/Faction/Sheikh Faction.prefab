@@ -46,11 +46,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   factionName: 1
   playerHeadquarters: {fileID: 3336064876840913456, guid: 4d8d79554691b694e9de64ce831a24a9, type: 3}
-  pike: {fileID: 8716173846940649073, guid: b38271b73a68e20419cee24c4117b8b9, type: 3}
-  bow: {fileID: 3189865142983444636, guid: 3450fb2c081311747a0bbb333d953a88, type: 3}
-  crossbow: {fileID: 8808335501749838077, guid: b93ff206449d4294ebb738c7c6de5098, type: 3}
-  bowTower: {fileID: 3752756323254394113, guid: dce948a2b2e583248b4b6d2eb8d0f1d8, type: 3}
-  crossbowTower: {fileID: 1475047218045151579, guid: d4a1de27f1f9fa3499f1082812441603, type: 3}
+  constructables:
+  - {fileID: 1475047218045151579, guid: d4a1de27f1f9fa3499f1082812441603, type: 3}
+  - {fileID: 3752756323254394113, guid: dce948a2b2e583248b4b6d2eb8d0f1d8, type: 3}
+  - {fileID: 8808335501749838077, guid: b93ff206449d4294ebb738c7c6de5098, type: 3}
+  - {fileID: 3189865142983444636, guid: 3450fb2c081311747a0bbb333d953a88, type: 3}
+  - {fileID: 8716173846940649073, guid: b38271b73a68e20419cee24c4117b8b9, type: 3}
   enemyHeadquarters: {fileID: 3336064876840913456, guid: 9e9464c2a407946479f12325c06e624f, type: 3}
   heavyStandard: {fileID: 8558042364214785068, guid: c0ea5f2f0b7f8dc4f821c4bd99a53f92, type: 3}
   mediumStandard: {fileID: 6842861846297817246, guid: 2dbb3ef6a40c62a4a91ba129fc9d2b61, type: 3}

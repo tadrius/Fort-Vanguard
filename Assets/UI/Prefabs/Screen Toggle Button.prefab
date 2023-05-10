@@ -81,7 +81,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2957610720585573341, guid: 6c4e304cd7c0cb543a645e3f5a47d5e2, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 28
+      value: 24
       objectReference: {fileID: 0}
     - target: {fileID: 2957610720585573341, guid: 6c4e304cd7c0cb543a645e3f5a47d5e2, type: 3}
       propertyPath: m_LocalPosition.x
@@ -166,8 +166,6 @@ MonoBehaviour:
   screenIsActiveText: Return
   screenIsInactiveText: Menu
   selectionIcon: {fileID: 8491450120269517175}
-  hotkeyEnabled: 0
-  screenIsActive: 0
 --- !u!114 &8491450120269517175 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3959193253829741311, guid: 6c4e304cd7c0cb543a645e3f5a47d5e2, type: 3}
