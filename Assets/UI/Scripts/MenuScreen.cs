@@ -46,6 +46,11 @@ public class MenuScreen : MonoBehaviour
         FindObjectOfType<Game>().RestartGame();
     }
 
+    public void ReturnToMainMenu()
+    {
+        FindObjectOfType<Game>().LoadMainMenu();
+    }
+
     public void ExitGame() {
         FindObjectOfType<Game>().QuitGame();
     }

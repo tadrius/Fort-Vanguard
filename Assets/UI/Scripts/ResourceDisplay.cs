@@ -36,7 +36,7 @@ public class ResourceDisplay : MonoBehaviour
         UpdateHealth();
         UpdateGold();
         UpdateWave(); 
-        UpdateCountdown();   
+        UpdateCountdown();
     }
 
     public void UpdateScore() {

@@ -7,7 +7,7 @@ public class Scoreboard : MonoBehaviour
 {
 
     // a list of int score values
-    List<int> scores = new List<int>();
+    [SerializeField] List<int> scores = new List<int>();
     HighScoreComparer comparer = new HighScoreComparer();
 
     void Awake() {
@@ -37,7 +37,7 @@ public class Scoreboard : MonoBehaviour
         }
     }
 
-    public void AddScore(int score) {
+    public void AddScore(int score) { // TODO - only keep track of top 10 scores
         scores.Add(score);
         scores.Sort(comparer);
     }

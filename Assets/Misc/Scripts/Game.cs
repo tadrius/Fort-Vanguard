@@ -14,7 +14,11 @@ public class Game : MonoBehaviour
 
     void Awake() {
         UnpauseGame();
-        player = GameObject.FindGameObjectWithTag(Player.playerTag).GetComponent<Player>();
+        GameObject playerObject = GameObject.FindGameObjectWithTag(Player.playerTag);
+        if (null != playerObject)   // player not active in main menu
+        {
+            player = playerObject.GetComponent<Player>();
+        }
     }
 
     public void StartGame() {
@@ -22,18 +26,24 @@ public class Game : MonoBehaviour
     }
 
     public void RestartGame() {
-        player.ScoreKeeper.UpdateScoreboard();
+        UpdateScoreboard();
         ReloadScene();
     }
 
     public void WinGame() {
-        player.ScoreKeeper.UpdateScoreboard();
+        UpdateScoreboard();
         gameOverScreen.OpenWinScreen();
     }
 
     public void LoseGame() {
-        player.ScoreKeeper.UpdateScoreboard();
+        UpdateScoreboard();
         gameOverScreen.OpenLoseScreen();
+    }
+
+    public void LoadMainMenu()
+    {
+        UpdateScoreboard();
+        LoadScene(0, loadDelay);
     }
 
     public void PauseGame() {
@@ -91,6 +101,14 @@ public class Game : MonoBehaviour
         {
             Debug.Log("Scene build index is greater than scene count. Loading the first scene.");
             loadingScreen.LoadScene(0);
+        }
+    }
+
+    void UpdateScoreboard()
+    {
+        if (null != player)
+        {
+            player.ScoreKeeper.UpdateScoreboard();
         }
     }
 
