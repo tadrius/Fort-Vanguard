@@ -10,22 +10,26 @@ using UnityEngine.SceneManagement;
 public class Player : MonoBehaviour
 {
     [SerializeField] Faction playerFaction;
+    [SerializeField] Vector2Int headquartersCoordinates = new Vector2Int(20, 17);
 
     readonly public static string playerTag = "Player";
 
-    Bank bank;
-    PlayerHealth playerHealth;
     ScoreKeeper scoreKeeper;
-    Builder builder;
 
     public Faction PlayerFaction { get { return playerFaction; } }
     public ScoreKeeper ScoreKeeper { get { return scoreKeeper; } }
+    public Vector2Int HeadquartersCoordinates { get { return headquartersCoordinates; } }
 
     void Awake() {
-        bank = GetComponent<Bank>();
-        playerHealth = GetComponent<PlayerHealth>();
         scoreKeeper = GetComponent<ScoreKeeper>();
-        builder = GetComponent<Builder>();
+    }
+
+    private void Start()
+    {
+        // create the player's headquarters visuals
+        GridManager gridManager = FindObjectOfType<GridManager>();
+        GameObject headquarters = GameObject.Instantiate(playerFaction.PlayerHeadquarters, transform);
+        headquarters.transform.localPosition = gridManager.GetPositionFromCoordinates(headquartersCoordinates);
     }
 
 }

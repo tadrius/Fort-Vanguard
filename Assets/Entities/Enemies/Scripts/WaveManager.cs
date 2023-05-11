@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class WaveManager : MonoBehaviour
 {
-
+    [Tooltip("Determines the visuals of the enemy units and headquarters.")]
+    [SerializeField] Faction enemyFaction;
     [Tooltip("The number of seconds between the end of the previous wave and the start of the next wave.")]
     [SerializeField] float waveDelay = 10f;
     [Tooltip("The first wave will start after the wave delay times the multiplier.")]
@@ -12,11 +13,11 @@ public class WaveManager : MonoBehaviour
     [Tooltip("A short time buffer, in seconds, between waves and their delays.")]
     [SerializeField] [Range(0f, 1f)] float transitionBuffer = 1f;
     [SerializeField] List<Wave> waves = new List<Wave>();
+    [Tooltip("The location of the enemy headquarters, from which enemies will spawn.")]
+    [SerializeField] Vector2Int headquartersCoordinates = new Vector2Int(10, 13);
 
-    Player player;
     ScoreKeeper scoreKeeper;
     Bank bank;
-    PlayerHealth playerHealth;
     Game game;
     
     float startTimer;
@@ -27,15 +28,14 @@ public class WaveManager : MonoBehaviour
     public int CurrentWaveIndex { get { return currentWaveIndex; }}
     public ManagerState State { get { return state; }}
     public float StartTimer { get { return startTimer; }}
+    public Vector2Int HeadquartersCoordinates { get { return headquartersCoordinates; } }
 
     public enum ManagerState{ WaveIsReady, WaveIsStarting, WaveIsRunning, WaveCompleted, NoMoreWaves, TransitioningWaves };
 
     void Awake() {
         GameObject playerObject = GameObject.FindGameObjectWithTag(Player.playerTag);
-        player = playerObject.GetComponent<Player>();
         scoreKeeper = playerObject.GetComponent<ScoreKeeper>(); 
         bank = playerObject.GetComponent<Bank>();
-        playerHealth = playerObject.GetComponent<PlayerHealth>();
         
         game = FindObjectOfType<Game>();
     }
@@ -46,6 +46,11 @@ public class WaveManager : MonoBehaviour
         }
         ResetTimers();
         startTimer *= startDelayMultipler; // double the time before the first wave
+
+        // create the enemy's headquarters visuals
+        GridManager gridManager = FindObjectOfType<GridManager>();
+        GameObject headquarters = GameObject.Instantiate(enemyFaction.PlayerHeadquarters, transform);
+        headquarters.transform.localPosition = gridManager.GetPositionFromCoordinates(headquartersCoordinates);
     }
 
     void Update() {

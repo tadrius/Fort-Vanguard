@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class Pathfinder : MonoBehaviour
 {
-
+    [Tooltip("If true, start and end coordinates will be taken from the Player and Wave Manager.")]
+    [SerializeField] bool fetchCoordinates = true;
     [SerializeField] Vector2Int startCoordinates;
     public Vector2Int StartCoordinates { get { return startCoordinates; }}
     [SerializeField] Vector2Int endCoordinates;
@@ -23,6 +24,14 @@ public class Pathfinder : MonoBehaviour
     Dictionary<Vector2Int, Node> grid;
 
     void Awake() {
+        if (fetchCoordinates)
+        {
+            Player player = FindObjectOfType<Player>();
+            WaveManager enemy = FindObjectOfType<WaveManager>();
+            startCoordinates = enemy.HeadquartersCoordinates;
+            endCoordinates = player.HeadquartersCoordinates;
+        }
+
         gridManager = FindObjectOfType<GridManager>();
         if (null != gridManager) {
             grid = gridManager.Grid;

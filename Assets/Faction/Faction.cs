@@ -8,12 +8,12 @@ public class Faction : MonoBehaviour
     [SerializeField] FactionName factionName = FactionName.Duke;
 
     [Header("Player Entities")]
-    [SerializeField] Building playerHeadquarters;
+    [SerializeField] GameObject playerHeadquarters;
     [Tooltip("All constructable buildings. Order of list determines order of buttons in the building panel.")]
     [SerializeField] List<Building> constructables;
 
     [Header("Enemy Entities")]
-    [SerializeField] Building enemyHeadquarters;
+    [SerializeField] GameObject enemyHeadquarters;
     [SerializeField] Unit heavyStandard;
     [SerializeField] Unit mediumStandard;
     [SerializeField] Unit lightStandard;
@@ -25,6 +25,8 @@ public class Faction : MonoBehaviour
     [SerializeField] Unit lightChampion;
 
     public enum FactionName { Duke, Sheikh, Jarl };
+    public GameObject PlayerHeadquarters { get { return playerHeadquarters; } }
     public List<Building> Constructables { get { return constructables; } }
+    public GameObject EnemyHeadquarters { get { return enemyHeadquarters; } }
 
 }
