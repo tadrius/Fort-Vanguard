@@ -6,7 +6,7 @@ public class ObjectPool : MonoBehaviour
 {
 
     [SerializeField] [Range(0, 200)] int poolSize = 50;
-    [SerializeField] GameObject objectPrefab;
+    [SerializeField] protected GameObject objectPrefab;
 
     GameObject[] objects;
 
@@ -16,7 +16,7 @@ public class ObjectPool : MonoBehaviour
         PopulatePool();
     }
 
-    void PopulatePool() {
+    protected void PopulatePool() {
         objects = new GameObject[poolSize];
         for (int i = 0; i < objects.Length; i++) {
             objects[i] = GameObject.Instantiate(objectPrefab, transform);

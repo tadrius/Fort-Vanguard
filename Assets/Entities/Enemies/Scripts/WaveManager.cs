@@ -24,6 +24,7 @@ public class WaveManager : MonoBehaviour
     int currentWaveIndex = 0;
     ManagerState state = ManagerState.WaveIsReady;
 
+    public Faction EnemyFaction { get { return enemyFaction; } }
     public List<Wave> Waves { get { return waves; }}
     public int CurrentWaveIndex { get { return currentWaveIndex; }}
     public ManagerState State { get { return state; }}

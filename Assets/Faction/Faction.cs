@@ -29,4 +29,16 @@ public class Faction : MonoBehaviour
     public List<Building> Constructables { get { return constructables; } }
     public GameObject EnemyHeadquarters { get { return enemyHeadquarters; } }
 
+    public Unit HeavyStandard { get { return heavyStandard; } }
+    public Unit MediumStandard { get { return mediumStandard; } }
+    public Unit LightStandard { get { return lightStandard; } }
+    public Unit HeavyVeteran { get { return heavyVeteran; } }
+    public Unit MediumVeteran { get { return mediumVeteran; } }
+    public Unit LightVeteran { get { return lightVeteran; } }
+    public Unit HeavyChampion { get { return heavyChampion; } }
+    public Unit MediumChampion { get { return mediumChampion; } }
+    public Unit LightChampion { get { return lightChampion; } }
+
+
+
 }
