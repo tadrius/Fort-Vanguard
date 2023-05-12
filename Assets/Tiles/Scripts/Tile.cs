@@ -51,7 +51,7 @@ public class Tile : MonoBehaviour
             return;
         }
 
-        if (builder.Building.CheckSiteCompatibility(this) & !WillBlockPathfinding()) {
+        if (builder.CheckSiteCompatibility(this) & !WillBlockPathfinding()) {
             validSiteDisplay.SetActive(true);
         } else {
             invalidSiteDisplay.SetActive(true);
@@ -77,7 +77,7 @@ public class Tile : MonoBehaviour
         } else { 
             // otherwise, create a new building
             if (!WillBlockPathfinding()) {
-                buildingObject = builder.Building.CreateBuilding(this);
+                buildingObject = builder.CreateBuilding(this);
                 if (null != buildingObject) {
                     BlockTile();
                 }

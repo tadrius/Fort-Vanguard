@@ -23,6 +23,7 @@ public class Building : MonoBehaviour
     Player player;
     public string BuildingName { get { return buildingName; }}
     public int Cost { get { return cost; }}
+    public bool IsPlatformBuildable { get { return isPlatformBuildable; } }
     public bool IsElevated { get { return isElevated; }}
 
     void Awake() {
@@ -32,19 +33,6 @@ public class Building : MonoBehaviour
 
     void Start() {
         StartCoroutine(Construct());
-    }
-
-    public GameObject CreateBuilding(Tile tile) {
-        RuntimeSpawns runtimeSpawns = GameObject.FindGameObjectWithTag(RuntimeSpawns.runtimeSpawnsTag)
-            .GetComponent<RuntimeSpawns>();
-        Bank bank = FindObjectOfType<Bank>();
-        
-        if (CheckSiteCompatibility(tile) && WithdrawCost(bank)) {
-            GameObject newBuilding = runtimeSpawns.SpawnObject(gameObject, tile.transform.position);
-            newBuilding.GetComponent<Building>().SetIsElevated(tile.IsPlatform);
-            return newBuilding;
-        }
-        return null;
     }
 
     IEnumerator Construct() {
@@ -105,22 +93,6 @@ public class Building : MonoBehaviour
         SpawnDismantleFX();
         Destroy(gameObject);
         return true;
-    }
-
-    public bool CheckSiteCompatibility(Tile tile) {
-        if (tile.IsBuildSite && !tile.IsOccupied) {
-            if (!tile.IsPlatform || (tile.IsPlatform && isPlatformBuildable)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    bool WithdrawCost(Bank bank) {
-        if (null != bank && bank.Withdraw(cost)) {
-            return true;
-        }
-        return false;
     }
 
     bool DepositRefund(Bank bank) {
