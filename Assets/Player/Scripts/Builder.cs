@@ -1,26 +1,52 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEditor.ObjectChangeEventStream;
 
 public class Builder : MonoBehaviour
 {
 
-    [SerializeField] bool refunding = false;
+    [SerializeField] Mode builderMode = Mode.Construct;
     [SerializeField] Building building;
 
-    public bool Refunding { get { return refunding; } }
+    public Mode BuilderMode { get { return builderMode; } }
     public Building Building { get { return building; } }
 
-    public void SetRefunding(bool refunding)
+    public enum Mode { Construct, Refund };
+
+    public void SetBuilderMode(Mode mode)
     {
-        this.refunding = refunding;
+        this.builderMode = mode;
     }
 
     public void SetBuildingPrefab(Building building) {
         this.building = building;
     }
 
-    public GameObject CreateBuilding(Tile tile)
+    public Building Build(Tile tile)
+    {
+        Building newBuilding = null;
+
+        // if a building exists on the given tile, attempt to refund it
+        if (null != tile.Building)
+        {
+            if (tile.Building.RefundBuilding())
+            {
+                tile.UnblockTile();
+            }
+        }
+        else if (!tile.WillBlockPathfinding()) // otherwise try and create a new building
+        {
+            newBuilding = CreateBuilding(tile);
+            if (null != newBuilding)
+            {
+                tile.BlockTile();
+            }
+        }
+        return newBuilding;
+    }
+
+    public Building CreateBuilding(Tile tile)
     {
         RuntimeSpawns runtimeSpawns = GameObject.FindGameObjectWithTag(RuntimeSpawns.runtimeSpawnsTag)
             .GetComponent<RuntimeSpawns>();
@@ -28,8 +54,9 @@ public class Builder : MonoBehaviour
 
         if (CheckSiteCompatibility(tile) && WithdrawCost(bank))
         {
-            GameObject newBuilding = runtimeSpawns.SpawnObject(building.gameObject, tile.transform.position);
-            newBuilding.GetComponent<Building>().SetIsElevated(tile.IsPlatform);
+            GameObject newBuildingObjecct = runtimeSpawns.SpawnObject(building.gameObject, tile.transform.position);
+            Building newBuilding = newBuildingObjecct.GetComponent<Building>();
+            newBuilding.SetIsElevated(tile.IsPlatform);
             return newBuilding;
         }
         return null;

@@ -14,16 +14,17 @@ public class Tile : MonoBehaviour
     [SerializeField] bool isBuildSite = true;
     [SerializeField] bool isPlatform = false;
 
-    public bool IsOccupied { get { return isOccupied; } }
-    public bool IsBuildSite { get { return isBuildSite; } }
-    public bool IsPlatform { get { return isPlatform; } } 
-
     GridManager gridManager;
     Pathfinder pathfinder;
     Builder builder;
-    GameObject buildingObject;
+    Building building;
 
     Vector2Int coordinates = new Vector2Int();
+
+    public bool IsOccupied { get { return isOccupied; } }
+    public bool IsBuildSite { get { return isBuildSite; } }
+    public bool IsPlatform { get { return isPlatform; } }
+    public Building Building { get { return building; } }
 
     void Awake() {
         gridManager = FindObjectOfType<GridManager>();
@@ -66,23 +67,7 @@ public class Tile : MonoBehaviour
         if (EventSystem.current.IsPointerOverGameObject()) { // return if a UI element is being pointed at
             return;
         }
-
-        Building building;
-        if (null != buildingObject) {
-            // if a building exists on this tile, attempt to destroy it
-            building = buildingObject.GetComponent<Building>();
-            if (building.RefundBuilding()) {
-                UnblockTile();
-            }
-        } else { 
-            // otherwise, create a new building
-            if (!WillBlockPathfinding()) {
-                buildingObject = builder.CreateBuilding(this);
-                if (null != buildingObject) {
-                    BlockTile();
-                }
-            }
-        }
+        building = builder.Build(this);
         DisableBuildSiteDisplays();
     }
 
@@ -99,7 +84,7 @@ public class Tile : MonoBehaviour
     }
 
     // checks if blocking this tile's associated node will interfere with pathfinding
-    bool WillBlockPathfinding() {
+    public bool WillBlockPathfinding() {
         if (null != gridManager.GetNode(coordinates) 
             && gridManager.GetNode(coordinates).isTraversable ) {
             return pathfinder.WillBlockPath(coordinates);
@@ -107,13 +92,13 @@ public class Tile : MonoBehaviour
         return false; // if tile is not involved with pathfinding then building will not block
     }
 
-    void BlockTile() {
+    public void BlockTile() {
         isOccupied = true;
         gridManager.BlockNode(coordinates);
         pathfinder.NotifyReceivers();
     }
 
-    void UnblockTile() {
+    public void UnblockTile() {
         isOccupied = false;
         gridManager.UnblockNode(coordinates);
         pathfinder.NotifyReceivers();  
