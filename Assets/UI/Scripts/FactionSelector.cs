@@ -25,12 +25,7 @@ public class FactionSelector : MonoBehaviour
             factionOptionDataList.Add(factionOptionData);
         }
         dropdown.AddOptions(factionOptionDataList);
-        dropdown.value = 0;
-    }
-
-    private void Start()
-    {
-        SelectFaction();
+        dropdown.value = settings.GetFactionIndex(settings.PlayerFaction); // to re-use previously selected faction
     }
 
     public void SelectFaction()

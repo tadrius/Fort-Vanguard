@@ -38,7 +38,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
+  m_SizeDelta: {x: 800, y: 450}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1772122384362122280
 MonoBehaviour:
@@ -88,7 +88,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: 84}
+  m_AnchoredPosition: {x: 0, y: 108}
   m_SizeDelta: {x: 100, y: 24}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &8973289713407739127
@@ -223,8 +223,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: 64}
-  m_SizeDelta: {x: 100, y: 24}
+  m_AnchoredPosition: {x: 0, y: -118}
+  m_SizeDelta: {x: 125, y: 24}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &6887319114842500111
 CanvasRenderer:
@@ -503,7 +503,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -42}
+  m_AnchoredPosition: {x: 0, y: -24}
   m_SizeDelta: {x: 0, y: 24}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!222 &2090856228879071002
@@ -534,7 +534,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Build Defences to prevent Enemies from reaching your Castle.
+  m_text: 'Build Defences to prevent Enemies from reaching your Caste.
 
     If an
     Enemy reaches your Castle, you lose Health.
@@ -551,24 +551,24 @@ MonoBehaviour:
     on a valid Tile, highlighted in green.
 
     If you can afford the Gold cost,
-    construction will begin.
+    the Defence will begin constructing.
 
 
     Tips...
 
-    Click on a Defence''s tile to refund
-    it for half its Gold cost.
+    Click on a Defence''s
+    tile to refund it for half its Gold cost.
 
-    Crossbows are longer range than Bows but shoot
-    slower.
+    Crossbows are longer range than
+    Bows but reload more slowly.
 
     Bows and Crossbows can be built atop Towers.
 
-    Towers and Defenses
-    built atop them have increased range and can shoot over nearby trees.
+    Towers
+    and Defenses built atop them have increased range and can shoot over nearby trees.
 
-    You
-    cannot refund a Tower before refunding any Defences built atop it.
+    To
+    refund a Tower you must refund any Defences built atop it first.
 
     You cannot
     fully block the Enemies'' path.'

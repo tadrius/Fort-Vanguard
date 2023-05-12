@@ -8,7 +8,7 @@ public class FactionSettings : MonoBehaviour
     [SerializeField] Faction playerFaction;
     [SerializeField] List<Faction> factions;
 
-    readonly Dictionary<string, Faction> factionsByName = new Dictionary<string, Faction>();
+    readonly Dictionary<string, Faction> factionsByName = new ();
 
     public Faction PlayerFaction { get { return playerFaction; } }
     public List<Faction> Factions { get { return factions; } }
@@ -30,6 +30,11 @@ public class FactionSettings : MonoBehaviour
     void SetPlayerFaction(Faction playerFaction)
     {
         this.playerFaction = playerFaction;
+    }
+
+    public int GetFactionIndex(Faction faction)
+    {
+        return factions.IndexOf(faction);
     }
 
 }
