@@ -21,6 +21,7 @@ public class Player : MonoBehaviour
     public Vector2Int HeadquartersCoordinates { get { return headquartersCoordinates; } }
 
     void Awake() {
+        playerFaction = FindObjectOfType<FactionSettings>().PlayerFaction;
         scoreKeeper = GetComponent<ScoreKeeper>();
     }
 

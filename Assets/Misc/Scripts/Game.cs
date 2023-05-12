@@ -10,15 +10,11 @@ public class Game : MonoBehaviour
     [SerializeField] GameOverScreen gameOverScreen;
     [SerializeField] LoadingScreen loadingScreen;
 
-    Player player;
+    Scoreboard scoreboard;
 
     void Awake() {
         UnpauseGame();
-        GameObject playerObject = GameObject.FindGameObjectWithTag(Player.playerTag);
-        if (null != playerObject)   // player not active in main menu
-        {
-            player = playerObject.GetComponent<Player>();
-        }
+        scoreboard = FindObjectOfType<Scoreboard>();
     }
 
     public void StartGame() {
@@ -26,33 +22,31 @@ public class Game : MonoBehaviour
     }
 
     public void RestartGame() {
-        UpdateScoreboard();
+        scoreboard.UpdateScoreboard();
         ReloadScene();
     }
 
     public void WinGame() {
-        UpdateScoreboard();
+        scoreboard.UpdateScoreboard();
         gameOverScreen.OpenWinScreen();
     }
 
     public void LoseGame() {
-        UpdateScoreboard();
+        scoreboard.UpdateScoreboard();
         gameOverScreen.OpenLoseScreen();
     }
 
     public void LoadMainMenu()
     {
-        UpdateScoreboard();
+        scoreboard.UpdateScoreboard();
         LoadScene(0, loadDelay);
     }
 
     public void PauseGame() {
-        Debug.Log("Game paused.");
         Time.timeScale = 0f;
     }
 
     public void UnpauseGame() {
-        Debug.Log("Game unpaused.");
         Time.timeScale = 1f;
     }
 
@@ -101,14 +95,6 @@ public class Game : MonoBehaviour
         {
             Debug.Log("Scene build index is greater than scene count. Loading the first scene.");
             loadingScreen.LoadScene(0);
-        }
-    }
-
-    void UpdateScoreboard()
-    {
-        if (null != player)
-        {
-            player.ScoreKeeper.UpdateScoreboard();
         }
     }
 

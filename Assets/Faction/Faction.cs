@@ -5,7 +5,7 @@ using UnityEngine;
 public class Faction : MonoBehaviour
 {
     
-    [SerializeField] FactionName factionName = FactionName.Duke;
+    [SerializeField] string factionName = "Faction Name";
 
     [Header("Player Entities")]
     [SerializeField] GameObject playerHeadquarters;
@@ -24,7 +24,7 @@ public class Faction : MonoBehaviour
     [SerializeField] Unit mediumChampion;
     [SerializeField] Unit lightChampion;
 
-    public enum FactionName { Duke, Sheikh, Jarl };
+    public string FactionName { get { return factionName; } }
     public GameObject PlayerHeadquarters { get { return playerHeadquarters; } }
     public List<Building> Constructables { get { return constructables; } }
     public GameObject EnemyHeadquarters { get { return enemyHeadquarters; } }

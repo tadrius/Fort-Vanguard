@@ -37,6 +37,16 @@ public class Scoreboard : MonoBehaviour
         }
     }
 
+    public void UpdateScoreboard()
+    {
+        GameObject playerObject = GameObject.FindGameObjectWithTag(Player.playerTag);
+        if (null != playerObject)   // player not active in main menu
+        {
+            Player player = playerObject.GetComponent<Player>();
+            player.ScoreKeeper.UpdateScoreboard();
+        }
+    }
+
     public void AddScore(int score) { // TODO - only keep track of top 10 scores
         scores.Add(score);
         scores.Sort(comparer);
