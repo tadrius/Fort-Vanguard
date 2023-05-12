@@ -5,6 +5,9 @@ using UnityEngine;
 public class BuildingPanel : MonoBehaviour
 {
 
+    [Tooltip("Generic selectors that will be added to the panel after the faction building selectors.")]
+    [SerializeField] List<BuildingSelector> standardSelectors = new List<BuildingSelector>();
+    [Tooltip("Prefab for selector buttons that will be generated for all of the player faction's buildings.")]
     [SerializeField] BuildingSelector buildButton;
     [Tooltip("A positional offset applied to all buttons.")]
     [SerializeField] float buttonYOffset = 12f;
@@ -18,14 +21,22 @@ public class BuildingPanel : MonoBehaviour
 
     private void Awake()
     {
+        AddFactionButtons();
+        AddStandardButtons();
+        buildSelectors[buildSelectors.Count - 1 - standardSelectors.Count].SelectBuilding(); // select the last faction button
+    }
+
+    void AddFactionButtons()
+    {
         Player player = GameObject.FindGameObjectWithTag(Player.playerTag).GetComponent<Player>();
         playerFaction = player.PlayerFaction;
         List<Building> buildings = playerFaction.Constructables;
-        BuildingSelector button;
-        for (int i = 0; i < buildings.Count; i++) {
+        for (int i = 0; i < buildings.Count; i++)
+        {
             Building building = buildings[i];
-            if (null != building) {
-                button = GameObject.Instantiate(buildButton, transform); // create the button
+            if (null != building)
+            {
+                BuildingSelector button = GameObject.Instantiate(buildButton, transform); // create the button
                 button.SetBuilding(building); // assign the building
 
                 Vector3 buttonPosition = Vector3.zero;
@@ -35,6 +46,18 @@ public class BuildingPanel : MonoBehaviour
                 buildSelectors.Add(button); // add the button the list
             }
         }
-        buildSelectors[buildSelectors.Count - 1].Select(); // select the last button
+    }
+
+    void AddStandardButtons()
+    {
+        for (int i = 0; i < standardSelectors.Count; i++)
+        {
+            BuildingSelector button = GameObject.Instantiate(standardSelectors[i], transform); // create the button
+            Vector3 buttonPosition = Vector3.zero;
+            buttonPosition.y = buttonYOffset + (i * buttonSpacing) + (playerFaction.Constructables.Count * buttonSpacing);
+            button.GetComponent<RectTransform>().localPosition = buttonPosition; // position the button
+
+            buildSelectors.Add(button); // add the button the list
+        }
     }
 }

@@ -182,6 +182,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Build Button
       objectReference: {fileID: 0}
+    - target: {fileID: 1413542588873091555, guid: 6c4e304cd7c0cb543a645e3f5a47d5e2, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2957610720585573331, guid: 6c4e304cd7c0cb543a645e3f5a47d5e2, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -189,14 +193,14 @@ PrefabInstance:
     - target: {fileID: 2957610720585573331, guid: 6c4e304cd7c0cb543a645e3f5a47d5e2, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 785057951}
+      objectReference: {fileID: 172111036542298364}
     - target: {fileID: 2957610720585573331, guid: 6c4e304cd7c0cb543a645e3f5a47d5e2, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: PlayButtonFX
       objectReference: {fileID: 0}
     - target: {fileID: 2957610720585573331, guid: 6c4e304cd7c0cb543a645e3f5a47d5e2, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: Select
+      value: SelectBuilding
       objectReference: {fileID: 0}
     - target: {fileID: 2957610720585573331, guid: 6c4e304cd7c0cb543a645e3f5a47d5e2, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
@@ -321,7 +325,7 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1019011410002504426, guid: 6c4e304cd7c0cb543a645e3f5a47d5e2, type: 3}
   m_PrefabInstance: {fileID: 4528259207247263410}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &785057951
+--- !u!114 &172111036542298364
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

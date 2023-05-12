@@ -19,29 +19,39 @@ public class Builder : MonoBehaviour
         this.builderMode = mode;
     }
 
-    public void SetBuildingPrefab(Building building) {
+    public void SetToRefund()
+    {
+        this.building = null;
+        this.builderMode = Mode.Refund;
+    }
+
+    public void SetToConstruct(Building building) {
         this.building = building;
+        this.builderMode = Mode.Construct;
     }
 
     public Building Build(Tile tile)
     {
         Building newBuilding = null;
 
-        // if a building exists on the given tile, attempt to refund it
-        if (null != tile.Building)
+        switch (builderMode)
         {
-            if (tile.Building.RefundBuilding())
-            {
-                tile.UnblockTile();
-            }
-        }
-        else if (!tile.WillBlockPathfinding()) // otherwise try and create a new building
-        {
-            newBuilding = CreateBuilding(tile);
-            if (null != newBuilding)
-            {
-                tile.BlockTile();
-            }
+            case Mode.Construct:
+                if (!tile.WillBlockPathfinding())
+                {
+                    newBuilding = CreateBuilding(tile);
+                    if (null != newBuilding)
+                    {
+                        tile.BlockTile();
+                    }
+                }
+                break;
+            case Mode.Refund:
+                if (null != tile.Building && tile.Building.RefundBuilding())
+                {
+                    tile.UnblockTile();
+                }
+                break;
         }
         return newBuilding;
     }

@@ -28,24 +28,40 @@ public class BuildingSelector : MonoBehaviour
 
     private void Start()
     {
-        WriteBuildingInfo(); // write building info at start (text objects are null on awake)
+        if (building != null)
+        {
+            WriteBuildingInfo(); // write building info at start (text objects are null on awake)
+        }
     }
-
     void WriteBuildingInfo() {
         nameText.text = building.BuildingName;
         costText.text = $"{building.Cost}";
     }
 
-    public void Select() {
+    public void SelectRefund()
+    {
         selectionIcon.enabled = true;
-        builder.SetBuildingPrefab(building);
+        builder.SetToRefund();
+        DeselectOtherSelectors();
+    }
 
+
+    public void SelectBuilding() {
+        selectionIcon.enabled = true;
+        builder.SetToConstruct(building);
+        DeselectOtherSelectors();
+    }
+
+    void DeselectOtherSelectors()
+    {
         // Deselect all other building selectors
-        foreach (BuildingSelector selector in buildPanel.BuildSelectors) {
-            if (this != selector) {
+        foreach (BuildingSelector selector in buildPanel.BuildSelectors)
+        {
+            if (this != selector)
+            {
                 selector.Deselect();
-            }           
-        }    
+            }
+        }
     }
 
     public void Deselect() {
