@@ -8,6 +8,7 @@ public class Builder : MonoBehaviour
 
     [SerializeField] Mode builderMode = Mode.Construct;
     [SerializeField] Building building;
+    [SerializeField] float refundMultiplier = 0.5f;
 
     public Mode BuilderMode { get { return builderMode; } }
     public Building Building { get { return building; } }
@@ -30,30 +31,29 @@ public class Builder : MonoBehaviour
         this.builderMode = Mode.Construct;
     }
 
-    public Building Build(Tile tile)
+    public void Build(Tile tile)
     {
-        Building newBuilding = null;
-
         switch (builderMode)
         {
             case Mode.Construct:
                 if (!tile.WillBlockPathfinding())
                 {
-                    newBuilding = CreateBuilding(tile);
+                    Building newBuilding = CreateBuilding(tile);
                     if (null != newBuilding)
                     {
+                        tile.SetBuilding(newBuilding);
                         tile.BlockTile();
                     }
                 }
                 break;
             case Mode.Refund:
-                if (null != tile.Building && tile.Building.RefundBuilding())
+                if (null != tile.Building && tile.Building.RefundBuilding(refundMultiplier))
                 {
+                    tile.SetBuilding(null);
                     tile.UnblockTile();
                 }
                 break;
         }
-        return newBuilding;
     }
 
     public Building CreateBuilding(Tile tile)

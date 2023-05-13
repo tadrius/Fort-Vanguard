@@ -72,9 +72,9 @@ public class Building : MonoBehaviour
         }     
     }
 
-    public bool RefundBuilding() {
+    public bool RefundBuilding(float refundMultiplier) {
         if (DestroyBuilding()) {
-            return DepositRefund(FindObjectOfType<Bank>());
+            return DepositRefund(FindObjectOfType<Bank>(), refundMultiplier);
         }
         return false;
     }
@@ -95,8 +95,8 @@ public class Building : MonoBehaviour
         return true;
     }
 
-    bool DepositRefund(Bank bank) {
-        if (null != bank && bank.Deposit(cost/2)) {
+    bool DepositRefund(Bank bank, float refundMultiplier) {
+        if (null != bank && bank.Deposit((int)((float) cost * refundMultiplier))) {
             return true;
         }
         return false;

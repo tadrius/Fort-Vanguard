@@ -22,23 +22,23 @@ public class Game : MonoBehaviour
     }
 
     public void RestartGame() {
-        scoreboard.UpdateScoreboard();
+        UpdateScoreboard();
         ReloadScene();
     }
 
     public void WinGame() {
-        scoreboard.UpdateScoreboard();
+        UpdateScoreboard();
         gameOverScreen.OpenWinScreen();
     }
 
     public void LoseGame() {
-        scoreboard.UpdateScoreboard();
+        UpdateScoreboard();
         gameOverScreen.OpenLoseScreen();
     }
 
     public void LoadMainMenu()
     {
-        scoreboard.UpdateScoreboard();
+        UpdateScoreboard();
         LoadScene(0, loadDelay);
     }
 
@@ -52,6 +52,14 @@ public class Game : MonoBehaviour
 
     public void QuitGame() {
         StartCoroutine(QuitApplicationWithDelay(loadDelay));
+    }
+
+    void UpdateScoreboard()
+    {
+        if (scoreboard != null)
+        {
+            scoreboard.UpdateScoreboard();
+        }
     }
 
     IEnumerator QuitApplicationWithDelay(float loadDelay) {

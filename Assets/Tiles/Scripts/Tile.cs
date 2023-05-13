@@ -67,7 +67,7 @@ public class Tile : MonoBehaviour
         if (EventSystem.current.IsPointerOverGameObject()) { // return if a UI element is being pointed at
             return;
         }
-        building = builder.Build(this);
+        builder.Build(this);
         DisableBuildSiteDisplays();
     }
 
@@ -90,6 +90,11 @@ public class Tile : MonoBehaviour
             return pathfinder.WillBlockPath(coordinates);
         };
         return false; // if tile is not involved with pathfinding then building will not block
+    }
+
+    public void SetBuilding(Building building) 
+    {
+        this.building = building;
     }
 
     public void BlockTile() {
