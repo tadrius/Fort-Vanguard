@@ -6,34 +6,35 @@ using static UnityEditor.ObjectChangeEventStream;
 public class Builder : MonoBehaviour
 {
 
-    [SerializeField] Mode builderMode = Mode.Construct;
+    [SerializeField] Mode buildMode = Mode.Construct;
     [SerializeField] Building building;
     [SerializeField] float refundMultiplier = 0.5f;
 
-    public Mode BuilderMode { get { return builderMode; } }
+    public Mode BuildMode { get { return buildMode; } }
     public Building Building { get { return building; } }
+    public float RefundMultiplier { get { return refundMultiplier; } }
 
     public enum Mode { Construct, Refund };
 
     public void SetBuilderMode(Mode mode)
     {
-        this.builderMode = mode;
+        this.buildMode = mode;
     }
 
     public void SetToRefund()
     {
         this.building = null;
-        this.builderMode = Mode.Refund;
+        this.buildMode = Mode.Refund;
     }
 
     public void SetToConstruct(Building building) {
         this.building = building;
-        this.builderMode = Mode.Construct;
+        this.buildMode = Mode.Construct;
     }
 
     public void Build(Tile tile)
     {
-        switch (builderMode)
+        switch (buildMode)
         {
             case Mode.Construct:
                 if (!tile.WillBlockPathfinding())

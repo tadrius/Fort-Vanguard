@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class BuildingSelector : MonoBehaviour
+public class BuildSelector : MonoBehaviour
 {
 
     [SerializeField] Building building;
@@ -12,7 +12,7 @@ public class BuildingSelector : MonoBehaviour
     [SerializeField] TMP_Text costText;
     [SerializeField] Image selectionIcon;
 
-    BuildingPanel buildPanel;
+    BuildPanel buildPanel;
 
     Builder builder;
 
@@ -22,17 +22,32 @@ public class BuildingSelector : MonoBehaviour
     }
 
     void Awake() {
-        buildPanel = FindObjectOfType<BuildingPanel>();
+        buildPanel = FindObjectOfType<BuildPanel>();
         builder = GameObject.FindGameObjectWithTag(Player.playerTag).GetComponent<Builder>();
     }
 
     private void Start()
     {
+        WriteButtonInfo();
         if (building != null)
         {
             WriteBuildingInfo(); // write building info at start (text objects are null on awake)
         }
     }
+
+    void WriteButtonInfo()
+    {
+        if ("Refund".Equals(nameText.text))
+        {
+            Builder builder = GameObject.FindObjectOfType<Builder>();
+            costText.text = $"{100f * builder.RefundMultiplier}%"; // write the refund amount as a percentage
+        }
+        else if (building != null)
+        {
+            WriteBuildingInfo(); // write building info at start (text objects are null on awake)
+        }
+    }
+
     void WriteBuildingInfo() {
         nameText.text = building.BuildingName;
         costText.text = $"{building.Cost}";
@@ -55,7 +70,7 @@ public class BuildingSelector : MonoBehaviour
     void DeselectOtherSelectors()
     {
         // Deselect all other building selectors
-        foreach (BuildingSelector selector in buildPanel.BuildSelectors)
+        foreach (BuildSelector selector in buildPanel.BuildSelectors)
         {
             if (this != selector)
             {
