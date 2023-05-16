@@ -20,16 +20,10 @@ public class Building : MonoBehaviour
 
     bool isElevated = false;
 
-    Player player;
     public string BuildingName { get { return buildingName; }}
     public int Cost { get { return cost; }}
     public bool IsPlatformBuildable { get { return isPlatformBuildable; } }
     public bool IsElevated { get { return isElevated; }}
-
-    void Awake() {
-        player = GameObject.FindGameObjectWithTag(Player.playerTag).GetComponent<Player>();
-
-    }
 
     void Start() {
         StartCoroutine(Construct());

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Attacker : MonoBehaviour
@@ -16,6 +17,9 @@ public class Attacker : MonoBehaviour
     AudioSource attackAudio;
     ParticleSystem projectileParticles;
 
+    float reloadMultiplier = 1f;   // A multiplier on the reload speed, allowing for buffs and debuffs.
+    bool buffsChanged = false;
+    Dictionary<Buffer, Buff> buffsBySource = new Dictionary<Buffer, Buff>();
     Transform target;
     Building building;
     WaveManager waveManager;
@@ -24,6 +28,7 @@ public class Attacker : MonoBehaviour
     Action currentAction;
     enum Action { Idle, Walk, Aim, Attack, Reload, Death, Special };
 
+    public bool BuffsChanged { get {  return buffsChanged; } set {  buffsChanged = value; } }
 
     void Awake() {
         animator = GetComponentInChildren<CharacterAnimator>();
@@ -47,6 +52,9 @@ public class Attacker : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (buffsChanged) {
+            UpdateBuffEffects();
+        }
         switch (currentAction) {
             case Action.Idle:
                 FindClosestTarget();
@@ -63,6 +71,35 @@ public class Attacker : MonoBehaviour
                 PointWeapon();
                 break;
         }
+    }
+
+    public Buff AddBuff(Buffer buffer)
+    {
+        if (buffsBySource.TryAdd(buffer, buffer.Buff))  // try adding the buffer with a placeholder to the buffs dictionary.
+        {
+            Buff buff = Instantiate(buffer.Buff, transform); // if this works, create an instance of the buff
+            buffsBySource[buffer] = buff; // replace the placeholder with the newly created buff 
+            buffsChanged = true;
+            return buff;
+        }
+        return null;
+    }
+
+    void UpdateBuffEffects()
+    {
+        float reloadMultiplier = 1f;
+        foreach (KeyValuePair<Buffer, Buff> bufferToBuff in buffsBySource.ToList())
+        {
+            Buffer buffer = bufferToBuff.Key;
+            if (null != buffer && buffer.InRange(this))
+            {
+                reloadMultiplier *= bufferToBuff.Value.ReloadMultiplier;
+            } else
+            {
+                buffsBySource.Remove(bufferToBuff.Key);
+            }
+        }
+        this.reloadMultiplier = reloadMultiplier;
     }
 
     void FindClosestTarget() {
@@ -120,7 +157,7 @@ public class Attacker : MonoBehaviour
     IEnumerator Reload() {
         currentAction = Action.Reload;
         UseReloadAnimation();
-        yield return new WaitForSeconds(reloadSpeed);
+        yield return new WaitForSeconds(reloadSpeed * reloadMultiplier);
         reloadRequired = false;
     }
 
@@ -171,7 +208,7 @@ public class Attacker : MonoBehaviour
         if (0 >= animationCount) { // if the animator has no reload animations use the aim animation
             UseAimAnimations();
         } else {
-            animator.SetAnimationDuration(reloadSpeed);
+            animator.SetAnimationDuration(reloadSpeed * reloadMultiplier);
         }
     }
 

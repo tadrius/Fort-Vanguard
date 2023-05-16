@@ -40,7 +40,6 @@ public class CharacterAnimator : MonoBehaviour
     AnimationPose blendPose;
     bool animationCompleted;
     bool looping = false; // indicates whether or not the current animation is looping (in which case it should not use the blend pose)
-    float excessProgress;
 
     public bool AnimationCompleted { get { return animationCompleted; }}
 
@@ -117,6 +116,11 @@ public class CharacterAnimator : MonoBehaviour
 
     public void SetAnimationSpeed(float speed) {
         animationSpeed = speed;
+    }
+
+    public void SetAnimationLock(bool isLocked)
+    {
+        this.lockAnimation = isLocked;
     }
 
     public void SetLoopAnimations(bool loop) {

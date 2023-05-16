@@ -10,9 +10,12 @@ public class Builder : MonoBehaviour
     [SerializeField] Building building;
     [SerializeField] float refundMultiplier = 0.5f;
 
+    [SerializeField] List<Building> existingBuildings = new List<Building>();
+
     public Mode BuildMode { get { return buildMode; } }
     public Building Building { get { return building; } }
     public float RefundMultiplier { get { return refundMultiplier; } }
+    public List<Building> ExistingBuildings { get { return existingBuildings; } }
 
     public enum Mode { Construct, Refund };
 
@@ -40,6 +43,7 @@ public class Builder : MonoBehaviour
                 if (!tile.WillBlockPathfinding())
                 {
                     Building newBuilding = CreateBuilding(tile);
+                    existingBuildings.Add(newBuilding);
                     if (null != newBuilding)
                     {
                         tile.SetBuilding(newBuilding);
@@ -48,8 +52,10 @@ public class Builder : MonoBehaviour
                 }
                 break;
             case Mode.Refund:
-                if (null != tile.Building && tile.Building.RefundBuilding(refundMultiplier))
+                if (null != tile.Building)
                 {
+                    existingBuildings.Remove(tile.Building);
+                    tile.Building.RefundBuilding(refundMultiplier);
                     tile.SetBuilding(null);
                     tile.UnblockTile();
                 }
