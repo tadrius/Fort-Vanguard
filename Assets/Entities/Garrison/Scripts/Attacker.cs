@@ -110,9 +110,10 @@ public class Attacker : MonoBehaviour
         if (null != wave && null != wave.SpawnedUnits) {
             foreach (Unit un in wave.SpawnedUnits) {
                 if (un.isActiveAndEnabled) {
-                    float distance = Vector3.Distance(transform.position, un.transform.position);
+                    Collider collider = un.GetComponentInChildren<Collider>();
+                    float distance = Vector3.Distance(transform.position, collider.transform.position);
                     if (distance < maxDistance) {
-                        closestTarget = un.transform;
+                        closestTarget = collider.transform;
                         maxDistance = distance;
                     }
                 }
@@ -122,7 +123,7 @@ public class Attacker : MonoBehaviour
     }
 
     bool TargetIsValid() {
-        if (null != target && target.GetComponent<Unit>().isActiveAndEnabled) {
+        if (null != target && target.gameObject.activeInHierarchy) {
             float targetDistance = Vector3.Distance(transform.position, target.position);
             if (range >= targetDistance) {
                 return true;
