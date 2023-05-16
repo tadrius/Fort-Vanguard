@@ -81,12 +81,23 @@ public class Builder : MonoBehaviour
 
     public bool CheckSiteCompatibility(Tile tile)
     {
-        if (tile.IsBuildSite && !tile.IsOccupied)
+        switch (buildMode)
         {
-            if (!tile.IsPlatform || (tile.IsPlatform && building.IsPlatformBuildable))
-            {
-                return true;
-            }
+            case Mode.Construct:
+                if (tile.IsBuildSite && !tile.IsOccupied)
+                {
+                    if (!tile.IsPlatform || (tile.IsPlatform && building.IsPlatformBuildable))
+                    {
+                        return true;
+                    }
+                }
+                break;
+            case Mode.Refund:
+                if (null != tile.Building)
+                {
+                    return true;
+                }
+                break;
         }
         return false;
     }
