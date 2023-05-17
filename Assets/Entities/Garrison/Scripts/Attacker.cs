@@ -42,7 +42,7 @@ public class Attacker : MonoBehaviour
     {
         building = GetComponentInParent<Building>();
         if (building.IsElevated) {
-            range *= 2;
+            range *= 1.75f; // TODO - Get range multiplier from platform building
         }
         reloadRequired = false;
         currentAction = Action.Idle;

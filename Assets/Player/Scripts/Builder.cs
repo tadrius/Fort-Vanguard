@@ -92,7 +92,7 @@ public class Builder : MonoBehaviour
                 }
                 break;
             case Mode.Refund:
-                if (null != tile.Building)
+                if (null != tile.Building && !tile.Building.IsActivePlatform())
                 {
                     return true;
                 }

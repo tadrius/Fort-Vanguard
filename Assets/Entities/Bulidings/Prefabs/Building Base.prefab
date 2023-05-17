@@ -9766,6 +9766,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bcf51633213305c4d8fc768294fc2f39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  buildingName: Building
   cost: 50
   isPlatformBuildable: 1
   parts:
@@ -9777,6 +9778,7 @@ MonoBehaviour:
   constructionAudio: {fileID: 3569558436740983131}
   constructionTime: 3
   dismantleFX: {fileID: 3022548671944094706, guid: a10312bbe28ecb948b3c466add4908f8, type: 3}
+  elevationMultiplier: 0
 --- !u!1 &7499321727430441042
 GameObject:
   m_ObjectHideFlags: 0

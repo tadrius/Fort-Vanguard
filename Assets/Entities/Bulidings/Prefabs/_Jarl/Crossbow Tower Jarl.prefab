@@ -7,6 +7,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1509619246344958887, guid: c083589e76a7d7d4e858a844d20ee985, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3274118476100186190, guid: c083589e76a7d7d4e858a844d20ee985, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -57,73 +61,3 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c083589e76a7d7d4e858a844d20ee985, type: 3}
---- !u!4 &4207446274756804262 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2254092607720078193, guid: c083589e76a7d7d4e858a844d20ee985, type: 3}
-  m_PrefabInstance: {fileID: 2678515126752396759}
-  m_PrefabAsset: {fileID: 0}
---- !u!1001 &3736331876357176956
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 4207446274756804262}
-    m_Modifications:
-    - target: {fileID: 449076863164189117, guid: f179eb7b56c1ed9448a6ff33e57c051d, type: 3}
-      propertyPath: m_Name
-      value: Crossbow Jarl
-      objectReference: {fileID: 0}
-    - target: {fileID: 3071240093396739136, guid: f179eb7b56c1ed9448a6ff33e57c051d, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3824822795491393289, guid: f179eb7b56c1ed9448a6ff33e57c051d, type: 3}
-      propertyPath: m_RootOrder
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3824822795491393289, guid: f179eb7b56c1ed9448a6ff33e57c051d, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3824822795491393289, guid: f179eb7b56c1ed9448a6ff33e57c051d, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3824822795491393289, guid: f179eb7b56c1ed9448a6ff33e57c051d, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3824822795491393289, guid: f179eb7b56c1ed9448a6ff33e57c051d, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3824822795491393289, guid: f179eb7b56c1ed9448a6ff33e57c051d, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3824822795491393289, guid: f179eb7b56c1ed9448a6ff33e57c051d, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3824822795491393289, guid: f179eb7b56c1ed9448a6ff33e57c051d, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3824822795491393289, guid: f179eb7b56c1ed9448a6ff33e57c051d, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3824822795491393289, guid: f179eb7b56c1ed9448a6ff33e57c051d, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3824822795491393289, guid: f179eb7b56c1ed9448a6ff33e57c051d, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8482239145355722920, guid: f179eb7b56c1ed9448a6ff33e57c051d, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: f179eb7b56c1ed9448a6ff33e57c051d, type: 3}

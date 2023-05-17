@@ -73,15 +73,27 @@ public class Building : MonoBehaviour
         return false;
     }
 
-    public bool DestroyBuilding() {
+
+    // if this building has any child tiles and any of these tiles are in use
+    // then this building is being used as a platform and cannot be destroyed
+    public bool IsActivePlatform()
+    {
         Tile[] tiles = GetComponentsInChildren<Tile>();
-        // if this building has any child tiles and any of these tiles are in use
-        // then this building is being used as a platform and cannot be destroyed
-        foreach (Tile tile in tiles) {
-            if (tile.IsOccupied) {
+        foreach (Tile tile in tiles)
+        {
+            if (tile.IsOccupied)
+            {
                 Debug.Log("Cannot destroy a building being used as a platform.");
-                return false;
-            }        
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public bool DestroyBuilding() {
+        if (IsActivePlatform())
+        {
+            return false;
         }
         // otherwise destroy the building
         SpawnDismantleFX();
