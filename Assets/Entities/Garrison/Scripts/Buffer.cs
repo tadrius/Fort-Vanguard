@@ -9,8 +9,9 @@ public class Buffer : MonoBehaviour
 
     [SerializeField] float range = 30f;
     [SerializeField] Buff buff;
-    [SerializeField] List<Attacker> buffTargets = new List<Attacker>();
-    [SerializeField] List<Buff> activeBuffs = new List<Buff>();
+
+    List<Attacker> buffTargets = new List<Attacker>();
+    List<Buff> activeBuffs = new List<Buff>();
 
     Builder builder;
     CharacterAnimator animator;
