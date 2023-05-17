@@ -7,6 +7,7 @@ public class UnitHealth : MonoBehaviour
     int maxHitPoints = 10;
     int currentHitPoints;
 
+    bool isDead = false;
     Unit unit;
     Decomposer decomposer;
 
@@ -18,19 +19,27 @@ public class UnitHealth : MonoBehaviour
     public void SetHitPoints(int hitPoints) {
         this.maxHitPoints = hitPoints;
         this.currentHitPoints = hitPoints;
+
+        if (currentHitPoints > 0)
+        {
+            isDead = false;
+        }
     }
 
     void OnParticleCollision(GameObject other) {
         currentHitPoints--;
         PlayDamageFX();
-        if (0 >= currentHitPoints) {
-            Kill();
+        if (0 >= currentHitPoints && !isDead) // to ensure the kill method is only called once
+        { 
+            isDead = true;
+            Kill(); 
         }
     }
 
     void Kill() {
         unit.SpawnDeathFX();
         unit.PlayDeathAnimation();
+        unit.ReduceWaveUnitCount();
         unit.DepositReward();
         decomposer.BeginDecomposing();
 

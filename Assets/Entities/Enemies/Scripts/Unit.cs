@@ -23,6 +23,7 @@ public class Unit : MonoBehaviour
     Bank bank;
     PlayerHealth playerHealth;
     RuntimeSpawns runtimeSpawns;
+    WaveManager waveManager;
 
     public CharacterAnimator Animator { get { return animator; }}
     public ParticleSystem DamageParticles { get { return damageParticles; }}
@@ -37,6 +38,7 @@ public class Unit : MonoBehaviour
         scoreKeeper = player.GetComponent<ScoreKeeper>(); 
         bank = player.GetComponent<Bank>();
         playerHealth = player.GetComponent<PlayerHealth>();
+        waveManager = FindObjectOfType<WaveManager>();
     }
 
     void OnEnable() {
@@ -44,6 +46,18 @@ public class Unit : MonoBehaviour
 
         unitHealth.SetHitPoints(maxHitPoints);
         unitMover.BeginMoving(speed);
+    }
+
+    public void ReduceWaveUnitCount()
+    {
+        if (null != waveManager)
+        {
+            Wave wave = waveManager.GetCurrentWave();
+            if (null != wave)
+            {
+                wave.IncreaseUnitsDestroyedCount(1);
+            }
+        }
     }
 
     public void DepositReward() {

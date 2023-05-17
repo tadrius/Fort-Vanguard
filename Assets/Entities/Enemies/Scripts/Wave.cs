@@ -18,15 +18,18 @@ public class Wave : MonoBehaviour {
     bool allSpawned;
     bool waveCompleted;
     int waveSize; // the total number of units in the wave
+    int unitsDestroyed;
 
     public int GoldReward{ get { return goldReward; }}
     public int PointReward{ get { return pointReward; }}
     public List<Unit> SpawnedUnits { get { return spawnedUnits; }}
     public bool AllSpawned { get { return allSpawned; }}
     public bool WaveCompleted { get { return waveCompleted; }}
+    public int UnitsDestroyed { get { return unitsDestroyed; }}
 
     void OnEnable() {
         waveSize = spawnCycles * spawnOrder.Count;
+        unitsDestroyed = 0;
         spawnedUnits = new List<Unit>();
         waveCompleted = false;
         allSpawned = false;
@@ -45,32 +48,30 @@ public class Wave : MonoBehaviour {
     }
 
     IEnumerator SpawnUnits() {
-        for (int i = 0; i < spawnCycles; i++) {
-            foreach (ObjectPool pool in spawnOrder) {
+        for (int i = 0; i < spawnCycles; i++)
+        {
+            foreach (ObjectPool pool in spawnOrder)
+            {
                 GameObject unitObj = pool.EnableObject();
-                if (null != unitObj) {
+                if (null != unitObj)
+                {
                     Unit unit = unitObj.GetComponent<Unit>();
                     unit.enabled = true;
                     spawnedUnits.Add(unit);
                 }
-            yield return new WaitForSeconds(spawnDelay);
+                yield return new WaitForSeconds(spawnDelay);
             }
         }
         allSpawned = true;
     }
 
-    public int CountRemainingEnemies() {
-        return waveSize - CountDestroyedEnemies();
+    public void IncreaseUnitsDestroyedCount(int numberDestroyed)
+    {
+        unitsDestroyed += numberDestroyed;
     }
 
-    int CountDestroyedEnemies() {
-        int count = 0;
-        foreach (Unit unit in spawnedUnits) {
-            if (!unit.isActiveAndEnabled) {
-                count++;
-            }
-        }
-        return count;
+    public int CountRemainingEnemies() {
+        return waveSize - unitsDestroyed;
     }
 
     // Returns true if there are any active units in the wave
