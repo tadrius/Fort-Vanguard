@@ -42,6 +42,7 @@ public class Unit : MonoBehaviour
     }
 
     void OnEnable() {
+        animator.ResetRig(); // so that re-enabled units do not appear in the pose they disabled with
         unitHealth.gameObject.SetActive(true); // should be the same game object as unit mover
 
         unitHealth.SetHitPoints(maxHitPoints);

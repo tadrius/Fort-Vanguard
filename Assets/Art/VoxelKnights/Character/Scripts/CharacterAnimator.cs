@@ -110,6 +110,11 @@ public class CharacterAnimator : MonoBehaviour
         }
     }
 
+    public void ResetRig()
+    {
+        animationRig.ApplyZeroPose();
+    }
+
     public void SetAnimationDuration(float duration) {
         animationDuration = duration;
     }

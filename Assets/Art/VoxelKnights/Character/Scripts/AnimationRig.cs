@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static AnimationPose;
 
 public class AnimationRig : MonoBehaviour
 {
@@ -39,6 +40,23 @@ public class AnimationRig : MonoBehaviour
             rightItem.localEulerAngles = pose.rightItemRotation;
             leftItem.localEulerAngles = pose.leftItemRotation;
         }
+    }
+
+    public void ApplyZeroPose()
+    {
+        neck.localEulerAngles = Vector3.zero;
+        waist.localEulerAngles = Vector3.zero;
+        ground.localEulerAngles = Vector3.zero;
+        rightShoulder.localEulerAngles = Vector3.zero;
+        leftShoulder.localEulerAngles = Vector3.zero;
+        rightElbow.localEulerAngles = Vector3.zero;
+        leftElbow.localEulerAngles = Vector3.zero;
+        rightWrist.localEulerAngles = Vector3.zero;
+        leftWrist.localEulerAngles = Vector3.zero;
+        rightHip.localEulerAngles = Vector3.zero;
+        leftHip.localEulerAngles = Vector3.zero;
+        rightItem.localEulerAngles = Vector3.zero;
+        leftItem.localEulerAngles = Vector3.zero;
     }
 
 }
