@@ -50,7 +50,7 @@ public class WaveManager : MonoBehaviour
 
         // create the enemy's headquarters visuals
         GridManager gridManager = FindObjectOfType<GridManager>();
-        GameObject headquarters = GameObject.Instantiate(enemyFaction.PlayerHeadquarters, transform);
+        GameObject headquarters = GameObject.Instantiate(enemyFaction.EnemyHeadquarters, transform);
         headquarters.transform.localPosition = gridManager.GetPositionFromCoordinates(headquartersCoordinates);
     }
 

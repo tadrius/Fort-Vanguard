@@ -87,7 +87,10 @@ public class Buffer : MonoBehaviour
     {
         foreach (Buff activeBuff in activeBuffs)
         {
-            Destroy(activeBuff.gameObject);
+            if (null != activeBuff)
+            {
+                Destroy(activeBuff.gameObject);
+            }
         }
         foreach (Attacker attacker in buffTargets)
         {
