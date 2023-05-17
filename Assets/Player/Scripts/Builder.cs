@@ -10,8 +10,7 @@ public class Builder : MonoBehaviour
     [SerializeField] Building building;
     [SerializeField] float refundMultiplier = 0.5f;
 
-    [SerializeField] List<Building> existingBuildings = new List<Building>();
-
+    List<Building> existingBuildings = new List<Building>();
     public Mode BuildMode { get { return buildMode; } }
     public Building Building { get { return building; } }
     public float RefundMultiplier { get { return refundMultiplier; } }

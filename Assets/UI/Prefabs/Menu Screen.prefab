@@ -432,7 +432,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &871740107941621167
 RectTransform:
   m_ObjectHideFlags: 0
@@ -534,13 +534,13 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Build Defences to prevent Enemies from reaching your Caste.
+  m_text: 'Build Defences to stop Enemies from reaching your Castle.
 
-    If an
+    When an
     Enemy reaches your Castle, you lose Health.
 
-    When your Health reaches 0,
-    you lose.
+    If your Health reaches 0, you
+    lose.
 
 
     To build Defences...
@@ -551,27 +551,27 @@ MonoBehaviour:
     on a valid Tile, highlighted in green.
 
     If you can afford the Gold cost,
-    the Defence will begin constructing.
+    construction will begin.
 
 
     Tips...
 
-    Click on a Defence''s
-    tile to refund it for half its Gold cost.
-
-    Crossbows are longer range than
+    Crossbows have longer range than
     Bows but reload more slowly.
 
-    Bows and Crossbows can be built atop Towers.
+    Banner decrease the reload speed of Defences
+    in range.
+
+    Bows, Crossbows, and Banners can be built atop Towers.
 
     Towers
     and Defenses built atop them have increased range and can shoot over nearby trees.
 
-    To
-    refund a Tower you must refund any Defences built atop it first.
+    You
+    cannot refund a Tower with a Defence atop it.
 
-    You cannot
-    fully block the Enemies'' path.'
+    You cannot fully block the
+    Enemies'' path.'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: df8cf892e7aad12478ce487673b0088f, type: 2}
   m_sharedMaterial: {fileID: 1906073875616529429, guid: df8cf892e7aad12478ce487673b0088f, type: 2}
