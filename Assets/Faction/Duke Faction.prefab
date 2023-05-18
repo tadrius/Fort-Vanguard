@@ -1,0 +1,65 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2009534954267243353
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2009534954267243359}
+  - component: {fileID: 2009534954267243352}
+  m_Layer: 0
+  m_Name: Duke Faction
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2009534954267243359
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2009534954267243353}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2009534954267243352
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2009534954267243353}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e2c005476b84f64da47fa8f4f38f26c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  factionName: Duke
+  playerHeadquarters: {fileID: 9146821388505718692, guid: 3cc563776d9e55149988814106343883, type: 3}
+  constructables:
+  - {fileID: 1475047218045151579, guid: 654fa9cf13596ae45837deaa4951e511, type: 3}
+  - {fileID: 3752756323254394113, guid: 573fb631721d5de4584eaa1e14dc9ab9, type: 3}
+  - {fileID: 2461254385388030293, guid: 5d98dbf0b84deaf488a7602400d049db, type: 3}
+  - {fileID: 8808335501749838077, guid: c796275bce408634993da0376293e8d1, type: 3}
+  - {fileID: 3189865142983444636, guid: f0dd974709975bd4189b1c3cc14959af, type: 3}
+  - {fileID: 8716173846940649073, guid: 56aecfba69e132a41b93a1eb5d8f019d, type: 3}
+  enemyHeadquarters: {fileID: 9146821388505718692, guid: 5a839fcd0dfa4b1479392999617d6bde, type: 3}
+  heavyStandard: {fileID: 8558042364214785068, guid: 4b3971f26c140d34298a67b98967adeb, type: 3}
+  mediumStandard: {fileID: 6842861846297817246, guid: 0e2725f223f8a104495bd14d1dee6531, type: 3}
+  lightStandard: {fileID: 6790522357951995821, guid: d8a3dc58cf0c8a54dbd6717f0db20e6e, type: 3}
+  heavyVeteran: {fileID: 3187191312438217766, guid: 7a92f84d8b79d544282309417de88064, type: 3}
+  mediumVeteran: {fileID: 2401702398865864277, guid: b18a7c323e55fc74894abcfa6e77e9c6, type: 3}
+  lightVeteran: {fileID: 4164806186880099888, guid: 5fd62cb6704d7be4f912e7a859017794, type: 3}
+  heavyChampion: {fileID: 538842271451109875, guid: 7ba30c0949f3d8d4ca28b13d1ee04064, type: 3}
+  mediumChampion: {fileID: 6649001215872639130, guid: 1b0e06867c8141541abecf976f3bf09c, type: 3}
+  lightChampion: {fileID: 9066036461918446192, guid: 0e4e9d2a684d031458c7763c7d9ecf88, type: 3}

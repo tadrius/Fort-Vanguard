@@ -1,0 +1,65 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &394075650691264202
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 394075650691264212}
+  - component: {fileID: 394075650691264213}
+  m_Layer: 0
+  m_Name: Jarl Faction
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &394075650691264212
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 394075650691264202}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &394075650691264213
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 394075650691264202}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e2c005476b84f64da47fa8f4f38f26c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  factionName: Jarl
+  playerHeadquarters: {fileID: 9146821388505718692, guid: b0e73e2a738c94144a1b498b27940827, type: 3}
+  constructables:
+  - {fileID: 1475047218045151579, guid: 9a78864c387103046a362e7b553de57b, type: 3}
+  - {fileID: 3752756323254394113, guid: c3f77a58330dd3c4ba07efd750594670, type: 3}
+  - {fileID: 2461254385388030293, guid: eb7c3d85419508446814a25ae4657562, type: 3}
+  - {fileID: 8808335501749838077, guid: 40d55b1bae0cd0d4d8e259f228e1d849, type: 3}
+  - {fileID: 3189865142983444636, guid: ccd867b716e4c584ab9c8abd0ac934c6, type: 3}
+  - {fileID: 8716173846940649073, guid: e1257381db1239c49a1f5d259af2666b, type: 3}
+  enemyHeadquarters: {fileID: 9146821388505718692, guid: 44bca42a694f8624c8a18be785075184, type: 3}
+  heavyStandard: {fileID: 8558042364214785068, guid: 5f237b8e199df9d4c97a93299621f54a, type: 3}
+  mediumStandard: {fileID: 6842861846297817246, guid: 90022853704e45642ae94d901d18f21e, type: 3}
+  lightStandard: {fileID: 6790522357951995821, guid: 658ba243d1a33244cbd755ea252b44bf, type: 3}
+  heavyVeteran: {fileID: 3187191312438217766, guid: 99e21aaa7afd5714284c9e200f701b55, type: 3}
+  mediumVeteran: {fileID: 2401702398865864277, guid: d752fbef31db2a04a839d76cd5a6f1af, type: 3}
+  lightVeteran: {fileID: 4164806186880099888, guid: 18d016fa2ea98ce49ba294c76de5acc7, type: 3}
+  heavyChampion: {fileID: 538842271451109875, guid: 883894aaccd0961458f96323fe604b6d, type: 3}
+  mediumChampion: {fileID: 6649001215872639130, guid: 065184ab4d146c0428c25c5bc2937d1c, type: 3}
+  lightChampion: {fileID: 9066036461918446192, guid: c24c140fdc1af384687b2e62abd7943a, type: 3}

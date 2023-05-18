@@ -1,0 +1,65 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2966523931157458815
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2966523931157458809}
+  - component: {fileID: 2966523931157458814}
+  m_Layer: 0
+  m_Name: Sheikh Faction
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2966523931157458809
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2966523931157458815}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2966523931157458814
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2966523931157458815}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e2c005476b84f64da47fa8f4f38f26c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  factionName: Sheikh
+  playerHeadquarters: {fileID: 9146821388505718692, guid: 93d9420917b062942b590d8df5eb3144, type: 3}
+  constructables:
+  - {fileID: 1475047218045151579, guid: d4a1de27f1f9fa3499f1082812441603, type: 3}
+  - {fileID: 3752756323254394113, guid: dce948a2b2e583248b4b6d2eb8d0f1d8, type: 3}
+  - {fileID: 2461254385388030293, guid: 21540bfa6946e0b4a8bc12cbfa364a98, type: 3}
+  - {fileID: 8808335501749838077, guid: b93ff206449d4294ebb738c7c6de5098, type: 3}
+  - {fileID: 3189865142983444636, guid: 3450fb2c081311747a0bbb333d953a88, type: 3}
+  - {fileID: 8716173846940649073, guid: b38271b73a68e20419cee24c4117b8b9, type: 3}
+  enemyHeadquarters: {fileID: 9146821388505718692, guid: 39d13db68c915dc42b6c235990e9afbf, type: 3}
+  heavyStandard: {fileID: 8558042364214785068, guid: c0ea5f2f0b7f8dc4f821c4bd99a53f92, type: 3}
+  mediumStandard: {fileID: 6842861846297817246, guid: 2dbb3ef6a40c62a4a91ba129fc9d2b61, type: 3}
+  lightStandard: {fileID: 6790522357951995821, guid: 2c943a1c92c7680449a74df25d99c183, type: 3}
+  heavyVeteran: {fileID: 3187191312438217766, guid: 224925a8be84e22438873e51e5bdadd1, type: 3}
+  mediumVeteran: {fileID: 2401702398865864277, guid: 895f22b342364f44881fc16ce644043b, type: 3}
+  lightVeteran: {fileID: 4164806186880099888, guid: 235de867be136c943b3d9dffe33ee823, type: 3}
+  heavyChampion: {fileID: 538842271451109875, guid: 40b316f01d54f274baba3a7a0ff05d83, type: 3}
+  mediumChampion: {fileID: 6649001215872639130, guid: 5921f05a343cac34c9a30b3ea2ea60e4, type: 3}
+  lightChampion: {fileID: 9066036461918446192, guid: 4ac80ef780117634e9c66e03c3d071a2, type: 3}
