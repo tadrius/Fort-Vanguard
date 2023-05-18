@@ -25,7 +25,11 @@ public class Player : MonoBehaviour
 
         if (null != settings)
         {
-            playerFaction = FindObjectOfType<FactionSettings>().PlayerFaction;
+            Faction settingsFaction = FindObjectOfType<FactionSettings>().PlayerFaction;
+            if (null != settingsFaction)
+            {
+                playerFaction = settingsFaction;
+            }
         }
         scoreKeeper = GetComponent<ScoreKeeper>();
     }
