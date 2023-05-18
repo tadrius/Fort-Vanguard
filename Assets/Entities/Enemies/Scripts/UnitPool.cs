@@ -8,15 +8,19 @@ public class UnitPool : ObjectPool
 
     [SerializeField] Tier unitTier = Tier.Standard;
     [SerializeField] Weight unitWeight = Weight.Medium;
-    [Tooltip("Contains information about the enemy faction.")]
-    [SerializeField] WaveManager waveManager;
+    [Tooltip("The default faction for this pool.")]
+    [SerializeField] Faction faction;
 
     enum Tier { Standard, Veteran, Champion }
     enum Weight { Light, Medium, Heavy };
 
     private void Awake()
     {
-        Faction faction = waveManager.EnemyFaction;
+        FactionSettings factionSettings = FindObjectOfType<FactionSettings>();
+        if (factionSettings != null)
+        {
+            faction = factionSettings.EnemyFaction;
+        } 
 
         if (Tier.Standard == unitTier)
         {

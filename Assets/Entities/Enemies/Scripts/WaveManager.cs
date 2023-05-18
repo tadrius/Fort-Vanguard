@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class WaveManager : MonoBehaviour
 {
-    [Tooltip("Determines the visuals of the enemy units and headquarters.")]
+    [Tooltip("The default faction which will determine the look of the enemy headquarters and units.")]
     [SerializeField] Faction enemyFaction;
     [Tooltip("The number of seconds between the end of the previous wave and the start of the next wave.")]
     [SerializeField] float waveDelay = 10f;
@@ -19,7 +19,7 @@ public class WaveManager : MonoBehaviour
     ScoreKeeper scoreKeeper;
     Bank bank;
     Game game;
-    
+
     float startTimer;
     int currentWaveIndex = 0;
     ManagerState state = ManagerState.WaveIsReady;
@@ -39,6 +39,13 @@ public class WaveManager : MonoBehaviour
         bank = playerObject.GetComponent<Bank>();
         
         game = FindObjectOfType<Game>();
+
+        FactionSettings factionSettings = FindObjectOfType<FactionSettings>();
+        if (factionSettings != null)
+        {
+            factionSettings.SetRandomEnemyFaction();
+            enemyFaction = factionSettings.EnemyFaction;
+        }
     }
 
     void Start() {
