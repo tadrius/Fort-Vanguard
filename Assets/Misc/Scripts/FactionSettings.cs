@@ -25,6 +25,7 @@ public class FactionSettings : MonoBehaviour
         {
             factionsByName.Add(faction.FactionName, faction);
         }
+        playerFaction = factions[0];
     }
 
     public void SetPlayerFaction(string factionName)
